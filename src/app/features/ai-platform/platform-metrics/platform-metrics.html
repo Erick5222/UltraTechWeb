@@ -1,0 +1,15 @@
+<section class="platform-metrics">
+  <div class="platform-metrics__grid">
+    @for (metric of metrics(); track metric.id) {
+      <app-platform-metric-card
+        [icon]="metric.icon"
+        [label]="metric.metric"
+        [value]="metric.value"
+        [description]="metric.description"
+        [detailText]="metric.detailText"
+        [detailVariant]="metric.detailVariant"
+        [format]="metric.format"
+      />
+    }
+  </div>
+</section>

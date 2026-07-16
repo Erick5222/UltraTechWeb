@@ -1,0 +1,21 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/**/*.{html,ts}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        'nexus-black': '#050505',
+        'nexus-dark': '#0a0a0a',
+        'nexus-blue': '#3b82f6',
+        'nexus-purple': '#8b5cf6',
+        'nexus-gray': '#9ca3af',
+      },
+      backgroundImage: {
+        'nexus-gradient': 'linear-gradient(to bottom right, #050505, #0a0a0a)',
+      }
+    },
+  },
+  plugins: [],
+}

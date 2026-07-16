@@ -1,0 +1,24 @@
+<section class="portfolio-showcase">
+  <div class="portfolio-showcase__container">
+    <div class="portfolio-showcase__grid">
+      <app-portfolio-featured-card
+        class="portfolio-showcase__featured"
+        [image]="featured.image"
+        [tagKeys]="featured.tagKeys"
+        [titleKey]="featured.titleKey"
+        [descriptionKey]="featured.descriptionKey"
+        [linkKey]="featured.linkKey"
+      />
+
+      <div class="portfolio-showcase__stats">
+        @for (stat of stats; track stat.id) {
+          <app-portfolio-stat-card
+            [valueKey]="stat.valueKey"
+            [labelKey]="stat.labelKey"
+            [descriptionKey]="stat.descriptionKey"
+          />
+        }
+      </div>
+    </div>
+  </div>
+</section>

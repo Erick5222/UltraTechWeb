@@ -1,0 +1,44 @@
+<section class="contact-sidebar">
+  <span class="contact-sidebar__label">{{ 'contactPage.inquiry.label' | translate }}</span>
+
+  <h1 class="contact-sidebar__title">
+    {{ 'contactPage.inquiry.titlePrefix' | translate }}
+    <span>{{ 'contactPage.inquiry.titleHighlight' | translate }}</span>{{ 'contactPage.inquiry.titleSuffix' | translate }}
+  </h1>
+
+  <p class="contact-sidebar__description">{{ 'contactPage.inquiry.description' | translate }}</p>
+
+  <div class="contact-sidebar__channels">
+    @for (channel of channels; track channel.id) {
+      <app-contact-info-card
+        [icon]="channel.icon"
+        [labelKey]="channel.labelKey"
+        [valueKey]="channel.valueKey"
+        [descriptionKey]="channel.descriptionKey"
+        [href]="channel.href"
+      />
+    }
+  </div>
+
+  <div class="contact-sidebar__social">
+    @for (link of socialLinks; track link.id) {
+      <a class="contact-sidebar__social-btn" [href]="link.href" [attr.aria-label]="link.labelKey | translate">
+        <img [src]="link.icon" [alt]="link.labelKey | translate" loading="lazy" />
+      </a>
+    }
+  </div>
+
+  <div class="contact-sidebar__faq">
+    <h2 class="contact-sidebar__faq-title">{{ 'contactPage.faq.title' | translate }}</h2>
+
+    @for (item of faqItems; track item.id) {
+      <app-contact-faq-item
+        [itemId]="item.id"
+        [questionKey]="item.questionKey"
+        [answerKey]="item.answerKey"
+        [open]="openFaqId() === item.id"
+        (toggle)="toggleFaq(item.id)"
+      />
+    }
+  </div>
+</section>

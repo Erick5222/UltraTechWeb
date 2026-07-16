@@ -1,0 +1,47 @@
+:host {
+  display: block;
+}
+
+.about-architects {
+  padding: 0 24px 80px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.about-architects__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 80px;
+}
+
+.about-architects__header {
+  margin-bottom: 40px;
+}
+
+.about-architects__title {
+  margin: 0;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.about-architects__subtitle {
+  margin: 12px 0 0;
+  max-width: 520px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #9aa3b2;
+}
+
+.about-architects__grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 768px) {
+  .about-architects__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+}

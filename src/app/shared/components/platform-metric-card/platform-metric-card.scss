@@ -1,0 +1,74 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.platform-metric-card {
+  height: 100%;
+  padding: 20px 22px;
+  border-radius: 14px;
+  background: #161616;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+
+  &:hover {
+    border-color: rgba(94, 139, 255, 0.18);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+  }
+}
+
+.platform-metric-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.platform-metric-card__heading {
+  min-width: 0;
+}
+
+.platform-metric-card__label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.platform-metric-card__description {
+  margin: 6px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #9aa3b2;
+}
+
+.platform-metric-card__icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.platform-metric-card__value {
+  margin: 0;
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.platform-metric-card__detail {
+  margin: 8px 0 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #9aa3b2;
+
+  &--success {
+    color: #22c55e;
+  }
+
+  &--info {
+    color: #5e8bff;
+  }
+}

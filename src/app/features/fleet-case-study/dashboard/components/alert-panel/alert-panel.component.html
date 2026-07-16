@@ -1,0 +1,22 @@
+<section class="alert-panel">
+  <h4 class="alert-panel__title">Active alerts</h4>
+  <div class="alert-panel__items">
+    @for (alert of alerts(); track alert.id) {
+      <div
+        class="alert-panel__item"
+        [class.alert-panel__item--critical]="severityType(alert) === AlertType.Critical"
+        [class.alert-panel__item--warning]="severityType(alert) === AlertType.Warning"
+      >
+        <div class="alert-panel__item-header">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" fill="currentColor"/>
+          </svg>
+          <span class="alert-panel__item-title">{{ alert.title }}</span>
+        </div>
+        <p class="alert-panel__item-desc">{{ alert.description }}</p>
+      </div>
+    } @empty {
+      <p class="alert-panel__empty">No active alerts.</p>
+    }
+  </div>
+</section>

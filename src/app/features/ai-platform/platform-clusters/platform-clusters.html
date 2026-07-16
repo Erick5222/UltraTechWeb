@@ -1,0 +1,24 @@
+<section class="platform-clusters">
+  <header class="platform-clusters__header">
+    <h2 class="platform-clusters__title">{{ 'aiPlatformPage.clusters.title' | translate }}</h2>
+    <div class="platform-clusters__stats">
+      <span>{{ 'aiPlatformPage.clusters.activeNodes' | translate }}</span>
+      <span class="platform-clusters__health">{{ 'aiPlatformPage.clusters.health' | translate }}</span>
+    </div>
+  </header>
+
+  <div class="platform-clusters__map-wrap">
+    <img [src]="mapImage" [alt]="'aiPlatformPage.clusters.mapAlt' | translate" class="platform-clusters__map" loading="lazy" />
+
+    <div class="platform-clusters__overlay">
+      <div class="platform-clusters__overlay-top">
+        <span>{{ 'aiPlatformPage.clusters.region' | translate }}</span>
+        <span>{{ 'aiPlatformPage.clusters.regionStatus' | translate }}</span>
+      </div>
+      <div class="platform-clusters__progress">
+        <div class="platform-clusters__progress-bar" [style.width.%]="progress"></div>
+      </div>
+      <span class="platform-clusters__progress-label">{{ progress }}%</span>
+    </div>
+  </div>
+</section>

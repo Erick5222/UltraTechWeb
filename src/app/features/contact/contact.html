@@ -1,0 +1,20 @@
+<main class="contact" id="contact">
+  <app-contact-inquiry />
+
+  @if (scheduleEnabled) {
+    <app-contact-schedule />
+  }
+
+  <div class="contact__about">
+    <app-about-hero [embedded]="true" />
+    <app-about-mission />
+    @if (evolutionEnabled) {
+      <app-about-evolution />
+    }
+    <app-about-principles />
+    @if (architectsEnabled) {
+      <app-about-architects />
+    }
+    <app-about-cta [buttonEnabled]="ctaButtonEnabled" />
+  </div>
+</main>

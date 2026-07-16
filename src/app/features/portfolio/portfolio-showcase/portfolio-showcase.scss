@@ -1,0 +1,33 @@
+:host {
+  display: block;
+}
+
+.portfolio-showcase {
+  padding: 0 24px 32px;
+}
+
+.portfolio-showcase__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.portfolio-showcase__grid {
+  display: grid;
+  gap: 20px;
+}
+
+.portfolio-showcase__stats {
+  display: grid;
+  gap: 20px;
+}
+
+@media (min-width: 1024px) {
+  .portfolio-showcase__grid {
+    grid-template-columns: 2fr 1fr;
+    align-items: stretch;
+  }
+
+  .portfolio-showcase__stats {
+    grid-template-rows: 1fr 1fr;
+  }
+}

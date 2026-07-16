@@ -1,0 +1,79 @@
+<div class="header-bar">
+  <div class="header__container">
+    <a routerLink="/" class="header__brand" [attr.aria-label]="'header.brandAria' | translate">
+      Ultra <span>Tech</span>
+    </a>
+
+    <nav class="header__nav" [attr.aria-label]="'header.navAria' | translate">
+      @for (item of navItems; track item.labelKey) {
+        <a
+          [routerLink]="item.path"
+          routerLinkActive="header__link--active"
+          [routerLinkActiveOptions]="{ exact: item.exact ?? false }"
+          class="header__link"
+        >
+          {{ item.labelKey | translate }}
+        </a>
+      }
+    </nav>
+
+    <div class="header__actions">
+      <div class="header__lang" role="group" [attr.aria-label]="'header.langAria' | translate">
+        <button
+          type="button"
+          class="header__lang-btn"
+          [class.header__lang-btn--active]="languageService.isActiveLanguage('en')"
+          (click)="setLanguage('en')"
+        >
+          EN
+        </button>
+        <button
+          type="button"
+          class="header__lang-btn"
+          [class.header__lang-btn--active]="languageService.isActiveLanguage('es')"
+          (click)="setLanguage('es')"
+        >
+          ES
+        </button>
+      </div>
+
+      <button
+        type="button"
+        class="header__menu-toggle"
+        [class.header__menu-toggle--open]="mobileMenuOpen()"
+        [attr.aria-expanded]="mobileMenuOpen()"
+        [attr.aria-label]="
+          (mobileMenuOpen() ? 'header.menuCloseAria' : 'header.menuToggleAria') | translate
+        "
+        (click)="toggleMobileMenu()"
+      >
+        <span class="header__menu-bar"></span>
+        <span class="header__menu-bar"></span>
+        <span class="header__menu-bar"></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+@if (mobileMenuOpen()) {
+  <button
+    type="button"
+    class="header__mobile-backdrop"
+    [attr.aria-label]="'header.menuCloseAria' | translate"
+    (click)="closeMobileMenu()"
+  ></button>
+
+  <nav class="header__mobile-nav" [attr.aria-label]="'header.mobileNavAria' | translate">
+    @for (item of navItems; track item.labelKey) {
+      <a
+        [routerLink]="item.path"
+        routerLinkActive="header__mobile-link--active"
+        [routerLinkActiveOptions]="{ exact: item.exact ?? false }"
+        class="header__mobile-link"
+        (click)="closeMobileMenu()"
+      >
+        {{ item.labelKey | translate }}
+      </a>
+    }
+  </nav>
+}

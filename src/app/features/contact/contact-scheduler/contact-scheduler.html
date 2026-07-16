@@ -1,0 +1,65 @@
+<div class="contact-scheduler">
+  <aside class="contact-scheduler__profile">
+    <div class="contact-scheduler__avatar-wrap">
+      <img [src]="consultantPhoto" [alt]="'contactPage.schedule.consultant.name' | translate" class="contact-scheduler__avatar" loading="lazy" />
+    </div>
+
+    <h3 class="contact-scheduler__name">{{ 'contactPage.schedule.consultant.name' | translate }}</h3>
+    <p class="contact-scheduler__role">{{ 'contactPage.schedule.consultant.role' | translate }}</p>
+
+    <ul class="contact-scheduler__details">
+      @for (detail of sessionDetails; track detail.id) {
+        <li>
+          <img [src]="detail.icon" [alt]="detail.labelKey | translate" loading="lazy" />
+          <span>{{ detail.labelKey | translate }}</span>
+        </li>
+      }
+    </ul>
+  </aside>
+
+  <div class="contact-scheduler__booking">
+    <div class="contact-scheduler__calendar-header">
+      <h4 class="contact-scheduler__month">{{ 'contactPage.schedule.month' | translate }}</h4>
+      <div class="contact-scheduler__nav">
+        <button type="button" aria-label="Previous month">‹</button>
+        <button type="button" aria-label="Next month">›</button>
+      </div>
+    </div>
+
+    <div class="contact-scheduler__weekdays">
+      @for (day of weekdays; track day) {
+        <span>{{ day | translate }}</span>
+      }
+    </div>
+
+    <div class="contact-scheduler__days">
+      @for (day of calendarDays; track $index) {
+        <button
+          type="button"
+          class="contact-scheduler__day"
+          [class.contact-scheduler__day--inactive]="day.inactive"
+          [class.contact-scheduler__day--selected]="selectedDay() === day.day && !day.inactive"
+          [disabled]="day.inactive"
+          (click)="selectDay(day.day)"
+        >
+          {{ day.day }}
+        </button>
+      }
+    </div>
+
+    <p class="contact-scheduler__slots-label">{{ 'contactPage.schedule.slotsLabel' | translate }}</p>
+
+    <div class="contact-scheduler__slots">
+      @for (slot of timeSlots; track slot.id) {
+        <button
+          type="button"
+          class="contact-scheduler__slot"
+          [class.contact-scheduler__slot--selected]="selectedSlot() === slot.id"
+          (click)="selectSlot(slot.id)"
+        >
+          {{ slot.labelKey | translate }}
+        </button>
+      }
+    </div>
+  </div>
+</div>

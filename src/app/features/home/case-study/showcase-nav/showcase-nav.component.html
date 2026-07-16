@@ -1,0 +1,20 @@
+<nav class="showcase-nav" aria-label="{{ 'caseStudy.showcase.nav.ariaLabel' | translate }}">
+  <ul class="showcase-nav__list" role="tablist">
+    @for (project of projects(); track project.id; let index = $index) {
+      <li class="showcase-nav__item" role="presentation">
+        <button
+          type="button"
+          class="showcase-nav__button"
+          role="tab"
+          [class.showcase-nav__button--active]="activeIndex() === index"
+          [attr.aria-selected]="activeIndex() === index"
+          [attr.aria-label]="project.navLabelKey | translate"
+          [disabled]="disabled()"
+          (click)="onSelect(index)"
+        >
+          <span class="showcase-nav__indicator" aria-hidden="true"></span>
+        </button>
+      </li>
+    }
+  </ul>
+</nav>

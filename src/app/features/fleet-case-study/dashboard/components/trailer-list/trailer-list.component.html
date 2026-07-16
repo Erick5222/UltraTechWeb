@@ -1,0 +1,10 @@
+<section class="trailer-list">
+  <h4 class="trailer-list__title">Trailers</h4>
+  <div class="trailer-list__items">
+    @for (trailer of trailers(); track trailer.id) {
+      <app-trailer-card [trailer]="trailer" />
+    } @empty {
+      <p class="trailer-list__empty">No trailers linked to this unit.</p>
+    }
+  </div>
+</section>

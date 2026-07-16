@@ -1,0 +1,62 @@
+@use 'styles/variables' as *;
+
+.units-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: $color-bg-primary;
+  border-left: 1px solid $color-border;
+
+  &__header {
+    padding: $spacing-lg;
+    border-bottom: 1px solid $color-border;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    flex-shrink: 0;
+  }
+
+  &__filters {
+    display: flex;
+    gap: $spacing-xs;
+  }
+
+  &__filter {
+    flex: 1;
+    padding: 6px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: $color-text-secondary;
+    background: transparent;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    transition: all 0.15s;
+
+    &:hover {
+      color: $color-text-primary;
+      border-color: $color-text-muted;
+    }
+
+    &--active {
+      color: $color-primary;
+      background: $color-primary-bg;
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+  }
+
+  &__items {
+    flex: 1;
+    overflow-y: auto;
+    padding: $spacing-md;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+
+  &__empty {
+    text-align: center;
+    padding: $spacing-xl;
+    color: $color-text-muted;
+    font-size: 13px;
+  }
+}

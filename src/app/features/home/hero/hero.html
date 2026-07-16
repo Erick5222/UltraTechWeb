@@ -1,0 +1,37 @@
+<section class="hero">
+  <div class="hero__media" aria-hidden="true">
+    <img
+      [src]="heroBackground"
+      class="hero__media-image"
+      alt=""
+      loading="eager"
+      fetchpriority="high"
+    />
+  </div>
+
+  <div class="hero__overlay" aria-hidden="true"></div>
+
+  <div class="hero__container">
+    <div class="hero__content">
+      <div class="hero__badge">
+        <img [src]="badgeIcon" alt="" class="hero__badge-icon" width="11" height="14" />
+        <span>{{ 'hero.badge' | translate }}</span>
+      </div>
+
+      <h1 class="hero__title">{{ 'hero.title' | translate }}</h1>
+
+      <p class="hero__description">
+        {{ 'hero.description' | translate }}
+      </p>
+
+      <div class="hero__actions">
+        <a routerLink="/contact" class="hero__btn hero__btn--primary">
+          {{ 'hero.scheduleConsultation' | translate }}
+        </a>
+        <a routerLink="/services" class="hero__btn hero__btn--secondary">
+          {{ 'hero.exploreSolutions' | translate }}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

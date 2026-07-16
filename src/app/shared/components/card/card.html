@@ -1,0 +1,25 @@
+<article class="card" [class.card--purple]="accent === 'purple'" [class.card--blue]="accent === 'blue'">
+  <div class="card__icon" aria-hidden="true">
+    @if (icon) {
+      <img [src]="icon" [alt]="titleKey | translate" class="card__icon-image" />
+    } @else {
+      <span class="card__icon-fallback">{{ (titleKey | translate).charAt(0) }}</span>
+    }
+  </div>
+
+  <h3 class="card__title">{{ titleKey | translate }}</h3>
+  <p class="card__description">{{ descriptionKey | translate }}</p>
+
+  @if (featureKeys.length) {
+    <ul class="card__features">
+      @for (featureKey of featureKeys; track featureKey) {
+        <li class="card__feature">
+          <span class="card__check" aria-hidden="true"></span>
+          <span>{{ featureKey | translate }}</span>
+        </li>
+      }
+    </ul>
+  }
+
+  <ng-content></ng-content>
+</article>

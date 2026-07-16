@@ -1,0 +1,18 @@
+<article class="service-offering-card">
+  <div class="service-offering-card__top">
+    <div class="service-offering-card__icon-wrap">
+      <img [src]="icon" alt="" class="service-offering-card__icon" />
+    </div>
+    <span class="service-offering-card__number">{{ number }}</span>
+  </div>
+
+  <h3 class="service-offering-card__title">{{ titleKey | translate }}</h3>
+  <p class="service-offering-card__description">{{ descriptionKey | translate }}</p>
+
+  <div class="service-offering-card__media">
+    <img
+      [src]="image"
+      [alt]="imageAltKey | translate"
+      class="service-offering-card__image" />
+  </div>
+</article>

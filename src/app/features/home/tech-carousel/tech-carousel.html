@@ -1,0 +1,21 @@
+<section class="tech-carousel" [attr.aria-label]="'techCarousel.ariaLabel' | translate">
+  <p class="tech-carousel__label">{{ 'techCarousel.label' | translate }}</p>
+
+  <div class="tech-carousel__rows">
+    @for (row of rows; track row.id) {
+      <div class="tech-carousel__viewport">
+        <div
+          class="tech-carousel__track"
+          [style.--carousel-duration]="row.duration + 's'"
+        >
+          @for (item of row.items; track item) {
+            <span class="tech-carousel__item">{{ item }}</span>
+          }
+          @for (item of row.items; track item + '-clone') {
+            <span class="tech-carousel__item" aria-hidden="true">{{ item }}</span>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</section>

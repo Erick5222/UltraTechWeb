@@ -1,0 +1,205 @@
+<section class="platform-analytics">
+  <header class="platform-analytics__hero">
+    <p class="platform-analytics__eyebrow">{{ 'aiPlatformPage.analytics.eyebrow' | translate }}</p>
+    <h1 class="platform-analytics__title">{{ 'aiPlatformPage.analytics.title' | translate }}</h1>
+    <p class="platform-analytics__subtitle">{{ 'aiPlatformPage.analytics.subtitle' | translate }}</p>
+  </header>
+
+  <div class="platform-analytics__kpi-grid">
+    @for (kpi of kpis; track kpi.id) {
+      <article class="platform-analytics__kpi-card">
+        <div class="platform-analytics__kpi-top">
+          <img [src]="kpi.icon" [alt]="kpi.labelKey | translate" class="platform-analytics__kpi-icon" loading="lazy" />
+          <span class="platform-analytics__kpi-change">{{ kpi.change }}</span>
+        </div>
+        <p class="platform-analytics__kpi-label">{{ kpi.labelKey | translate }}</p>
+        <p class="platform-analytics__kpi-value">{{ kpi.value }}</p>
+      </article>
+    }
+  </div>
+
+  <article class="platform-analytics__panel platform-analytics__panel--chart">
+    <div class="platform-analytics__panel-header">
+      <h2 class="platform-analytics__panel-title">
+        {{ 'aiPlatformPage.analytics.dailyConversations' | translate }}
+      </h2>
+      <div class="platform-analytics__toggle">
+        <button
+          type="button"
+          class="platform-analytics__toggle-btn"
+          [class.platform-analytics__toggle-btn--active]="chartPeriod() === '30'"
+          (click)="setChartPeriod('30')"
+        >
+          {{ 'aiPlatformPage.analytics.period30' | translate }}
+        </button>
+        <button
+          type="button"
+          class="platform-analytics__toggle-btn"
+          [class.platform-analytics__toggle-btn--active]="chartPeriod() === '60'"
+          (click)="setChartPeriod('60')"
+        >
+          {{ 'aiPlatformPage.analytics.period60' | translate }}
+        </button>
+      </div>
+    </div>
+
+    <div class="platform-analytics__chart-wrap">
+      <svg viewBox="0 0 920 260" class="platform-analytics__chart" aria-hidden="true">
+        <defs>
+          <linearGradient id="analyticsAreaGradient" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#5e8bff" stop-opacity="0.35" />
+            <stop offset="100%" stop-color="#5e8bff" stop-opacity="0" />
+          </linearGradient>
+          <filter id="analyticsLineGlow">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        <path [attr.d]="chartGeometry().areaPath" fill="url(#analyticsAreaGradient)" />
+        <path
+          [attr.d]="chartGeometry().linePath"
+          fill="none"
+          stroke="#7aa0ff"
+          stroke-width="2.5"
+          filter="url(#analyticsLineGlow)"
+        />
+      </svg>
+      <div class="platform-analytics__chart-labels">
+        @for (label of chartGeometry().labels; track label) {
+          <span>{{ label }}</span>
+        }
+      </div>
+    </div>
+  </article>
+
+  <div class="platform-analytics__split-grid">
+    <article class="platform-analytics__panel">
+      <h2 class="platform-analytics__panel-title">
+        {{ 'aiPlatformPage.analytics.mostUsedWorkflows' | translate }}
+      </h2>
+      <div class="platform-analytics__bars">
+        @for (item of workflowUsage; track item.id) {
+          <div class="platform-analytics__bar-row">
+            <div class="platform-analytics__bar-meta">
+              <span>{{ item.labelKey | translate }}</span>
+              <strong>{{ item.value | number }}</strong>
+            </div>
+            <div class="platform-analytics__bar-track">
+              <span
+                class="platform-analytics__bar-fill platform-analytics__bar-fill--{{ item.tone }}"
+                [style.width]="workflowBarWidth(item.value)"
+              ></span>
+            </div>
+          </div>
+        }
+      </div>
+    </article>
+
+    <article class="platform-analytics__panel">
+      <h2 class="platform-analytics__panel-title">
+        {{ 'aiPlatformPage.analytics.usageDistribution' | translate }}
+      </h2>
+      <div class="platform-analytics__donut-wrap">
+        <svg viewBox="0 0 160 160" class="platform-analytics__donut" aria-hidden="true">
+          <circle cx="80" cy="80" r="54" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="16" />
+          @for (segment of donutSegments(); track segment.id) {
+            <circle
+              cx="80"
+              cy="80"
+              r="54"
+              fill="none"
+              [attr.stroke]="segment.color"
+              stroke-width="16"
+              stroke-linecap="round"
+              [attr.stroke-dasharray]="segment.dashArray"
+              [attr.stroke-dashoffset]="segment.dashOffset"
+              transform="rotate(-90 80 80)"
+            />
+          }
+        </svg>
+        <div class="platform-analytics__donut-center">
+          <strong>85%</strong>
+          <span>{{ 'aiPlatformPage.analytics.utilityRate' | translate }}</span>
+        </div>
+      </div>
+      <ul class="platform-analytics__legend">
+        @for (segment of usageSegments; track segment.id) {
+          <li>
+            <span class="platform-analytics__legend-dot" [style.background]="segment.color"></span>
+            {{ segment.labelKey | translate }} ({{ segment.percent }}%)
+          </li>
+        }
+      </ul>
+    </article>
+  </div>
+
+  <div class="platform-analytics__split-grid">
+    <article class="platform-analytics__panel">
+      <h2 class="platform-analytics__panel-title">
+        {{ 'aiPlatformPage.analytics.hoursSaved' | translate }}
+      </h2>
+      <div class="platform-analytics__column-chart">
+        @for (value of hoursWeek; track $index) {
+          <div class="platform-analytics__column">
+            <div class="platform-analytics__column-bar-wrap">
+              <span
+                class="platform-analytics__column-bar"
+                [class.platform-analytics__column-bar--current]="$index === hoursWeek.length - 1"
+                [style.height]="hoursBarHeight(value)"
+              ></span>
+            </div>
+            <span class="platform-analytics__column-label">{{ weekLabels[$index] | translate }}</span>
+          </div>
+        }
+      </div>
+    </article>
+
+    <article class="platform-analytics__panel">
+      <h2 class="platform-analytics__panel-title">
+        {{ 'aiPlatformPage.analytics.busiestHours' | translate }}
+      </h2>
+      <div class="platform-analytics__heatmap">
+        @for (value of hourlyUsage; track $index) {
+          <span
+            class="platform-analytics__heatmap-cell"
+            [style.background]="'rgba(94, 139, 255, ' + heatmapOpacity(value) + ')'"
+          ></span>
+        }
+      </div>
+      <div class="platform-analytics__heatmap-labels">
+        @for (label of hourLabels; track label) {
+          <span>{{ label }}</span>
+        }
+      </div>
+      <p class="platform-analytics__heatmap-note">{{ 'aiPlatformPage.analytics.peakUsageNote' | translate }}</p>
+    </article>
+  </div>
+
+  <div class="platform-analytics__footer-kpis">
+    @for (item of footerKpis; track item.id) {
+      <div class="platform-analytics__footer-kpi">
+        <span class="platform-analytics__footer-label">{{ item.labelKey | translate }}</span>
+        <strong class="platform-analytics__footer-value">{{ item.value }}</strong>
+        <span class="platform-analytics__footer-sub">{{ item.subtextKey | translate }}</span>
+      </div>
+    }
+  </div>
+
+  <section class="platform-analytics__insights">
+    <h2 class="platform-analytics__insights-title">
+      <span aria-hidden="true">💡</span>
+      {{ 'aiPlatformPage.analytics.generatedInsights' | translate }}
+    </h2>
+    <div class="platform-analytics__insights-grid">
+      @for (insight of insights; track insight.id) {
+        <article class="platform-analytics__insight-card">
+          <img [src]="insight.icon" alt="" class="platform-analytics__insight-icon" loading="lazy" />
+          <p>{{ insight.textKey | translate }}</p>
+        </article>
+      }
+    </div>
+  </section>
+</section>

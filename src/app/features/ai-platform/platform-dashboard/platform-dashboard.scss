@@ -1,0 +1,27 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.platform-dashboard {
+  display: grid;
+  gap: 20px;
+  min-width: 0;
+}
+
+.platform-dashboard__main {
+  display: grid;
+  gap: 20px;
+  align-items: start;
+}
+
+.platform-dashboard__sidebar {
+  display: grid;
+  gap: 20px;
+}
+
+@media (min-width: 1024px) {
+  .platform-dashboard__main {
+    grid-template-columns: minmax(0, 1.4fr) minmax(280px, 1fr);
+  }
+}

@@ -1,0 +1,68 @@
+<section class="platform-workflows">
+  <header class="platform-workflows__hero">
+    <span class="platform-workflows__badge">
+      <span class="platform-workflows__badge-dot" aria-hidden="true"></span>
+      {{ 'aiPlatformPage.workflows.badge' | translate }}
+    </span>
+    <h1 class="platform-workflows__title">{{ 'aiPlatformPage.workflows.title' | translate }}</h1>
+    <p class="platform-workflows__subtitle">{{ 'aiPlatformPage.workflows.subtitle' | translate }}</p>
+  </header>
+
+  <div class="platform-workflows__grid">
+    @for (workflow of workflows; track workflow.id) {
+      <article class="platform-workflows__card">
+        <div class="platform-workflows__card-top">
+          <img
+            [src]="workflow.icon"
+            [alt]="workflow.titleKey | translate"
+            class="platform-workflows__card-icon"
+            loading="lazy"
+          />
+          <div class="platform-workflows__card-heading">
+            <div class="platform-workflows__card-title-row">
+              <h2 class="platform-workflows__card-title">{{ workflow.titleKey | translate }}</h2>
+              <span class="platform-workflows__status">{{ 'aiPlatformPage.workflows.ready' | translate }}</span>
+            </div>
+            <p class="platform-workflows__card-description">{{ workflow.descriptionKey | translate }}</p>
+          </div>
+        </div>
+
+        <p class="platform-workflows__execution">
+          <span class="platform-workflows__execution-icon" aria-hidden="true">⏱</span>
+          {{ 'aiPlatformPage.workflows.estimatedExecution' | translate }}
+          {{ workflow.executionKey | translate }}
+        </p>
+
+        <button type="button" class="platform-workflows__run" (click)="onRunWorkflow()">
+          {{ 'aiPlatformPage.workflows.runWorkflow' | translate }}
+        </button>
+      </article>
+    }
+  </div>
+
+  <section class="platform-workflows__suggested">
+    <h2 class="platform-workflows__suggested-title">
+      {{ 'aiPlatformPage.workflows.suggestedTitle' | translate }}
+    </h2>
+
+    <div class="platform-workflows__suggested-grid">
+      @for (item of suggestedAutomations; track item.id) {
+        <article class="platform-workflows__suggested-card">
+          <img
+            [src]="item.icon"
+            [alt]="item.titleKey | translate"
+            class="platform-workflows__suggested-icon"
+            loading="lazy"
+          />
+          <div class="platform-workflows__suggested-content">
+            <h3 class="platform-workflows__suggested-name">{{ item.titleKey | translate }}</h3>
+            <p class="platform-workflows__suggested-description">{{ item.descriptionKey | translate }}</p>
+            <button type="button" class="platform-workflows__explore" (click)="onRunWorkflow()">
+              {{ 'aiPlatformPage.workflows.exploreWorkflow' | translate }}
+            </button>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+</section>

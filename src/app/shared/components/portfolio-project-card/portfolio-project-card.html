@@ -1,0 +1,21 @@
+<article class="portfolio-project-card">
+  <div class="portfolio-project-card__media">
+    <img [src]="image" [alt]="titleKey | translate" loading="lazy" />
+  </div>
+
+  <div class="portfolio-project-card__body">
+    <ul class="portfolio-project-card__tags">
+      @for (tagKey of tagKeys; track tagKey) {
+        <li>{{ tagKey | translate }}</li>
+      }
+    </ul>
+
+    <h3 class="portfolio-project-card__title">{{ titleKey | translate }}</h3>
+    <p class="portfolio-project-card__description">{{ descriptionKey | translate }}</p>
+
+    <a class="portfolio-project-card__link" href="#">
+      {{ linkKey | translate }}
+      <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>

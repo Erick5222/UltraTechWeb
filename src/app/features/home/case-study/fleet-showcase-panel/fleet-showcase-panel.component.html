@@ -1,0 +1,47 @@
+<article class="fleet-showcase">
+  <header class="fleet-showcase__intro">
+    <p class="fleet-showcase__label">{{ 'caseStudy.label' | translate }}</p>
+
+    <h2 class="fleet-showcase__title">
+      {{ 'caseStudy.title' | translate }}
+    </h2>
+
+    <p class="fleet-showcase__subtitle">{{ 'caseStudy.subtitle' | translate }}</p>
+
+    <p class="fleet-showcase__description">
+      {{ 'caseStudy.description' | translate }}
+    </p>
+
+    <div class="fleet-showcase__capabilities">
+      <h3 class="fleet-showcase__section-title">{{ 'caseStudy.capabilitiesTitle' | translate }}</h3>
+      <ul class="fleet-showcase__capability-list">
+        @for (capabilityKey of capabilities; track capabilityKey) {
+          <li class="fleet-showcase__capability-item">
+            <span class="fleet-showcase__check" aria-hidden="true"></span>
+            <span>{{ capabilityKey | translate }}</span>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <div class="fleet-showcase__metrics">
+      @for (metricKey of metrics; track metricKey) {
+        <div class="fleet-showcase__metric">
+          <span class="fleet-showcase__metric-value">{{ metricKey | translate }}</span>
+        </div>
+      }
+    </div>
+  </header>
+
+  <div class="fleet-showcase__demo">
+    <div class="fleet-showcase__demo-frame">
+      @defer (on viewport) {
+        <app-fleet-case-study-shell />
+      } @placeholder {
+        <div class="fleet-showcase__demo-placeholder" aria-hidden="true">
+          <span>{{ 'caseStudy.demoLoading' | translate }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</article>

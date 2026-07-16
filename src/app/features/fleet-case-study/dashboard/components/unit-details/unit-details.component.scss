@@ -1,0 +1,109 @@
+@use 'styles/variables' as *;
+
+.unit-details {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: $color-bg-primary;
+  border-left: 1px solid $color-border;
+
+  &--empty {
+    align-items: center;
+    justify-content: center;
+    color: $color-text-muted;
+    font-size: 13px;
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: $spacing-lg;
+    border-bottom: 1px solid $color-border;
+    flex-shrink: 0;
+  }
+
+  &__title-group {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+
+  &__title {
+    font-size: 16px;
+    font-weight: 700;
+    color: $color-text-primary;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: $radius-md;
+    color: $color-text-muted;
+    transition: color 0.15s, background 0.15s;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    &:hover {
+      color: $color-primary;
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  &__body {
+    flex: 1;
+    overflow-y: auto;
+    padding: $spacing-lg;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xl;
+  }
+
+  &__section {
+    flex-shrink: 0;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    padding: $spacing-lg;
+    border-top: 1px solid $color-border;
+    flex-shrink: 0;
+  }
+
+  &__btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    border-radius: $radius-md;
+    transition: opacity 0.15s, background 0.15s;
+
+    &--primary {
+      background: $color-primary;
+      color: $color-bg-primary;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+
+    &--secondary {
+      background: transparent;
+      color: $color-text-primary;
+      border: 1px solid $color-border;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
+    }
+  }
+}

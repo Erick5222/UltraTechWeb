@@ -1,0 +1,21 @@
+:host {
+  display: block;
+}
+
+.platform-metrics__grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 640px) {
+  .platform-metrics__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .platform-metrics__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

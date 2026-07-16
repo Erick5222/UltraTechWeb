@@ -1,0 +1,59 @@
+:host {
+  display: block;
+}
+
+.about-cta {
+  padding: 0 24px 96px;
+}
+
+.about-cta__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-cta__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 64px 32px;
+  border: 1px solid rgba(94, 168, 255, 0.15);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 0 40px rgba(94, 168, 255, 0.06);
+  text-align: center;
+}
+
+.about-cta__title {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.about-cta__btn {
+  margin-top: 32px;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 999px;
+  background: #6b99ff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #0a0a0a;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    background: #85abff;
+    box-shadow: 0 0 24px rgba(107, 153, 255, 0.35);
+  }
+}
+
+@media (min-width: 768px) {
+  .about-cta__card {
+    padding: 72px 48px;
+  }
+}

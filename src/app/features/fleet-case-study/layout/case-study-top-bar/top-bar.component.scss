@@ -1,0 +1,119 @@
+@use 'styles/variables' as *;
+
+.top-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: $topbar-height;
+  padding: 0 $spacing-lg;
+  background: $color-bg-panel;
+  border-bottom: 1px solid $color-border;
+  flex-shrink: 0;
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xl * 2;
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+  }
+
+  &__logo {
+    width: 22px;
+    height: 22px;
+    color: $color-primary;
+  }
+
+  &__title {
+    font-size: 16px;
+    font-weight: 700;
+    color: $color-text-primary;
+    letter-spacing: -0.02em;
+  }
+
+  &__pro {
+    color: $color-primary;
+    font-weight: 600;
+  }
+
+  &__center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &__connection {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: 6px 14px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: $radius-pill;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: $color-success;
+  }
+
+  &__connection-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: $color-success;
+    box-shadow: 0 0 6px $color-success;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+  }
+
+  &__clock {
+    font-size: 14px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: $color-text-primary;
+    min-width: 72px;
+    text-align: right;
+  }
+
+  &__icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: $radius-md;
+    color: $color-text-secondary;
+    transition: color 0.15s, background 0.15s;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover {
+      color: $color-text-primary;
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  &__demo-badge {
+    padding: 6px 10px;
+    border-radius: $radius-pill;
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    background: rgba(56, 189, 248, 0.12);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-primary;
+  }
+}

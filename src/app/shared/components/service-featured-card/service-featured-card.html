@@ -1,0 +1,23 @@
+<article class="service-featured-card">
+  <div class="service-featured-card__media">
+    <img
+      [src]="image"
+      [alt]="imageAltKey | translate"
+      class="service-featured-card__image"
+      loading="lazy"
+      decoding="async" />
+  </div>
+
+  <div class="service-featured-card__header">
+    <h3 class="service-featured-card__title">{{ titleKey | translate }}</h3>
+    <span class="service-featured-card__number">{{ number }}</span>
+  </div>
+
+  <p class="service-featured-card__description">{{ descriptionKey | translate }}</p>
+
+  <ul class="service-featured-card__tags" aria-label="Technologies">
+    @for (tag of tags; track tag) {
+      <li class="service-featured-card__tag">{{ tag }}</li>
+    }
+  </ul>
+</article>

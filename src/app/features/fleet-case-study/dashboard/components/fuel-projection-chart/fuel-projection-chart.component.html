@@ -1,0 +1,84 @@
+<div class="fuel-chart" [class.fuel-chart--low]="isLowFuel()">
+  <div class="fuel-chart__header">
+    <div class="fuel-chart__title-group">
+      <span class="fuel-chart__label">Fuel</span>
+      <span class="fuel-chart__value">{{ projection().currentPercent }}%</span>
+    </div>
+    <span class="fuel-chart__remaining">{{ remainingLabel() }}</span>
+  </div>
+
+  <div class="fuel-chart__canvas">
+    <svg
+      [attr.viewBox]="'0 0 ' + chartWidth + ' ' + chartHeight"
+      class="fuel-chart__svg"
+      role="img"
+      aria-label="Proyección de combustible en el tiempo"
+    >
+      <defs>
+        <linearGradient id="fuelAreaGradient" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35" />
+          <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.02" />
+        </linearGradient>
+        <linearGradient id="fuelAreaGradientLow" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.35" />
+          <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.02" />
+        </linearGradient>
+      </defs>
+
+      @for (tick of yAxisTicks; track tick) {
+        <line
+          class="fuel-chart__grid-line"
+          [attr.x1]="padding.left"
+          [attr.x2]="chartWidth - padding.right"
+          [attr.y1]="padding.top + (chartHeight - padding.top - padding.bottom) * (1 - tick / 100)"
+          [attr.y2]="padding.top + (chartHeight - padding.top - padding.bottom) * (1 - tick / 100)"
+        />
+        <text
+          class="fuel-chart__axis-y"
+          [attr.x]="padding.left - 6"
+          [attr.y]="padding.top + (chartHeight - padding.top - padding.bottom) * (1 - tick / 100) + 3"
+          text-anchor="end"
+        >
+          {{ tick }}
+        </text>
+      }
+
+      @if (areaPath()) {
+        <path
+          class="fuel-chart__area"
+          [class.fuel-chart__area--low]="isLowFuel()"
+          [attr.d]="areaPath()"
+        />
+        <path
+          class="fuel-chart__line"
+          [class.fuel-chart__line--low]="isLowFuel()"
+          [attr.d]="linePath()"
+        />
+      }
+
+      @for (point of chartPoints(); track point.label) {
+        <circle
+          class="fuel-chart__dot"
+          [class.fuel-chart__dot--low]="isLowFuel()"
+          [attr.cx]="point.x"
+          [attr.cy]="point.y"
+          r="3"
+        />
+        <text
+          class="fuel-chart__axis-x"
+          [attr.x]="point.x"
+          [attr.y]="chartHeight - 4"
+          text-anchor="middle"
+        >
+          {{ point.label }}
+        </text>
+      }
+    </svg>
+  </div>
+
+  <div class="fuel-chart__footer">
+    <span class="fuel-chart__consumption">
+      Consumo est.: {{ projection().consumptionPerHour }}%/h
+    </span>
+  </div>
+</div>

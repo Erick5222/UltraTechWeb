@@ -1,0 +1,140 @@
+:host {
+  display: block;
+}
+
+.about-evolution {
+  padding: 0 24px 80px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.about-evolution__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 80px;
+}
+
+.about-evolution__header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 56px;
+}
+
+.about-evolution__title {
+  margin: 0;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.about-evolution__subtitle {
+  margin: 12px 0 0;
+  max-width: 560px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #9aa3b2;
+}
+
+.about-evolution__range {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+.about-evolution__timeline {
+  position: relative;
+}
+
+.about-evolution__line {
+  display: none;
+}
+
+.about-evolution__milestones {
+  display: grid;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about-evolution__milestone {
+  position: relative;
+  padding-left: 28px;
+}
+
+.about-evolution__dot {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #5ea8ff;
+  box-shadow: 0 0 16px rgba(94, 168, 255, 0.65);
+}
+
+.about-evolution__year {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #5ea8ff;
+}
+
+.about-evolution__milestone-title {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.about-evolution__milestone-description {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #9aa3b2;
+}
+
+@media (min-width: 1024px) {
+  .about-evolution__header {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .about-evolution__timeline {
+    padding-top: 0;
+  }
+
+  .about-evolution__line {
+    display: block;
+    position: absolute;
+    top: 6px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .about-evolution__milestones {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    padding-top: 0;
+  }
+
+  .about-evolution__milestone {
+    padding: 28px 0 0;
+  }
+
+  .about-evolution__dot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,110 @@
+@use 'styles/variables' as *;
+
+.map-panel {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  background: $color-bg-primary;
+
+  &__leaflet {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  &__overlay {
+    position: absolute;
+    top: $spacing-lg;
+    left: $spacing-lg;
+    max-width: 320px;
+    padding: $spacing-md $spacing-lg;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid $color-border;
+    border-radius: $radius-lg;
+    backdrop-filter: blur(8px);
+    z-index: 500;
+    pointer-events: none;
+  }
+
+  &__overlay-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: $color-text-primary;
+    margin-bottom: 4px;
+  }
+
+  &__overlay-subtitle {
+    font-size: 11px;
+    color: $color-text-secondary;
+    line-height: 1.4;
+  }
+
+  &__controls {
+    position: absolute;
+    bottom: $spacing-lg;
+    left: $spacing-lg;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    z-index: 500;
+  }
+
+  &__control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(30, 41, 59, 0.9);
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    color: $color-text-primary;
+    font-size: 18px;
+    font-weight: 600;
+    transition: background 0.15s;
+
+    &:hover {
+      background: $color-bg-panel-hover;
+    }
+  }
+}
+
+:host ::ng-deep {
+  .fleet-map-marker {
+    background: transparent;
+    border: none;
+  }
+
+  .fleet-map-marker__pin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+  }
+
+  .fleet-map-tooltip {
+    background: rgba(15, 23, 42, 0.92) !important;
+    border: 1px solid $color-border !important;
+    border-radius: $radius-sm !important;
+    color: $color-success !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    padding: 2px 8px !important;
+    box-shadow: none !important;
+
+    &::before {
+      border-bottom-color: $color-border !important;
+    }
+  }
+
+  .leaflet-control-attribution {
+    background: rgba(15, 23, 42, 0.75) !important;
+    color: $color-text-muted !important;
+    font-size: 10px !important;
+
+    a {
+      color: $color-text-secondary !important;
+    }
+  }
+}

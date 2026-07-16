@@ -1,0 +1,121 @@
+@use 'styles/variables' as *;
+
+.fuel-chart {
+  padding: $spacing-md;
+  background: $color-bg-input;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+
+  &--low {
+    border-color: rgba(245, 158, 11, 0.4);
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-md;
+  }
+
+  &__title-group {
+    display: flex;
+    align-items: baseline;
+    gap: $spacing-sm;
+  }
+
+  &__label {
+    font-size: 12px;
+    color: $color-text-muted;
+  }
+
+  &__value {
+    font-size: 16px;
+    font-weight: 700;
+    color: $color-primary;
+  }
+
+  &--low &__value {
+    color: $color-warning;
+  }
+
+  &__remaining {
+    font-size: 11px;
+    font-weight: 600;
+    color: $color-text-secondary;
+    text-align: right;
+    line-height: 1.3;
+  }
+
+  &--low &__remaining {
+    color: $color-warning;
+  }
+
+  &__canvas {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  &__svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  &__grid-line {
+    stroke: rgba(148, 163, 184, 0.12);
+    stroke-width: 1;
+  }
+
+  &__axis-y {
+    fill: $color-text-muted;
+    font-size: 9px;
+  }
+
+  &__axis-x {
+    fill: $color-text-secondary;
+    font-size: 9px;
+    font-weight: 500;
+  }
+
+  &__area {
+    fill: url(#fuelAreaGradient);
+
+    &--low {
+      fill: url(#fuelAreaGradientLow);
+    }
+  }
+
+  &__line {
+    fill: none;
+    stroke: $color-primary;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    &--low {
+      stroke: $color-warning;
+    }
+  }
+
+  &__dot {
+    fill: $color-bg-input;
+    stroke: $color-primary;
+    stroke-width: 2;
+
+    &--low {
+      stroke: $color-warning;
+    }
+  }
+
+  &__footer {
+    margin-top: $spacing-sm;
+    padding-top: $spacing-sm;
+    border-top: 1px solid rgba(148, 163, 184, 0.1);
+  }
+
+  &__consumption {
+    font-size: 10px;
+    color: $color-text-muted;
+  }
+}

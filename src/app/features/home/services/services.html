@@ -1,0 +1,22 @@
+<section class="services" id="services" aria-labelledby="services-title">
+  <div class="services__container">
+    <header class="services__header">
+      <h2 id="services-title" class="services__title">{{ 'services.title' | translate }}</h2>
+      <p class="services__subtitle">
+        {{ 'services.subtitle' | translate }}
+      </p>
+    </header>
+
+    <div class="services__grid">
+      @for (service of services; track service.id) {
+        <app-card
+          [icon]="service.icon"
+          [titleKey]="service.titleKey"
+          [descriptionKey]="service.descriptionKey"
+          [featureKeys]="service.featureKeys"
+          [accent]="service.accent">
+        </app-card>
+      }
+    </div>
+  </div>
+</section>

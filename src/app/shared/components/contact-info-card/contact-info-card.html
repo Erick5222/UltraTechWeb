@@ -1,0 +1,15 @@
+<article class="contact-info-card">
+  <div class="contact-info-card__icon-wrap">
+    <img [src]="icon" [alt]="labelKey | translate" class="contact-info-card__icon" loading="lazy" />
+  </div>
+
+  <div class="contact-info-card__content">
+    <span class="contact-info-card__label">{{ labelKey | translate }}</span>
+    @if (href) {
+      <a class="contact-info-card__value" [href]="href">{{ valueKey | translate }}</a>
+    } @else {
+      <p class="contact-info-card__value">{{ valueKey | translate }}</p>
+    }
+    <p class="contact-info-card__description">{{ descriptionKey | translate }}</p>
+  </div>
+</article>

@@ -1,0 +1,49 @@
+<section class="case-study" id="featured-solutions" aria-labelledby="case-study-showcase-title">
+  <div class="case-study__container">
+    <div class="case-study__frame">
+      <app-showcase-controls
+        [canGoPrevious]="canGoPrevious()"
+        [canGoNext]="canGoNext()"
+        [disabled]="isTransitioning()"
+        (previous)="onPrevious()"
+        (next)="onNext()"
+      />
+
+      <div
+        class="case-study__card"
+        [class.case-study__card--transitioning]="isTransitioning()"
+      >
+        <div class="case-study__stage">
+          @for (project of projects; track project.id; let index = $index) {
+            @if (isProjectMounted(project.id)) {
+              <article
+                class="case-study__panel"
+                [class.case-study__panel--active]="displayIndex() === index"
+                [attr.aria-hidden]="displayIndex() !== index"
+                [attr.id]="displayIndex() === index ? 'case-study-showcase-title' : null"
+              >
+                @switch (project.type) {
+                  @case ('fleet-intelligence') {
+                    <app-fleet-showcase-panel />
+                  }
+                  @case ('placeholder') {
+                    @if (project.placeholder; as placeholder) {
+                      <app-showcase-placeholder [content]="placeholder" />
+                    }
+                  }
+                }
+              </article>
+            }
+          }
+        </div>
+      </div>
+    </div>
+
+    <app-showcase-nav
+      [projects]="projects"
+      [activeIndex]="activeIndex()"
+      [disabled]="isTransitioning()"
+      (projectSelect)="onProjectSelect($event)"
+    />
+  </div>
+</section>

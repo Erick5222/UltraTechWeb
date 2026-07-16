@@ -1,0 +1,84 @@
+:host {
+  display: block;
+}
+
+.contact-sidebar__label {
+  display: inline-flex;
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #c3b1e1;
+}
+
+.contact-sidebar__title {
+  margin: 20px 0 0;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+
+  span {
+    color: #5ea8ff;
+  }
+}
+
+.contact-sidebar__description {
+  margin: 20px 0 0;
+  max-width: 520px;
+  font-size: 15px;
+  line-height: 1.75;
+  color: #9aa3b2;
+}
+
+.contact-sidebar__channels {
+  display: grid;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.contact-sidebar__social {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.contact-sidebar__social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #111111;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: border-color 0.2s ease, background 0.2s ease;
+
+  img {
+    width: 18px;
+    height: 18px;
+  }
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.04);
+  }
+}
+
+.contact-sidebar__faq {
+  margin-top: 48px;
+}
+
+.contact-sidebar__faq-title {
+  margin: 0 0 16px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9aa3b2;
+}

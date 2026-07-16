@@ -1,0 +1,23 @@
+:host {
+  display: block;
+}
+
+.portfolio-projects {
+  padding: 0 24px 64px;
+}
+
+.portfolio-projects__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.portfolio-projects__grid {
+  display: grid;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .portfolio-projects__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

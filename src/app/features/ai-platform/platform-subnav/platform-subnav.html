@@ -1,0 +1,15 @@
+<aside class="platform-sidebar" [attr.aria-label]="'aiPlatformPage.sidebar.ariaLabel' | translate">
+  <nav class="platform-sidebar__nav">
+    @for (item of navItems; track item.id) {
+      <button
+        type="button"
+        class="platform-sidebar__item"
+        [class.platform-sidebar__item--active]="activeNav() === item.id"
+        [attr.aria-current]="activeNav() === item.id ? 'page' : null"
+        (click)="selectNav(item.id)"
+      >
+        {{ item.labelKey | translate }}
+      </button>
+    }
+  </nav>
+</aside>

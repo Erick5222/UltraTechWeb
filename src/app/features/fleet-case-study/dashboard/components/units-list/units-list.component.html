@@ -1,0 +1,35 @@
+<div class="units-list">
+  <div class="units-list__header">
+    <app-search-bar
+      [value]="searchQuery()"
+      (searchChange)="onSearchChange($event)"
+    />
+
+    <div class="units-list__filters" role="tablist" aria-label="Filter units">
+      @for (tab of filterTabs; track tab.id) {
+        <button
+          class="units-list__filter"
+          [class.units-list__filter--active]="activeFilter() === tab.id"
+          role="tab"
+          [attr.aria-selected]="activeFilter() === tab.id"
+          (click)="onFilterChange(tab.id)"
+          type="button"
+        >
+          {{ tab.label }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <div class="units-list__items">
+    @for (unit of units(); track unit.id) {
+      <app-unit-card
+        [unit]="unit"
+        [selected]="selectedUnitId() === unit.id"
+        (unitSelect)="onUnitSelect($event)"
+      />
+    } @empty {
+      <p class="units-list__empty">No units found.</p>
+    }
+  </div>
+</div>

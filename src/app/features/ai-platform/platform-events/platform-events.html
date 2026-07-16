@@ -1,0 +1,28 @@
+<section class="platform-activity">
+  <header class="platform-activity__header">
+    <h2 class="platform-activity__title">{{ 'aiPlatformPage.activity.title' | translate }}</h2>
+    <span class="platform-activity__live">{{ 'aiPlatformPage.activity.live' | translate }}</span>
+  </header>
+
+  <ul class="platform-activity__timeline">
+    @for (activity of activities(); track activity.id) {
+      <li class="platform-activity__item" [class.platform-activity__item--new]="$first">
+        <div class="platform-activity__marker">
+          <img [src]="activityIcon(activity.activityType)" alt="" aria-hidden="true" loading="lazy" />
+        </div>
+
+        <div class="platform-activity__content">
+          <span class="platform-activity__time">{{ formatTime(activity.timestamp) }}</span>
+          <p class="platform-activity__title-text">{{ activity.title }}</p>
+          <span
+            class="platform-activity__status"
+            [class.platform-activity__status--completed]="activity.status === 'Completed'"
+            [class.platform-activity__status--failed]="activity.status === 'Failed'"
+          >
+            {{ activity.status }}
+          </span>
+        </div>
+      </li>
+    }
+  </ul>
+</section>

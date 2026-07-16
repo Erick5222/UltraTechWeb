@@ -1,0 +1,14 @@
+<div class="status-summary">
+  <div class="status-summary__item status-summary__item--active">
+    <span class="status-summary__label">ACTIVE</span>
+    <span class="status-summary__value">{{ dashboardStatus()?.activeUnitsCount ?? 0 }}</span>
+  </div>
+  <div class="status-summary__item">
+    <span class="status-summary__label">STOPPED</span>
+    <span class="status-summary__value">{{ dashboardStatus()?.stoppedUnitsCount ?? 0 }}</span>
+  </div>
+  <div class="status-summary__item status-summary__item--alerts">
+    <span class="status-summary__label">ALERTS</span>
+    <span class="status-summary__value">{{ (dashboardStatus()?.alertsCount ?? 0) | number: '2.0-0' }}</span>
+  </div>
+</div>

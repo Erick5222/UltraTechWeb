@@ -1,0 +1,20 @@
+<article class="testimonial-card">
+  <span class="testimonial-card__quote-mark" aria-hidden="true">"</span>
+
+  <blockquote class="testimonial-card__quote">
+    {{ quoteKey | translate }}
+  </blockquote>
+
+  <footer class="testimonial-card__author">
+    @if (avatar) {
+      <img [src]="avatar" [alt]="nameKey | translate" class="testimonial-card__avatar" />
+    } @else {
+      <span class="testimonial-card__avatar testimonial-card__avatar--placeholder">{{ initials }}</span>
+    }
+
+    <div class="testimonial-card__meta">
+      <cite class="testimonial-card__name">{{ nameKey | translate }}</cite>
+      <span class="testimonial-card__role">{{ roleKey | translate }}</span>
+    </div>
+  </footer>
+</article>

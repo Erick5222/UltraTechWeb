@@ -1,0 +1,18 @@
+<section class="about-principles">
+  <div class="about-principles__container">
+    <header class="about-principles__header">
+      <h2 class="about-principles__title">{{ 'aboutPage.principles.title' | translate }}</h2>
+      <p class="about-principles__subtitle">{{ 'aboutPage.principles.subtitle' | translate }}</p>
+    </header>
+
+    <div class="about-principles__grid">
+      @for (principle of principles; track principle.id) {
+        <app-about-principle-card
+          [icon]="principle.icon"
+          [titleKey]="principle.titleKey"
+          [descriptionKey]="principle.descriptionKey"
+        />
+      }
+    </div>
+  </div>
+</section>

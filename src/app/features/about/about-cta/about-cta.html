@@ -1,0 +1,15 @@
+<section class="about-cta" aria-labelledby="about-cta-title">
+  <div class="about-cta__container">
+    <div class="about-cta__card">
+      <h2 id="about-cta-title" class="about-cta__title">
+        {{ 'aboutPage.cta.title' | translate }}
+      </h2>
+
+      @if (buttonEnabled) {
+        <button type="button" class="about-cta__btn">
+          {{ 'aboutPage.cta.button' | translate }}
+        </button>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,32 @@
+<div class="map-panel">
+  <div
+    #mapContainer
+    class="map-panel__leaflet"
+    role="application"
+    aria-label="Real-time fleet tracking map"
+  ></div>
+
+  <div class="map-panel__overlay">
+    <h3 class="map-panel__overlay-title">{{ mapViewInfo().title }}</h3>
+    <p class="map-panel__overlay-subtitle">{{ mapViewInfo().subtitle }}</p>
+  </div>
+
+  <div class="map-panel__controls">
+    <button
+      class="map-panel__control"
+      aria-label="Zoom in"
+      type="button"
+      (click)="onZoomIn()"
+    >
+      +
+    </button>
+    <button
+      class="map-panel__control"
+      aria-label="Zoom out"
+      type="button"
+      (click)="onZoomOut()"
+    >
+      −
+    </button>
+  </div>
+</div>

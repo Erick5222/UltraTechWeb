@@ -1,0 +1,18 @@
+<header class="top-bar">
+  <div class="top-bar__left">
+    <div class="top-bar__brand">
+      <svg class="top-bar__logo" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M3 17h18v2H3v-2zm1-4h2v2H4v-2zm0-4h2v2H4V9zm0-4h2v2H4V5zm4 8h10v2H8v-2zm0-4h10v2H8V9zm0-4h10v2H8V5z" fill="currentColor"/>
+      </svg>
+      <span class="top-bar__title">FleetControl</span>
+    </div>
+    <app-status-summary />
+  </div>
+  
+  
+
+  <div class="top-bar__right">
+    <span class="top-bar__clock">{{ currentTime() }}</span>
+    
+  </div>
+</header>

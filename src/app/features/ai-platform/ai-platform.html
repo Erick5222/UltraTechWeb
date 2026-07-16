@@ -1,0 +1,21 @@
+<div class="ai-platform">
+  <div class="ai-platform__shell">
+    <app-platform-subnav [activeNav]="activeNav()" (navChange)="onNavChange($event)" />
+
+    <main class="ai-platform__content">
+      <div class="ai-platform__inner" [class.ai-platform__inner--wide]="activeNav() === 'analytics'">
+        @switch (activeNav()) {
+          @case ('workflows') {
+            <app-platform-workflows (runWorkflow)="onNavChange('dashboard')" />
+          }
+          @case ('analytics') {
+            <app-platform-analytics />
+          }
+          @default {
+            <app-platform-dashboard />
+          }
+        }
+      </div>
+    </main>
+  </div>
+</div>

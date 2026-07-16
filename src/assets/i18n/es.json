@@ -1,0 +1,755 @@
+{
+  "header": {
+    "brandAria": "Inicio de Ultra Tech",
+    "navAria": "Navegación principal",
+    "langAria": "Seleccionar idioma",
+    "nav": {
+      "home": "Inicio",
+      "services": "Servicios",
+      "portfolio": "Portafolio",
+      "about": "Nosotros",
+      "contact": "Contacto",
+      "aiPlatform": "Plataforma IA"
+    },
+    "demo": "Demo",
+    "menuToggleAria": "Abrir menú de navegación",
+    "menuCloseAria": "Cerrar menú de navegación",
+    "mobileNavAria": "Navegación móvil"
+  },
+  "hero": {
+    "badge": "Ingeniería de Nueva Generación",
+    "title": "Construimos software inteligente para empresas que quieren escalar",
+    "description": "Diseñamos soluciones de software a medida, automatizamos procesos complejos e integramos inteligencia artificial para ayudar a las empresas a operar más rápido y de forma más inteligente.",
+    "scheduleConsultation": "Trabajemos juntos",
+    "exploreSolutions": "Explorar soluciones",
+    "imageAlt": "Red de nodos inteligentes de Ultra Tech"
+  },
+  "techCarousel": {
+    "label": "Impulsado por tecnología moderna",
+    "ariaLabel": "Stacks tecnológicos y servicios"
+  },
+  "services": {
+    "title": "Soluciones diseñadas según las necesidades de tu negocio",
+    "subtitle": "Combinamos ingeniería de software, tecnologías cloud e inteligencia artificial para crear soluciones que simplifican operaciones, automatizan procesos y ayudan a las empresas a crecer.",
+    "items": {
+      "enterpriseAi": {
+        "title": "Soluciones inteligentes con IA",
+        "description": "Crea flujos de trabajo más inteligentes con asistentes impulsados por IA, análisis de documentos y automatización inteligente diseñada según los procesos de tu negocio.",
+        "features": {
+          "aiAssistants": "Asistentes IA",
+          "documentIntelligence": "Inteligencia documental",
+          "ragSolutions": "Soluciones RAG",
+          "workflowAutomation": "Automatización de flujos"
+        }
+      },
+      "fullStackPlatforms": {
+        "title": "Plataformas de software a medida",
+        "description": "Diseñamos y desarrollamos aplicaciones escalables adaptadas a los requisitos únicos de tu empresa, desde sistemas internos hasta plataformas orientadas al cliente.",
+        "features": {
+          "fullStackDevelopment": "Desarrollo Full-Stack",
+          "enterpriseApplications": "Aplicaciones empresariales",
+          "apiDevelopment": "Desarrollo de APIs",
+          "systemIntegration": "Integración de sistemas"
+        }
+      },
+      "cloudInfrastructure": {
+        "title": "Cloud e infraestructura digital",
+        "description": "Implementamos bases tecnológicas seguras, confiables y escalables que permiten que tus aplicaciones rindan y evolucionen.",
+        "features": {
+          "cloudArchitecture": "Arquitectura cloud",
+          "devopsAutomation": "Automatización DevOps",
+          "cicdPipelines": "Pipelines CI/CD",
+          "modernInfrastructure": "Infraestructura moderna"
+        }
+      }
+    }
+  },
+  "caseStudy": {
+    "label": "Caso de estudio",
+    "title": "Fleet Intelligence Platform",
+    "subtitle": "Dashboard de operaciones logísticas en tiempo real",
+    "description": "Una plataforma moderna de gestión de flotas diseñada para ofrecer visibilidad en tiempo real sobre las operaciones de transporte. La solución combina mapas interactivos, telemetría y analítica operacional para ayudar a las empresas a monitorear activos y tomar decisiones más rápidas.",
+    "capabilitiesTitle": "Capacidades",
+    "capabilities": {
+      "tracking": "Seguimiento vehicular en tiempo real",
+      "telemetry": "Visualización de telemetría",
+      "analytics": "Analítica operacional",
+      "dashboards": "Dashboards interactivos"
+    },
+    "metrics": {
+      "monitoring": "Monitoreo en tiempo real",
+      "maps": "Mapas interactivos",
+      "integration": "Integración multi-fuente"
+    },
+    "demoLoading": "Cargando demo interactivo...",
+    "showcase": {
+      "comingSoonLabel": "Vista previa del portafolio",
+      "nav": {
+        "ariaLabel": "Escaparates de soluciones destacadas",
+        "fleetIntelligence": "Fleet Intelligence Platform",
+        "enterpriseSolution": "Escaparate de solución empresarial",
+        "additionalCaseStudy": "Caso de estudio adicional"
+      },
+      "controls": {
+        "previous": "Proyecto anterior",
+        "next": "Proyecto siguiente"
+      },
+      "placeholders": {
+        "enterprise": {
+          "title": "Próximamente",
+          "subtitle": "Escaparate de una futura solución empresarial."
+        },
+        "additional": {
+          "title": "Próximamente",
+          "subtitle": "Aquí se presentará un caso de estudio adicional."
+        }
+      }
+    }
+  },
+  "technologyEcosystem": {
+    "title": "Ecosistema Tecnológico",
+    "description": "Aprovechamos plataformas líderes de la industria y tecnologías modernas para construir soluciones seguras, escalables e inteligentes. Desde infraestructura en la nube hasta inteligencia artificial, seleccionamos las herramientas adecuadas para transformar desafíos empresariales complejos en productos digitales confiables.",
+    "items": {
+      "microsoftCloud": {
+        "logoAlt": "Logo de Microsoft",
+        "title": "Soluciones en la Nube Microsoft",
+        "description": "Construimos soluciones de nivel empresarial utilizando el ecosistema de Microsoft, combinando infraestructura en la nube, desarrollo de aplicaciones, gestión de identidades y prácticas modernas de DevOps."
+      },
+      "cloudInfrastructure": {
+        "logoAlt": "Logo de AWS",
+        "title": "Infraestructura en la Nube",
+        "description": "Diseñamos arquitecturas en la nube escalables que ayudan a las empresas a desplegar aplicaciones confiables, optimizar recursos y acelerar la transformación digital."
+      },
+      "artificialIntelligence": {
+        "logoAlt": "Icono de inteligencia artificial",
+        "title": "Soluciones de Inteligencia Artificial",
+        "description": "Integramos inteligencia artificial en los flujos de trabajo empresariales para automatizar procesos, analizar información y crear experiencias digitales más inteligentes."
+      },
+      "softwareEngineering": {
+        "logoAlt": "Icono de ingeniería de software moderna",
+        "title": "Ingeniería de Software Moderna",
+        "description": "Creamos plataformas de software escalables utilizando frameworks modernos y prácticas de ingeniería diseñadas para el rendimiento, la mantenibilidad y el crecimiento a largo plazo."
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Ingeniería de precisión. Diseño para la innovación.",
+    "socialHeading": "Social",
+    "linksHeading": "Enlaces",
+    "social": {
+      "linkedin": "LinkedIn",
+      "twitter": "Twitter",
+      "github": "GitHub"
+    },
+    "links": {
+      "clutch": "Clutch",
+      "careers": "Carreras",
+      "contact": "Contacto"
+    },
+    "copyright": "© 2026 Ultra Tech Consulting. Ingeniería de precisión."
+  },
+  "servicesPage": {
+    "badge": "Nuestros servicios",
+    "titlePrefix": "Construyendo soluciones inteligentes ",
+    "titleHighlight": "para empresas modernas",
+    "subtitle": "Diseñamos y desarrollamos software a medida, soluciones en la nube y sistemas basados ​​en inteligencia artificial que ayudan a las organizaciones a automatizar procesos, mejorar la eficiencia y adaptarse a un panorama digital en constante cambio.",
+    "featuredOfferings": {
+      "aiSolutions": {
+        "title": "Soluciones de IA",
+        "description": "Integramos inteligencia artificial en los procesos de negocio para automatizar flujos de trabajo, analizar información y crear experiencias digitales más inteligentes.",
+        "imageAlt": "Panel de analítica empresarial con inteligencia artificial"
+      },
+      "businessAutomation": {
+        "title": "Automatización de negocio",
+        "description": "Automatizamos procesos repetitivos y conectamos flujos de trabajo empresariales para mejorar la eficiencia, reducir el esfuerzo manual y permitir que los equipos se enfoquen en actividades de mayor valor.",
+        "imageAlt": "Visualización de procesos de negocio conectados y flujos de automatización"
+      },
+      "customSoftware": {
+        "title": "Software a medida",
+        "description": "Diseñamos y construimos plataformas de software personalizadas, desde aplicaciones internas de negocio hasta productos digitales orientados al cliente.",
+        "imageAlt": "Interfaz moderna de aplicación empresarial"
+      },
+      "cloudSolutions": {
+        "title": "Soluciones en la nube",
+        "description": "Diseñamos arquitecturas en la nube seguras y escalables que permiten que las aplicaciones crezcan con confiabilidad, rendimiento y eficiencia operativa.",
+        "imageAlt": "Diagrama esquemático de infraestructura en la nube"
+      },
+      "systemIntegration": {
+        "title": "Integración de sistemas",
+        "description": "Conectamos aplicaciones, plataformas y fuentes de datos para crear ecosistemas digitales unificados y visibilidad operativa.",
+        "imageAlt": "Flujo de datos de integración entre plataformas"
+      },
+      "legacyModernization": {
+        "title": "Modernización legacy",
+        "description": "Ayudamos a las organizaciones a modernizar sistemas obsoletos mejorando arquitectura, rendimiento y mantenibilidad, preservando las operaciones críticas.",
+        "imageAlt": "Transformación digital de sistemas legacy a arquitectura moderna"
+      }
+    },
+    "additionalOfferings": {
+      "dataAnalytics": {
+        "title": "Datos y analítica",
+        "description": "Transformamos datos empresariales complejos en insights claros mediante dashboards interactivos, plataformas de analítica y soluciones de reportes inteligentes que apoyan una mejor toma de decisiones.",
+        "imageAlt": "Ilustración de dashboard empresarial de datos y analítica"
+      },
+      "mobileApplications": {
+        "title": "Aplicaciones móviles",
+        "description": "Creamos experiencias móviles modernas que ayudan a las empresas a conectar con clientes, empleados y operaciones mediante aplicaciones confiables e intuitivas.",
+        "imageAlt": "Ilustración de aplicaciones móviles empresariales"
+      },
+      "cybersecurityReliability": {
+        "title": "Ciberseguridad y confiabilidad",
+        "description": "Diseñamos soluciones de software seguras con bases arquitectónicas sólidas, protegiendo aplicaciones, datos y operaciones empresariales frente a amenazas digitales en evolución.",
+        "imageAlt": "Ilustración de ciberseguridad y protección de sistemas"
+      }
+    },
+    "offerings": {
+      "aiIntegration": {
+        "title": "Integración de IA",
+        "description": "Implementación profunda de LLMs y modelos de machine learning personalizados en flujos de trabajo existentes para impulsar la toma de decisiones inteligente.",
+        "imageAlt": "Visualización de infraestructura de servidores para integración de IA"
+      },
+      "processAutomation": {
+        "title": "Automatización de procesos",
+        "description": "Optimización de operaciones con pipelines CI/CD robustos y herramientas internas personalizadas para eliminar cuellos de botella manuales.",
+        "imageAlt": "Engranajes mecánicos que representan automatización de procesos"
+      },
+      "webDevelopment": {
+        "title": "Desarrollo web",
+        "description": "Construcción de aplicaciones web responsivas y de alto rendimiento usando stacks modernos como Next.js, especializadas para SaaS de alto tráfico.",
+        "imageAlt": "Código de desarrollo web en un monitor"
+      },
+      "enterprisePlatforms": {
+        "title": "Plataformas empresariales",
+        "description": "Arquitectura de infraestructura escalable diseñada para grandes organizaciones, garantizando seguridad, resiliencia y disponibilidad global.",
+        "imageAlt": "Red global de plataforma empresarial sobre la Tierra"
+      },
+      "apiDevelopment": {
+        "title": "Desarrollo de APIs",
+        "description": "Diseño y despliegue de APIs RESTful y GraphQL robustas con enfoque en experiencia de desarrollador y alto rendimiento.",
+        "imageAlt": "Visualización de flujos de datos para desarrollo de APIs"
+      },
+      "legacyModernization": {
+        "title": "Modernización legacy",
+        "description": "Migración cuidadosa de sistemas monolíticos obsoletos a microservicios modernos sin interrumpir operaciones críticas del negocio.",
+        "imageAlt": "Visualización abstracta de modernización de sistemas legacy"
+      }
+    },
+    "cta": {
+      "title": "Construyamos algo con significado",
+      "description": "Todo producto exitoso comienza con una conversación. Ya sea que estés modernizando sistemas existentes, explorando inteligencia artificial o construyendo una plataforma completamente nueva, ayudamos a las organizaciones a transformar ideas ambiciosas en soluciones digitales confiables diseñadas para un crecimiento a largo plazo.",
+      "contactUs": "Contáctanos",
+      "exploreFeaturedSolutions": "Explorar soluciones destacadas"
+    }
+  },
+  "portfolioPage": {
+    "hero": {
+      "titlePrefix": "Escaparate de ",
+      "titleHighlight": "infraestructura a prueba de futuro",
+      "subtitle": "Una exhibición curada de excelencia en ingeniería donde la precisión arquitectónica se encuentra con la inteligencia cognitiva. Construimos los marcos que definen la próxima década."
+    },
+    "featured": {
+      "tags": {
+        "pytorch": "PyTorch",
+        "postgresql": "PostgreSQL",
+        "legalNlp": "Legal-NLP"
+      },
+      "title": "Nexus_AI Core V2",
+      "description": "Un motor de documentos legales de alto rendimiento que procesa millones de contratos con 99.9% de precisión usando modelos de lenguaje entrenados a medida.",
+      "link": "Ver caso de estudio"
+    },
+    "stats": {
+      "uptime": {
+        "value": "99.9%",
+        "label": "Uptime del sistema",
+        "description": "Continuidad operativa garantizada para infraestructura bancaria de misión crítica."
+      },
+      "latency": {
+        "value": "240ms",
+        "label": "Latencia global",
+        "description": "Tiempo de respuesta promedio en nuestra red mesh multi-cloud en el edge."
+      }
+    },
+    "projects": {
+      "cloudEdge": {
+        "tags": {
+          "aws": "AWS",
+          "rust": "Rust"
+        },
+        "title": "Cloud Edge Mesh",
+        "description": "Capa de orquestación de microservicios distribuidos optimizada para edge computing de ultra baja latencia.",
+        "link": "Ver caso de estudio"
+      },
+      "quantumShield": {
+        "tags": {
+          "terraform": "Terraform",
+          "go": "Go"
+        },
+        "title": "Quantum Shield VPN",
+        "description": "Protocolos de cifrado de próxima generación que protegen el tránsito de datos empresariales en clústeres públicos.",
+        "link": "Ver caso de estudio"
+      }
+    },
+    "standard": {
+      "title": "El estándar Ultra Tech",
+      "description": "La ingeniería no se trata solo de código: se trata de resultados medibles que definen la supervivencia del negocio.",
+      "cta": "DESCARGAR ESPECIFICACIONES DE INFRAESTRUCTURA",
+      "metrics": {
+        "coldStart": {
+          "value": "0ms",
+          "label": "Retraso de arranque en frío"
+        },
+        "security": {
+          "value": "Zero-Trust",
+          "label": "Modelo de seguridad"
+        },
+        "edge": {
+          "value": "94%",
+          "label": "Utilización del edge"
+        },
+        "ingress": {
+          "value": "10TB/s",
+          "label": "Capacidad de ingreso"
+        }
+      }
+    }
+  },
+  "aboutPage": {
+    "hero": {
+      "titlePrefix": "Construyendo tecnología que crece con ",
+      "titleHighlight": "tu negocio",
+      "subtitle": "Un gran software no se construye solo para hoy. Diseñamos soluciones digitales escalables que evolucionan con tu organización, combinando prácticas modernas de ingeniería, tecnologías en la nube e inteligencia artificial para crear valor empresarial duradero.",
+      "closing": "Software diseñado para crecer. Soluciones pensadas para generar impacto."
+    },
+    "purpose": {
+      "label": "Nuestro propósito",
+      "mission": {
+        "title": "Nuestra misión",
+        "statement": "Nuestra misión es ayudar a las organizaciones a transformar ideas en soluciones digitales confiables, combinando ingeniería reflexiva, tecnologías modernas y una comprensión profunda de los desafíos del negocio.",
+        "statementSecondary": "Creemos que la tecnología debe simplificar la complejidad, crear nuevas oportunidades y ayudar a las empresas a construir un futuro más sólido."
+      },
+      "vision": {
+        "title": "Nuestra visión",
+        "statement": "Nuestra visión es crear un futuro en el que la tecnología sea una ventaja estratégica para las organizaciones, permitiendo a las empresas operar con más inteligencia, adaptarse más rápido y crecer mediante soluciones digitales inteligentes y escalables."
+      }
+    },
+    "evolution": {
+      "title": "La evolución de Ultra Tech",
+      "subtitle": "Trazando nuestra trayectoria desde una agencia boutique hasta un referente tecnológico global.",
+      "range": "Est. 2018 — Presente",
+      "milestones": {
+        "origin": {
+          "year": "2018",
+          "title": "Origen",
+          "description": "Fundada en Silicon Valley con enfoque en arquitectura cloud-native para startups de alto crecimiento."
+        },
+        "scale": {
+          "year": "2020",
+          "title": "Escala",
+          "description": "Expansión a EMEA, asegurando alianzas con tres instituciones financieras Fortune 500."
+        },
+        "innovation": {
+          "year": "2022",
+          "title": "Innovación",
+          "description": "Lanzamiento de Ultra Tech AI labs, integrando modelos generativos en motores de escalado predictivo."
+        },
+        "horizon": {
+          "year": "2024",
+          "title": "Horizonte",
+          "description": "Pioneros en soluciones de edge computing para infraestructura industrial descentralizada."
+        }
+      }
+    },
+    "principles": {
+      "title": "Principios de ingeniería",
+      "subtitle": "Creemos que el gran software se construye con decisiones cuidadosas, sólidas prácticas de ingeniería y un compromiso continuo por crear soluciones que aporten valor real.",
+      "items": {
+        "quality": {
+          "title": "Calidad primero",
+          "description": "Nos enfocamos en construir soluciones confiables donde cada decisión técnica tiene un propósito. Arquitectura limpia, código mantenible y atención al detalle son la base de todo lo que creamos."
+        },
+        "innovation": {
+          "title": "Innovación continua",
+          "description": "La tecnología evoluciona constantemente. Exploramos herramientas y enfoques modernos para crear soluciones más inteligentes, eligiendo la tecnología adecuada para cada desafío de negocio."
+        },
+        "scale": {
+          "title": "Diseñado para escalar",
+          "description": "Las soluciones exitosas deben crecer con las organizaciones que las impulsan. Diseñamos sistemas pensando en flexibilidad, rendimiento y expansión futura."
+        }
+      }
+    },
+    "architects": {
+      "title": "Los arquitectos",
+      "subtitle": "Un colectivo de ingenieros senior, diseñadores y estrategas.",
+      "members": {
+        "marcus": {
+          "name": "Marcus Thorne",
+          "role": "Arquitecto jefe de sistemas"
+        },
+        "elena": {
+          "name": "Elena Vance",
+          "role": "Directora de estrategia UX"
+        },
+        "aris": {
+          "name": "Dr. Aris Chen",
+          "role": "Ingeniero líder de IA"
+        },
+        "sasha": {
+          "name": "Sasha Kovac",
+          "role": "Líder full-stack"
+        }
+      }
+    },
+    "cta": {
+      "title": "¿Listo para construir lo que sigue?",
+      "button": "Iniciar alianza"
+    }
+  },
+  "contactPage": {
+    "inquiry": {
+      "label": "Iniciar una conversación",
+      "title": "Construyamos algo juntos",
+      "titlePrefix": "Construyamos algo ",
+      "titleHighlight": "juntos",
+      "titleSuffix": "",
+      "description": "¿Tienes un proyecto en mente o un desafío técnico por resolver? Cuéntanos tus objetivos y nuestro equipo te ayudará a explorar las soluciones de software, nube e IA adecuadas para dar vida a tus ideas."
+    },
+    "channels": {
+      "email": {
+        "label": "Correo electrónico",
+        "value": "gerickco522@gmail.com",
+        "description": "Escríbenos para hablar sobre tu proyecto, requisitos o desafíos técnicos."
+      },
+      "consultation": {
+        "label": "Consultoría de proyectos",
+        "value": "Hablemos de tu próxima solución",
+        "description": "Comparte tus objetivos y explora cómo la tecnología puede ayudar a tu negocio a crecer."
+      },
+      "responseTime": {
+        "label": "Tiempo de respuesta",
+        "value": "24-48 horas",
+        "description": "Nuestro equipo revisará tu solicitud y se pondrá en contacto contigo pronto."
+      }
+    },
+    "social": {
+      "grid": "Red grid",
+      "network": "Red compartida",
+      "nodes": "Red de nodos"
+    },
+    "faq": {
+      "title": "Antes de comenzar",
+      "items": {
+        "projectDuration": {
+          "question": "¿Cuánto tiempo toma un proyecto típico?",
+          "answer": "Cada proyecto es diferente. Después de entender tus objetivos y requisitos técnicos, definimos una hoja de ruta realista. Las soluciones más pequeñas pueden entregarse en semanas, mientras que las plataformas más grandes suelen requerir un enfoque por fases para garantizar calidad y escalabilidad."
+        },
+        "modernizeSystems": {
+          "question": "¿Pueden modernizar sistemas existentes?",
+          "answer": "Sí. Ayudamos a las organizaciones a mejorar y evolucionar software existente modernizando arquitecturas obsoletas, mejorando el rendimiento e integrando tecnologías modernas sin interrumpir operaciones críticas."
+        },
+        "security": {
+          "question": "¿Cómo abordan la seguridad?",
+          "answer": "La seguridad se considera desde el inicio de cada proyecto. Aplicamos prácticas modernas en autenticación, protección de datos, infraestructura y arquitectura de aplicaciones para construir soluciones confiables."
+        },
+        "existingTeams": {
+          "question": "¿Trabajan con equipos existentes?",
+          "answer": "Por supuesto. Podemos colaborar con equipos de desarrollo internos, apoyar esfuerzos de ingeniería existentes o proporcionar una solución completa desde la arquitectura hasta la implementación."
+        }
+      }
+    },
+    "form": {
+      "title": "Consulta de proyecto",
+      "subtitle": "Cuéntanos sobre tu proyecto, desafíos técnicos u objetivos de negocio. Nuestro equipo revisará tu solicitud e identificará la mejor forma de ayudarte.",
+      "name": "Nombre completo",
+      "namePlaceholder": "Tu nombre",
+      "company": "Nombre de la empresa",
+      "companyPlaceholder": "Tu empresa",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "tu@email.com",
+      "projectType": "Tipo de proyecto",
+      "projectTypePlaceholder": "Selecciona el tipo de proyecto que necesitas",
+      "preferredContactMethod": "Método de contacto preferido",
+      "preferredContactMethodPlaceholder": "¿Cómo te gustaría que te contactemos?",
+      "message": "Detalles del proyecto",
+      "messagePlaceholder": "Describe tus objetivos, desafíos actuales, tecnologías involucradas o lo que te gustaría construir...",
+      "submit": "Enviar solicitud",
+      "projectTypeOptions": {
+        "customSoftware": {
+          "label": "Desarrollo de software a medida",
+          "description": "Aplicaciones y plataformas diseñadas alrededor de las necesidades de tu negocio."
+        },
+        "aiSolutions": {
+          "label": "Soluciones de inteligencia artificial",
+          "description": "Asistentes de IA, automatización, inteligencia documental y flujos inteligentes."
+        },
+        "cloudInfrastructure": {
+          "label": "Nube e infraestructura",
+          "description": "Arquitectura cloud, despliegue, escalabilidad y mejoras de infraestructura."
+        },
+        "systemIntegration": {
+          "label": "Integración de sistemas",
+          "description": "Conecta sistemas existentes, aplicaciones, APIs y plataformas de negocio."
+        },
+        "businessAutomation": {
+          "label": "Automatización de negocio",
+          "description": "Automatiza procesos repetitivos y mejora la eficiencia operativa."
+        },
+        "legacyModernization": {
+          "label": "Modernización de legado",
+          "description": "Moderniza sistemas de software existentes y mejora la arquitectura."
+        },
+        "dataAnalytics": {
+          "label": "Datos y analítica",
+          "description": "Dashboards, reportes y plataformas de decisión basadas en datos."
+        },
+        "mobileApplication": {
+          "label": "Aplicación móvil",
+          "description": "Aplicaciones móviles multiplataforma para clientes o equipos internos."
+        },
+        "technicalConsulting": {
+          "label": "Consultoría técnica",
+          "description": "Revisiones de arquitectura, estrategia tecnológica y guía de ingeniería."
+        },
+        "other": {
+          "label": "Otro",
+          "description": "Un proyecto que no encaja en las categorías anteriores."
+        }
+      },
+      "contactMethodOptions": {
+        "email": {
+          "label": "Correo electrónico",
+          "description": "Recibe la comunicación del proyecto por correo electrónico."
+        },
+        "videoCall": {
+          "label": "Videollamada",
+          "description": "Agenda una reunión remota para discutir los requisitos."
+        },
+        "phoneCall": {
+          "label": "Llamada telefónica",
+          "description": "Habla sobre tu proyecto mediante una llamada directa."
+        },
+        "noPreference": {
+          "label": "Sin preferencia",
+          "description": "Usa el método de comunicación más conveniente."
+        }
+      },
+      "feedback": {
+        "success": "Gracias por contactarnos. Hemos recibido tu solicitud y la revisaremos pronto.",
+        "validationError": "Por favor revisa los campos requeridos e inténtalo de nuevo.",
+        "submitError": "No pudimos enviar tu solicitud en este momento. Inténtalo de nuevo en unos minutos."
+      },
+      "errors": {
+        "nameRequired": "El nombre completo es obligatorio.",
+        "emailRequired": "El correo electrónico es obligatorio.",
+        "emailInvalid": "Ingresa un correo electrónico válido.",
+        "projectTypeRequired": "Selecciona un tipo de proyecto.",
+        "messageRequired": "Los detalles del proyecto son obligatorios."
+      }
+    },
+    "schedule": {
+      "title": "Synchronize_Schedule",
+      "subtitle": "Reserva una auditoría de arquitectura técnica de 30 minutos con nuestros consultores líderes.",
+      "month": "Octubre 2024",
+      "consultant": {
+        "name": "Dr. Elias Vance",
+        "role": "Arquitecto principal de sistemas"
+      },
+      "details": {
+        "duration": "Sesión de 30 minutos",
+        "link": "Enlace virtual seguro (cifrado)",
+        "timezone": "Despliegue global (UTC+0)"
+      },
+      "weekdays": {
+        "mon": "Lun",
+        "tue": "Mar",
+        "wed": "Mié",
+        "thu": "Jue",
+        "fri": "Vie",
+        "sat": "Sáb",
+        "sun": "Dom"
+      },
+      "slotsLabel": "Seleccionar ventana disponible (PST)",
+      "slots": {
+        "slot0900": "09:00 AM",
+        "slot1030": "10:30 AM",
+        "slot1300": "01:00 PM",
+        "slot1530": "03:30 PM"
+      }
+    }
+  },
+  "aiPlatformPage": {
+    "subnav": {
+      "items": {
+        "dashboard": "Dashboard",
+        "workflows": "Flujos de IA",
+        "analytics": "Analítica"
+      }
+    },
+    "sidebar": {
+      "ariaLabel": "Secciones de la plataforma"
+    },
+    "metrics": {},
+    "workflows": {
+      "badge": "Motor de flujos empresariales V4.2",
+      "title": "Flujos de IA",
+      "subtitle": "Automatiza tareas repetitivas, acelera la toma de decisiones y potencia a tus equipos con flujos inteligentes impulsados por inteligencia artificial.",
+      "ready": "LISTO",
+      "estimatedExecution": "Ejecución estimada:",
+      "runWorkflow": "Ejecutar flujo",
+      "suggestedTitle": "Automatizaciones sugeridas",
+      "exploreWorkflow": "Explorar flujo →",
+      "items": {
+        "documentAnalysis": {
+          "title": "Análisis de documentos",
+          "description": "Procesa grandes volúmenes de texto no estructurado para extraer insights clave y sentimiento automáticamente.",
+          "execution": "2-3 min"
+        },
+        "proposalGenerator": {
+          "title": "Generador de propuestas",
+          "description": "Crea propuestas de negocio personalizadas usando datos del cliente e historial de proyectos exitosos.",
+          "execution": "4-5 min"
+        },
+        "technicalDocumentation": {
+          "title": "Documentación técnica",
+          "description": "Genera documentación completa de SDK y API directamente desde tus repositorios de código fuente.",
+          "execution": "3-5 min"
+        },
+        "meetingSummarizer": {
+          "title": "Resumen de reuniones",
+          "description": "Transcribe y resume reuniones ejecutivas en tareas accionables e informes estratégicos.",
+          "execution": "2-4 min"
+        },
+        "codeReviewAssistant": {
+          "title": "Asistente de code review",
+          "description": "Análisis automatizado de PRs para vulnerabilidades de seguridad y cuellos de botella de rendimiento.",
+          "execution": "1-3 min"
+        },
+        "sqlGenerator": {
+          "title": "Generador SQL",
+          "description": "Convierte preguntas en lenguaje natural en consultas SQL optimizadas para esquemas complejos.",
+          "execution": "1-2 min"
+        }
+      },
+      "suggested": {
+        "customerSupport": {
+          "title": "Automatización de soporte al cliente",
+          "description": "Escala tu capacidad de respuesta con ticketing impulsado por IA y análisis de sentimiento."
+        },
+        "invoiceProcessing": {
+          "title": "Procesamiento de facturas",
+          "description": "Extrae automáticamente datos de facturas y sincronízalos con sistemas contables."
+        },
+        "contractIntelligence": {
+          "title": "Inteligencia contractual",
+          "description": "Revisa términos legales y detecta riesgos de cumplimiento en segundos con análisis neuronal."
+        },
+        "knowledgeAssistant": {
+          "title": "Asistente de conocimiento interno",
+          "description": "Convierte wikis y documentos internos en una base de conocimiento conversacional y accionable."
+        }
+      }
+    },
+    "analytics": {
+      "eyebrow": "— PANEL EJECUTIVO",
+      "title": "Analítica de IA",
+      "subtitle": "Monitorea la adopción de IA, el rendimiento de automatización y los insights operacionales con analítica inteligente.",
+      "dailyConversations": "Conversaciones diarias de IA",
+      "period30": "30 DÍAS",
+      "period60": "60 DÍAS",
+      "mostUsedWorkflows": "Flujos más usados",
+      "usageDistribution": "Distribución de uso de IA",
+      "utilityRate": "TASA DE UTILIDAD",
+      "hoursSaved": "Horas ahorradas por semana",
+      "busiestHours": "Horas de mayor uso",
+      "peakUsageNote": "Pico de uso identificado entre 9:00 - 11:00 AM",
+      "generatedInsights": "Insights generados",
+      "kpis": {
+        "conversations": "Conversaciones IA",
+        "documents": "Documentos procesados",
+        "workflows": "Flujos automatizados",
+        "timeSaved": "Tiempo estimado ahorrado"
+      },
+      "workflowUsage": {
+        "documentAnalysis": "Análisis de documentos",
+        "proposalGenerator": "Generador de propuestas",
+        "codeReview": "Code review",
+        "meetingSummary": "Resumen de reuniones"
+      },
+      "usage": {
+        "documents": "Documentos",
+        "development": "Desarrollo",
+        "business": "Negocio",
+        "others": "Otros"
+      },
+      "hoursWeek": {
+        "week1": "SEMANA 1",
+        "week2": "SEMANA 2",
+        "week3": "SEMANA 3",
+        "current": "ACTUAL"
+      },
+      "footer": {
+        "responseTime": "TIEMPO PROM. DE RESPUESTA",
+        "responseTimeSub": "PERCENTIL GLOBAL: 98%",
+        "successRate": "TASA DE ÉXITO",
+        "successRateSub": "CUMPLE SLA",
+        "satisfaction": "SATISFACCIÓN DEL USUARIO",
+        "satisfactionSub": "★★★★★",
+        "processingTime": "TIEMPO PROM. DE PROCESAMIENTO",
+        "processingTimeSub": "-5s RESPECTO AL MES PASADO"
+      },
+      "insights": {
+        "documentUsage": "El uso de análisis de documentos aumentó 24% esta semana, sugiriendo un enfoque fuerte en auditorías administrativas.",
+        "proposalPopular": "La generación de propuestas se convirtió en el flujo más popular del equipo de desarrollo de negocio.",
+        "peakUsage": "El pico de uso de IA ocurre entre 9:00 y 11:00, alineado con el briefing estratégico matutino.",
+        "automationSaved": "La automatización redujo trabajo repetitivo en aproximadamente 18 horas por usuario activo este trimestre."
+      }
+    },
+    "assistant": {
+      "title": "Asistente de Negocios IA",
+      "subtitle": "Haz preguntas sobre ingeniería de software, arquitectura cloud, integración de IA, automatización de negocio, APIs, documentación, propuestas técnicas o documentos cargados.",
+      "prompt": "Empieza con una sugerencia rápida o pregunta lo que necesites sobre tu negocio, documentos o necesidades técnicas.",
+      "inputPlaceholder": "Pregunta sobre propuestas, documentos, APIs, arquitectura...",
+      "execute": "Consultar IA",
+      "refreshAria": "Iniciar nueva conversación",
+      "moreAria": "Más opciones",
+      "uploadAria": "Subir archivo",
+      "userLabel": "Tú",
+      "assistantLabel": "Ultra IA",
+      "thinking": "Preparando tu respuesta...",
+      "chips": {
+        "analyzeContract": "Analizar contrato",
+        "analyzeContractPrompt": "Analiza este contrato y resalta riesgos, obligaciones, términos de pago y próximos pasos recomendados.",
+        "summarizePdf": "Resumir PDF",
+        "summarizePdfPrompt": "Resume los puntos clave de este documento PDF para un stakeholder de negocio.",
+        "generateProposal": "Generar propuesta",
+        "generateProposalPrompt": "Genera una propuesta técnica de consultoría para un proyecto de modernización cloud e IA.",
+        "explainSourceCode": "Explicar código",
+        "explainSourceCodePrompt": "Explica este código fuente en lenguaje de negocio e identifica oportunidades de mejora.",
+        "reviewApi": "Revisar API",
+        "reviewApiPrompt": "Revisa este diseño de API y sugiere mejoras de seguridad, escalabilidad y documentación.",
+        "createSqlQuery": "Crear consulta SQL",
+        "createSqlQueryPrompt": "Crea una consulta SQL optimizada para responder esta pregunta de reportes de negocio.",
+        "improveArchitecture": "Mejorar arquitectura",
+        "improveArchitecturePrompt": "Revisa esta arquitectura y recomienda mejoras de escalabilidad, seguridad y costo."
+      },
+      "errors": {
+        "missingApiKey": "El servicio de IA aún no está configurado. Contacta al administrador.",
+        "invalidApiKey": "La API key de Gemini no es válida. Actualízala en environment.development.ts.",
+        "emptyResponse": "El asistente devolvió una respuesta vacía. Intenta de nuevo.",
+        "requestFailed": "No se pudo conectar con el asistente de IA. Revisa tu conexión e intenta de nuevo."
+      }
+    },
+    "clusters": {
+      "title": "Clusters globales",
+      "activeNodes": "Nodos activos: 2,481",
+      "health": "Estado: Normal",
+      "mapAlt": "Mapa de red de clusters globales",
+      "region": "US-EAST-1",
+      "regionStatus": "Optimizando..."
+    },
+    "activity": {
+      "title": "Actividad reciente de IA",
+      "live": "En vivo"
+    },
+    "events": {}
+  }
+}

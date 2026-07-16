@@ -1,0 +1,8 @@
+<article class="about-team-card">
+  <div class="about-team-card__media">
+    <img [src]="image" [alt]="nameKey | translate" class="about-team-card__photo" loading="lazy" />
+  </div>
+
+  <h3 class="about-team-card__name">{{ nameKey | translate }}</h3>
+  <p class="about-team-card__role">{{ roleKey | translate }}</p>
+</article>

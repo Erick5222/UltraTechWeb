@@ -1,0 +1,29 @@
+<section class="about-evolution">
+  <div class="about-evolution__container">
+    <div class="about-evolution__header">
+      <div class="about-evolution__intro">
+        <h2 class="about-evolution__title">{{ 'aboutPage.evolution.title' | translate }}</h2>
+        <p class="about-evolution__subtitle">{{ 'aboutPage.evolution.subtitle' | translate }}</p>
+      </div>
+
+      <span class="about-evolution__range">{{ 'aboutPage.evolution.range' | translate }}</span>
+    </div>
+
+    <div class="about-evolution__timeline">
+      <div class="about-evolution__line" aria-hidden="true"></div>
+
+      <ol class="about-evolution__milestones">
+        @for (milestone of milestones; track milestone.id) {
+          <li class="about-evolution__milestone">
+            <span class="about-evolution__dot" aria-hidden="true"></span>
+            <span class="about-evolution__year">{{ milestone.yearKey | translate }}</span>
+            <h3 class="about-evolution__milestone-title">{{ milestone.titleKey | translate }}</h3>
+            <p class="about-evolution__milestone-description">
+              {{ milestone.descriptionKey | translate }}
+            </p>
+          </li>
+        }
+      </ol>
+    </div>
+  </div>
+</section>

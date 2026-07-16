@@ -1,0 +1,44 @@
+:host {
+  display: block;
+}
+
+.about-principles {
+  padding: 0 24px 64px;
+}
+
+.about-principles__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-principles__header {
+  max-width: 640px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+.about-principles__title {
+  margin: 0;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.about-principles__subtitle {
+  margin: 16px 0 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #9aa3b2;
+}
+
+.about-principles__grid {
+  display: grid;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .about-principles__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

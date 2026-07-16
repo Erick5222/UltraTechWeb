@@ -1,0 +1,15 @@
+<div class="trailer-card">
+  <div class="trailer-card__header">
+    <span class="trailer-card__id">{{ trailer().code }}</span>
+    <app-status-pill [label]="statusLabel()" [variant]="statusVariant()" />
+  </div>
+  <div class="trailer-card__details">
+    <span>Last communication: {{ lastUpdateLabel() }}</span>
+    @if (trailer().temperatureCelsius !== null && trailer().temperatureCelsius !== undefined) {
+      <span>Temperatura: {{ trailer().temperatureCelsius }}°C</span>
+    }
+    @if (!trailer().gpsConnected) {
+      <span class="trailer-card__disconnected">GPS: Disconnected</span>
+    }
+  </div>
+</div>

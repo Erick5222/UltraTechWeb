@@ -1,0 +1,26 @@
+<button
+  class="unit-card"
+  [class.unit-card--selected]="selected()"
+  (click)="onSelect()"
+  type="button"
+>
+  <div class="unit-card__header">
+    <span class="unit-card__id">{{ unit().code }}</span>
+    <app-status-pill [label]="statusLabel()" [variant]="statusVariant()" />
+  </div>
+
+  <div class="unit-card__metrics">
+    <span class="unit-card__speed">{{ speedLabel() }}</span>
+    <span class="unit-card__separator">·</span>
+    <span class="unit-card__time">{{ lastUpdateLabel() }}</span>
+  </div>
+
+  @if (unit().hasActiveAlert) {
+    <div class="unit-card__alert">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" fill="currentColor"/>
+      </svg>
+      <span>Active alert</span>
+    </div>
+  }
+</button>

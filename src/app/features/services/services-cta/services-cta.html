@@ -1,0 +1,25 @@
+<section class="services-cta" aria-labelledby="services-cta-title">
+  <div class="services-cta__container">
+    <div class="services-cta__card">
+      <h2 id="services-cta-title" class="services-cta__title">
+        {{ 'servicesPage.cta.title' | translate }}
+      </h2>
+
+      <p class="services-cta__description">
+        {{ 'servicesPage.cta.description' | translate }}
+      </p>
+
+      <div class="services-cta__actions">
+        <a routerLink="/contact" class="services-cta__btn services-cta__btn--primary">
+          {{ 'servicesPage.cta.contactUs' | translate }}
+        </a>
+        <a
+          routerLink="/"
+          [queryParams]="{ scrollTo: sections.featuredSolutions }"
+          class="services-cta__btn services-cta__btn--secondary">
+          {{ 'servicesPage.cta.exploreFeaturedSolutions' | translate }}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

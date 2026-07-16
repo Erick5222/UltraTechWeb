@@ -1,0 +1,18 @@
+<section class="about-architects">
+  <div class="about-architects__container">
+    <header class="about-architects__header">
+      <h2 class="about-architects__title">{{ 'aboutPage.architects.title' | translate }}</h2>
+      <p class="about-architects__subtitle">{{ 'aboutPage.architects.subtitle' | translate }}</p>
+    </header>
+
+    <div class="about-architects__grid">
+      @for (member of team; track member.id) {
+        <app-about-team-card
+          [image]="member.image"
+          [nameKey]="member.nameKey"
+          [roleKey]="member.roleKey"
+        />
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,108 @@
+<section class="platform-assistant">
+  <header class="platform-assistant__header">
+    <div class="platform-assistant__title-wrap">
+      <img [src]="assets.assistantHeaderIcon" alt="" aria-hidden="true" loading="lazy" />
+      <div>
+        <h2 class="platform-assistant__title">{{ 'aiPlatformPage.assistant.title' | translate }}</h2>
+        <p class="platform-assistant__subtitle">{{ 'aiPlatformPage.assistant.subtitle' | translate }}</p>
+      </div>
+    </div>
+
+    <div class="platform-assistant__actions">
+      <button
+        type="button"
+        [attr.aria-label]="'aiPlatformPage.assistant.refreshAria' | translate"
+        (click)="resetChat()"
+        [disabled]="isLoading()"
+      >
+        <img [src]="assets.refreshIcon" alt="" aria-hidden="true" loading="lazy" />
+      </button>
+      <button type="button" [attr.aria-label]="'aiPlatformPage.assistant.moreAria' | translate">
+        <img [src]="assets.moreIcon" alt="" aria-hidden="true" loading="lazy" />
+      </button>
+    </div>
+  </header>
+
+  <div class="platform-assistant__body" #messagesContainer>
+    @if (messages().length === 0) {
+      <img
+        class="platform-assistant__center-icon"
+        [src]="assets.assistantCenterIcon"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+      />
+      <p class="platform-assistant__prompt">{{ 'aiPlatformPage.assistant.prompt' | translate }}</p>
+    } @else {
+      <div class="platform-assistant__messages">
+        @for (message of messages(); track message.id) {
+          <article
+            class="platform-assistant__message"
+            [class.platform-assistant__message--user]="message.role === 'user'"
+            [class.platform-assistant__message--assistant]="message.role === 'assistant'"
+          >
+            <span class="platform-assistant__message-label">
+              {{
+                message.role === 'user'
+                  ? ('aiPlatformPage.assistant.userLabel' | translate)
+                  : ('aiPlatformPage.assistant.assistantLabel' | translate)
+              }}
+            </span>
+            <p>{{ message.content }}</p>
+          </article>
+        }
+
+        @if (isLoading()) {
+          <p class="platform-assistant__typing">{{ 'aiPlatformPage.assistant.thinking' | translate }}</p>
+        }
+      </div>
+    }
+
+    @if (errorKey()) {
+      <p class="platform-assistant__error">{{ errorKey()! | translate }}</p>
+    }
+  </div>
+
+  <div class="platform-assistant__suggestions">
+    @for (chip of suggestionChips; track chip.id) {
+      <button
+        type="button"
+        class="platform-assistant__chip"
+        (click)="applySuggestion(chip.promptKey)"
+        [disabled]="isLoading()"
+      >
+        {{ chip.labelKey | translate }}
+      </button>
+    }
+  </div>
+
+  <footer class="platform-assistant__input-row">
+    <button
+      type="button"
+      class="platform-assistant__upload"
+      [attr.aria-label]="'aiPlatformPage.assistant.uploadAria' | translate"
+      disabled
+    >
+      <img [src]="assets.uploadIcon" alt="" aria-hidden="true" loading="lazy" />
+    </button>
+
+    <input
+      type="text"
+      class="platform-assistant__input"
+      [formControl]="messageControl"
+      [placeholder]="'aiPlatformPage.assistant.inputPlaceholder' | translate"
+      (keydown.enter)="sendMessage()"
+      [disabled]="isLoading()"
+    />
+
+    <button
+      type="button"
+      class="platform-assistant__execute"
+      (click)="sendMessage()"
+      [disabled]="isLoading() || messageControl.invalid"
+    >
+      {{ 'aiPlatformPage.assistant.execute' | translate }}
+      <img [src]="assets.sendIcon" alt="" aria-hidden="true" loading="lazy" />
+    </button>
+  </footer>
+</section>

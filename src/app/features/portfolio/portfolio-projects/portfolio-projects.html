@@ -1,0 +1,15 @@
+<section class="portfolio-projects">
+  <div class="portfolio-projects__container">
+    <div class="portfolio-projects__grid">
+      @for (project of projects; track project.id) {
+        <app-portfolio-project-card
+          [image]="project.image"
+          [tagKeys]="project.tagKeys"
+          [titleKey]="project.titleKey"
+          [descriptionKey]="project.descriptionKey"
+          [linkKey]="project.linkKey"
+        />
+      }
+    </div>
+  </div>
+</section>

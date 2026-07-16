@@ -1,0 +1,45 @@
+@use 'styles/variables' as *;
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: $radius-pill;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+
+  &--sm {
+    padding: 2px 8px;
+    font-size: 11px;
+  }
+
+  &--md {
+    padding: 4px 12px;
+    font-size: 12px;
+  }
+
+  &--success {
+    background: $color-success-bg;
+    color: $color-success;
+  }
+
+  &--warning {
+    background: $color-warning-bg;
+    color: $color-warning;
+  }
+
+  &--danger {
+    background: $color-danger-bg;
+    color: $color-danger;
+  }
+
+  &--neutral {
+    background: rgba(148, 163, 184, 0.15);
+    color: $color-text-secondary;
+  }
+
+  &--primary {
+    background: $color-primary-bg;
+    color: $color-primary;
+  }
+}

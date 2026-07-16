@@ -1,0 +1,23 @@
+<article class="platform-metric-card">
+  <div class="platform-metric-card__top">
+    <div class="platform-metric-card__heading">
+      <span class="platform-metric-card__label">{{ label }}</span>
+      <p class="platform-metric-card__description">{{ description }}</p>
+    </div>
+    <img [src]="icon" [alt]="label" class="platform-metric-card__icon" loading="lazy" />
+  </div>
+
+  <p class="platform-metric-card__value">
+    <app-animated-counter [value]="value" [format]="format" />
+  </p>
+
+  @if (detailText) {
+    <p
+      class="platform-metric-card__detail"
+      [class.platform-metric-card__detail--success]="detailVariant === 'success'"
+      [class.platform-metric-card__detail--info]="detailVariant === 'info'"
+    >
+      {{ detailText }}
+    </p>
+  }
+</article>

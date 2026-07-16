@@ -1,0 +1,37 @@
+.fuel-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem 0;
+}
+
+.fuel-chart__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fuel-chart__title-group {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.fuel-chart__label {
+  color: var(--text-muted, #94a3b8);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.fuel-chart__value {
+  color: var(--text-primary, #f8fafc);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.fuel-chart__empty {
+  color: var(--text-muted, #94a3b8);
+  font-size: 0.8125rem;
+  margin: 0.5rem 0;
+}

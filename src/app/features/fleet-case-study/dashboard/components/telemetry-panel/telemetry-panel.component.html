@@ -1,0 +1,32 @@
+<div class="telemetry-panel">
+  @if (speedMetric(); as metric) {
+    <div class="telemetry-panel__row">
+      <span class="telemetry-panel__label">{{ metric.label }}</span>
+      <div class="telemetry-panel__value-group">
+        <span class="telemetry-panel__value">{{ metric.value }}</span>
+        @if (metric.showBar) {
+          <div class="telemetry-panel__bar">
+            <div
+              class="telemetry-panel__bar-fill"
+              [style.width.%]="metric.barPercent"
+            ></div>
+          </div>
+        }
+      </div>
+    </div>
+  }
+
+  <app-fuel-telemetry-chart
+    [history]="history()"
+    [currentFuelPercent]="telemetry()?.fuelPercent ?? null"
+  />
+
+  @for (metric of otherMetrics(); track metric.label) {
+    <div class="telemetry-panel__row">
+      <span class="telemetry-panel__label">{{ metric.label }}</span>
+      <div class="telemetry-panel__value-group">
+        <span class="telemetry-panel__value">{{ metric.value }}</span>
+      </div>
+    </div>
+  }
+</div>

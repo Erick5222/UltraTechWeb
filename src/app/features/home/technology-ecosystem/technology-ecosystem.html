@@ -1,0 +1,24 @@
+<section class="ecosystem" aria-labelledby="ecosystem-title">
+  <div class="ecosystem__container">
+    <header class="ecosystem__header">
+      <h2 id="ecosystem-title" class="ecosystem__title">
+        {{ 'technologyEcosystem.title' | translate }}
+      </h2>
+      <p class="ecosystem__description">
+        {{ 'technologyEcosystem.description' | translate }}
+      </p>
+    </header>
+
+    <div class="ecosystem__grid">
+      @for (item of items; track item.id) {
+        <app-ecosystem-card
+          [logoSrc]="item.logoSrc"
+          [logoAltKey]="item.logoAltKey"
+          [titleKey]="item.titleKey"
+          [descriptionKey]="item.descriptionKey"
+          [tags]="item.tags"
+        />
+      }
+    </div>
+  </div>
+</section>

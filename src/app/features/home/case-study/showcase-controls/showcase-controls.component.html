@@ -1,0 +1,25 @@
+<div class="showcase-controls" aria-hidden="false">
+  <button
+    type="button"
+    class="showcase-controls__button showcase-controls__button--previous"
+    [attr.aria-label]="'caseStudy.showcase.controls.previous' | translate"
+    [disabled]="!canGoPrevious() || disabled()"
+    (click)="onPrevious()"
+  >
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M14.5 6.5 9 12l5.5 5.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <button
+    type="button"
+    class="showcase-controls__button showcase-controls__button--next"
+    [attr.aria-label]="'caseStudy.showcase.controls.next' | translate"
+    [disabled]="!canGoNext() || disabled()"
+    (click)="onNext()"
+  >
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M9.5 6.5 15 12l-5.5 5.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+</div>

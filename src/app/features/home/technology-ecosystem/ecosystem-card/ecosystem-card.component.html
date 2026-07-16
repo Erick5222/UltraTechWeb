@@ -1,0 +1,20 @@
+<article class="ecosystem-card">
+  <div class="ecosystem-card__logo-area">
+    <img
+      class="ecosystem-card__logo"
+      [src]="logoSrc()"
+      [alt]="logoAltKey() | translate"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+
+  <h3 class="ecosystem-card__title">{{ titleKey() | translate }}</h3>
+  <p class="ecosystem-card__description">{{ descriptionKey() | translate }}</p>
+
+  <ul class="ecosystem-card__tags" aria-label="Technologies">
+    @for (tag of tags(); track tag) {
+      <li class="ecosystem-card__tag">{{ tag }}</li>
+    }
+  </ul>
+</article>

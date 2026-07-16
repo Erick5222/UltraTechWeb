@@ -1,0 +1,108 @@
+<section class="contact-form-section">
+  <div class="contact-form-section__card">
+    <img
+      class="contact-form-section__watermark"
+      [src]="watermark"
+      alt=""
+      aria-hidden="true"
+      loading="lazy"
+    />
+
+    <header class="contact-form-section__header">
+      <h2 class="contact-form-section__title">{{ 'contactPage.form.title' | translate }}</h2>
+      <p class="contact-form-section__subtitle">{{ 'contactPage.form.subtitle' | translate }}</p>
+    </header>
+
+    @if (feedback() === 'success') {
+      <p class="contact-form-section__feedback contact-form-section__feedback--success" role="status">
+        {{ 'contactPage.form.feedback.success' | translate }}
+      </p>
+    }
+
+    <form class="contact-form-section__form" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <label class="contact-form-section__field">
+        <span class="contact-form-section__label">{{ 'contactPage.form.name' | translate }}</span>
+        <input
+          type="text"
+          formControlName="name"
+          autocomplete="name"
+          [placeholder]="'contactPage.form.namePlaceholder' | translate" />
+        @if (showFieldError('name')) {
+          <span class="contact-form-section__error">{{ getFieldErrorKey('name') | translate }}</span>
+        }
+      </label>
+
+      <label class="contact-form-section__field">
+        <span class="contact-form-section__label">{{ 'contactPage.form.company' | translate }}</span>
+        <input
+          type="text"
+          formControlName="company"
+          autocomplete="organization"
+          [placeholder]="'contactPage.form.companyPlaceholder' | translate" />
+      </label>
+
+      <label class="contact-form-section__field">
+        <span class="contact-form-section__label">{{ 'contactPage.form.email' | translate }}</span>
+        <input
+          type="email"
+          formControlName="email"
+          autocomplete="email"
+          [placeholder]="'contactPage.form.emailPlaceholder' | translate" />
+        @if (showFieldError('email')) {
+          <span class="contact-form-section__error">{{ getFieldErrorKey('email') | translate }}</span>
+        }
+      </label>
+
+      <div class="contact-form-section__field">
+        <span class="contact-form-section__label" id="contact-project-type-label">
+          {{ 'contactPage.form.projectType' | translate }}
+        </span>
+        <app-contact-select
+          formControlName="projectType"
+          id="contact-project-type"
+          labelledBy="contact-project-type-label"
+          [options]="projectTypeOptions"
+          placeholderKey="contactPage.form.projectTypePlaceholder"
+        />
+        @if (showFieldError('projectType')) {
+          <span class="contact-form-section__error">{{ getFieldErrorKey('projectType') | translate }}</span>
+        }
+      </div>
+
+      <div class="contact-form-section__field">
+        <span class="contact-form-section__label" id="contact-method-label">
+          {{ 'contactPage.form.preferredContactMethod' | translate }}
+        </span>
+        <app-contact-select
+          formControlName="preferredContactMethod"
+          id="contact-preferred-method"
+          labelledBy="contact-method-label"
+          [options]="preferredMethodOptions"
+          placeholderKey="contactPage.form.preferredContactMethodPlaceholder"
+        />
+      </div>
+
+      <label class="contact-form-section__field">
+        <span class="contact-form-section__label">{{ 'contactPage.form.message' | translate }}</span>
+        <textarea
+          formControlName="message"
+          rows="4"
+          [placeholder]="'contactPage.form.messagePlaceholder' | translate"></textarea>
+        @if (showFieldError('message')) {
+          <span class="contact-form-section__error">{{ getFieldErrorKey('message') | translate }}</span>
+        }
+      </label>
+
+      @if (feedback() === 'error') {
+        <p class="contact-form-section__feedback contact-form-section__feedback--error" role="alert">
+          {{ feedbackMessageKey() | translate }}
+        </p>
+      }
+
+      <button type="submit" class="contact-form-section__submit">
+        {{ 'contactPage.form.submit' | translate }}
+        <img [src]="sendIcon" alt="" aria-hidden="true" loading="lazy" />
+      </button>
+    </form>
+  </div>
+</section>

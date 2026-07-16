@@ -1,0 +1,39 @@
+<div class="contact-faq-item" [class.contact-faq-item--open]="open">
+  <button
+    type="button"
+    class="contact-faq-item__trigger"
+    [id]="triggerId"
+    [attr.aria-expanded]="open"
+    [attr.aria-controls]="panelId"
+    (click)="toggle.emit()"
+  >
+    <span class="contact-faq-item__question">{{ questionKey | translate }}</span>
+    <svg
+      class="contact-faq-item__chevron"
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      aria-hidden="true"
+      focusable="false">
+      <path
+        d="M5 7.5L10 12.5L15 7.5"
+        stroke="currentColor"
+        stroke-width="1.75"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+    </svg>
+  </button>
+
+  <div
+    class="contact-faq-item__panel"
+    [class.contact-faq-item__panel--open]="open"
+    [id]="panelId"
+    role="region"
+    [attr.aria-labelledby]="triggerId"
+    [attr.aria-hidden]="!open">
+    <div class="contact-faq-item__panel-inner">
+      <p class="contact-faq-item__answer">{{ answerKey | translate }}</p>
+    </div>
+  </div>
+</div>

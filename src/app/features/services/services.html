@@ -1,0 +1,37 @@
+<app-services-hero></app-services-hero>
+
+<section class="services-offerings" aria-label="Featured service offerings">
+  <div class="services-offerings__container">
+    <div class="services-offerings__grid">
+      @for (offering of featuredOfferings; track offering.id) {
+        <app-service-featured-card
+          [number]="offering.number"
+          [image]="offering.image"
+          [titleKey]="offering.titleKey"
+          [descriptionKey]="offering.descriptionKey"
+          [imageAltKey]="offering.imageAltKey"
+          [tags]="offering.tags">
+        </app-service-featured-card>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="services-offerings services-offerings--secondary" aria-label="Additional service offerings">
+  <div class="services-offerings__container">
+    <div class="services-offerings__grid">
+      @for (offering of additionalFeaturedOfferings; track offering.id) {
+        <app-service-featured-card
+          [number]="offering.number"
+          [image]="offering.image"
+          [titleKey]="offering.titleKey"
+          [descriptionKey]="offering.descriptionKey"
+          [imageAltKey]="offering.imageAltKey"
+          [tags]="offering.tags">
+        </app-service-featured-card>
+      }
+    </div>
+  </div>
+</section>
+
+<app-services-cta></app-services-cta>

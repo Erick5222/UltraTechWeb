@@ -1,0 +1,26 @@
+<section class="portfolio-standard">
+  <div class="portfolio-standard__container">
+    <div class="portfolio-standard__header">
+      <div class="portfolio-standard__intro">
+        <h2 class="portfolio-standard__title">{{ 'portfolioPage.standard.title' | translate }}</h2>
+        <p class="portfolio-standard__description">
+          {{ 'portfolioPage.standard.description' | translate }}
+        </p>
+      </div>
+
+      <a class="portfolio-standard__cta" href="#">
+        {{ 'portfolioPage.standard.cta' | translate }}
+      </a>
+    </div>
+
+    <div class="portfolio-standard__metrics">
+      @for (metric of metrics; track metric.id) {
+        <app-portfolio-metric-card
+          [icon]="metric.icon"
+          [valueKey]="metric.valueKey"
+          [labelKey]="metric.labelKey"
+        />
+      }
+    </div>
+  </div>
+</section>

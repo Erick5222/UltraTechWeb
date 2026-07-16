@@ -1,0 +1,29 @@
+:host {
+  display: block;
+}
+
+.contact-inquiry {
+  padding: calc(var(--header-height) + 48px) 24px 64px;
+}
+
+.contact-inquiry__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contact-inquiry__grid {
+  display: grid;
+  gap: 40px;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .contact-inquiry {
+    padding: calc(var(--header-height) + 64px) 24px 80px;
+  }
+
+  .contact-inquiry__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 48px;
+  }
+}

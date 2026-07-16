@@ -1,0 +1,89 @@
+:host {
+  display: block;
+  --showcase-intro-min-height: 480px;
+  --showcase-demo-height: 560px;
+}
+
+.case-study {
+  padding: 0 24px 56px;
+}
+
+.case-study__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.case-study__frame {
+  position: relative;
+}
+
+.case-study__card {
+  padding: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.02) 100%);
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(126, 200, 255, 0.04);
+  overflow: hidden;
+  transition: box-shadow 0.32s ease;
+}
+
+.case-study__card--transitioning .case-study__panel--active {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.case-study__stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.case-study__panel {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition:
+    opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.case-study__panel--active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+@media (min-width: 768px) {
+  :host {
+    --showcase-intro-min-height: 360px;
+  }
+
+  .case-study__card {
+    padding: 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :host {
+    --showcase-intro-min-height: 380px;
+    --showcase-demo-height: min(78vh, 880px);
+  }
+
+  .case-study {
+    padding: 0 24px 72px;
+  }
+
+  .case-study__card {
+    padding: 48px;
+  }
+}
+
+@media (max-width: 767px) {
+  :host {
+    --showcase-intro-min-height: 520px;
+  }
+}
