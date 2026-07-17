@@ -1,4 +1,3 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
@@ -11,13 +10,9 @@ describe('GeminiService', () => {
   let service: GeminiService;
   let httpMock: HttpTestingController;
 
-  const history: ChatMessage[] = [
-    { id: '1', role: 'user', content: 'Hello' },
-  ];
+  const history: ChatMessage[] = [{ id: '1', role: 'user', content: 'Hello' }];
 
   beforeEach(() => {
-    environment.geminiApiKey = 'test-key';
-
     TestBed.configureTestingModule({
       providers: [provideHttpClient(), provideHttpClientTesting(), GeminiService],
     });
@@ -30,18 +25,21 @@ describe('GeminiService', () => {
     httpMock.verify();
   });
 
-  it('should send a message to Gemini', () => {
+  it('should send a message through UltraTech API', () => {
     let responseText = '';
 
     service.sendMessage(history).subscribe((text) => {
       responseText = text;
     });
 
-    const request = httpMock.expectOne((req) => req.url.includes('generativelanguage.googleapis.com'));
+    const request = httpMock.expectOne(`${environment.apiBaseUrl}/chat`);
     expect(request.request.method).toBe('POST');
 
     request.flush({
-      candidates: [{ content: { parts: [{ text: 'Hi there' }] } }],
+      success: true,
+      data: { reply: 'Hi there', model: 'gemini-2.0-flash' },
+      message: 'Chat response generated successfully',
+      timestamp: '2026-07-17T12:00:00.000Z',
     });
 
     expect(responseText).toBe('Hi there');
@@ -56,12 +54,17 @@ describe('GeminiService', () => {
       },
     });
 
-    const request = httpMock.expectOne((req) => req.url.includes('generativelanguage.googleapis.com'));
+    const request = httpMock.expectOne(`${environment.apiBaseUrl}/chat`);
     request.flush(
-      { error: { message: 'Invalid API key' } },
-      { status: 400, statusText: 'Bad Request' },
+      {
+        success: false,
+        message: 'Gemini returned an error.',
+        error: 'invalid_api_key',
+        timestamp: '2026-07-17T12:00:00.000Z',
+      },
+      { status: 502, statusText: 'Bad Gateway' },
     );
 
-    expect(errorMessage).toBe('Invalid API key');
+    expect(errorMessage).toBe('invalid_api_key');
   });
 });

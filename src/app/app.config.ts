@@ -2,10 +2,9 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/
 import { provideHttpClient } from '@angular/common/http';
 import { provideRouter, withHashLocation, withInMemoryScrolling } from '@angular/router';
 
-import { provideInquiryRepository, provideInquiryWebhookConfig } from './core/providers/inquiry.provider';
+import { provideInquiryRepository } from './core/providers/inquiry.provider';
 import {
   provideDashboardDataRepository,
-  provideDashboardWebhookConfig,
 } from './core/providers/dashboard-data.provider';
 import { provideLanguage } from './core/providers/language.provider';
 import { routes } from './app.routes';
@@ -23,9 +22,7 @@ export const appConfig: ApplicationConfig = {
       }),
     ),
     ...provideLanguage(),
-    provideInquiryWebhookConfig(),
     provideInquiryRepository(),
-    provideDashboardWebhookConfig(),
     provideDashboardDataRepository(),
   ],
 };

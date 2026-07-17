@@ -733,7 +733,7 @@
       },
       "errors": {
         "missingApiKey": "El servicio de IA aún no está configurado. Contacta al administrador.",
-        "invalidApiKey": "La API key de Gemini no es válida. Actualízala en environment.development.ts.",
+        "invalidApiKey": "La API key de Gemini no es válida. Actualízala en GEMINI_API_KEY del backend.",
         "emptyResponse": "El asistente devolvió una respuesta vacía. Intenta de nuevo.",
         "requestFailed": "No se pudo conectar con el asistente de IA. Revisa tu conexión e intenta de nuevo."
       }

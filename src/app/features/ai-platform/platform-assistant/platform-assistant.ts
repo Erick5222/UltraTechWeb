@@ -11,7 +11,7 @@ import { GeminiService } from '../../../core/services/gemini.service';
 import { DashboardDataService } from '../../../core/services/dashboard-data/dashboard-data.service';
 import { LanguageService } from '../../../core/services/language.service';
 import { ChatMessage } from '../../../core/models/chat-message.model';
-import { environment } from '../../../../environments/environment';
+import { DEFAULT_AI_MODEL } from '../../../core/services/dashboard-data/dashboard-data.constants';
 import { PLATFORM_ASSETS, PLATFORM_SUGGESTION_CHIPS } from '../ai-platform.model';
 
 @Component({
@@ -80,7 +80,7 @@ export class PlatformAssistant {
         void this.dashboardData.recordChatInteraction({
           prompt: content,
           response: reply,
-          model: environment.geminiModel,
+          model: DEFAULT_AI_MODEL,
           executionTime: Math.round(performance.now() - startedAt),
           status: 'completed',
         });
@@ -93,7 +93,7 @@ export class PlatformAssistant {
         void this.dashboardData.recordChatInteraction({
           prompt: content,
           response: error.message,
-          model: environment.geminiModel,
+          model: DEFAULT_AI_MODEL,
           executionTime: Math.round(performance.now() - startedAt),
           status: 'failed',
         });

@@ -732,7 +732,7 @@
       },
       "errors": {
         "missingApiKey": "The AI service is not configured yet. Please contact the administrator.",
-        "invalidApiKey": "The Gemini API key is invalid. Update geminiApiKey in environment.development.ts.",
+        "invalidApiKey": "The Gemini API key is invalid. Update GEMINI_API_KEY in the backend environment.",
         "emptyResponse": "The assistant returned an empty response. Please try again.",
         "requestFailed": "Could not reach the AI assistant. Check your connection and try again."
       }

@@ -2,15 +2,15 @@ import { Injectable, inject } from '@angular/core';
 
 import { ChatInteractionInput, DashboardWorkbook } from './dashboard-data.model';
 import { DashboardDataRepository } from './dashboard-data.repository';
-import { DashboardGoogleSheetsRepository } from './dashboard-google-sheets.repository';
+import { DashboardApiRepository } from './dashboard-api.repository';
 import { DashboardLocalStorageRepository } from './dashboard-local-storage.repository';
 
 /**
- * Tries Google Sheets first; falls back to localStorage if webhook access fails (403).
+ * Tries UltraTech API first; falls back to localStorage if the gateway is unavailable.
  */
 @Injectable({ providedIn: 'root' })
 export class DashboardResilientRepository implements DashboardDataRepository {
-  private readonly sheetsRepository = inject(DashboardGoogleSheetsRepository);
+  private readonly apiRepository = inject(DashboardApiRepository);
   private readonly localRepository = inject(DashboardLocalStorageRepository);
 
   private useLocalFallback = false;
@@ -21,7 +21,7 @@ export class DashboardResilientRepository implements DashboardDataRepository {
     }
 
     try {
-      return await this.sheetsRepository.loadWorkbook();
+      return await this.apiRepository.loadWorkbook();
     } catch (error) {
       this.warnFallback(error);
       this.useLocalFallback = true;
@@ -36,7 +36,7 @@ export class DashboardResilientRepository implements DashboardDataRepository {
     }
 
     try {
-      await this.sheetsRepository.saveWorkbook(workbook);
+      await this.apiRepository.saveWorkbook(workbook);
     } catch (error) {
       this.warnFallback(error);
       this.useLocalFallback = true;
@@ -50,7 +50,7 @@ export class DashboardResilientRepository implements DashboardDataRepository {
     }
 
     try {
-      return await this.sheetsRepository.recordChatInteraction(input);
+      return await this.apiRepository.recordChatInteraction(input);
     } catch (error) {
       this.warnFallback(error);
       this.useLocalFallback = true;
@@ -60,9 +60,6 @@ export class DashboardResilientRepository implements DashboardDataRepository {
 
   private warnFallback(error: unknown): void {
     const message = error instanceof Error ? error.message : String(error);
-    console.warn(
-      '[Dashboard] Google Sheets webhook unavailable. Using local fallback.',
-      message,
-    );
+    console.warn('[Dashboard] UltraTech API unavailable. Using local fallback.', message);
   }
 }
