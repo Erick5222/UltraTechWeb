@@ -1,9 +1,11 @@
 export const environment = {
   production: true,
-  geminiApiKey: 'YOUR_GEMINI_API_KEY',
+  geminiApiKey: 'AIzaSyDUaimWCWHIdQ6M55OPCP5OZHlCHg3ykvw',
   geminiModel: 'gemini-2.0-flash',
-  inquiryWebhookUrl: 'YOUR_GOOGLE_APPS_SCRIPT_WEBHOOK_URL',
-  inquiryWebhookToken: 'YOUR_WEBHOOK_SECRET_TOKEN',
-  dashboardWebhookUrl: 'YOUR_DASHBOARD_APPS_SCRIPT_WEBHOOK_URL',
-  dashboardWebhookToken: 'YOUR_DASHBOARD_WEBHOOK_SECRET_TOKEN',
+  inquiryWebhookUrl:
+    'https://script.google.com/macros/s/AKfycbyOY2s2Aa1ikw5ZjREaomwqQaFATAu3jv3-m382-BELEKfQGs1DbTWqqbodCskwCM81/exec',
+  inquiryWebhookToken: 'PEGA_AQUI_TU_TOKEN_SECRETO',
+  dashboardWebhookUrl:
+    'https://script.google.com/macros/s/AKfycbxMJ9bXzC8xWgidqeehRKSVp0gN4wZm1eN3rSAJ_QdUBIyyAg5zfLLxethldba_S-Ri/exec',
+  dashboardWebhookToken: 'TU_TOKEN_SECRETO_AQUI',
 };
