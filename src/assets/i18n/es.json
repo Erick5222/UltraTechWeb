@@ -87,6 +87,7 @@
       "nav": {
         "ariaLabel": "Escaparates de soluciones destacadas",
         "fleetIntelligence": "Fleet Intelligence Platform",
+        "documentIntelligence": "AI Document Intelligence",
         "enterpriseSolution": "Escaparate de solución empresarial",
         "additionalCaseStudy": "Caso de estudio adicional"
       },
@@ -138,7 +139,7 @@
     "linksHeading": "Enlaces",
     "social": {
       "linkedin": "LinkedIn",
-      "twitter": "Twitter",
+      "whatsapp": "WhatsApp",
       "github": "GitHub"
     },
     "links": {
@@ -147,6 +148,47 @@
       "contact": "Contacto"
     },
     "copyright": "© 2026 Ultra Tech Consulting. Ingeniería de precisión."
+  },
+  "documentIntelligence": {
+    "badge": "✦ NUEVA SUITE DE INTELIGENCIA",
+    "titlePrefix": "Transforma documentos en",
+    "titleHighlight": "Inteligencia de negocio",
+    "subtitle": "Sube contratos, reportes, hojas de cálculo o documentos de negocio y deja que la IA comprenda su contenido con precisión humana.",
+    "getStarted": "Comenzar →",
+    "viewDemo": "Ver demo ▷",
+    "uploadTitle": "Arrastra y suelta tus archivos",
+    "uploadNote": "Procesamiento seguro y cifrado para cumplimiento empresarial.",
+    "browseFiles": "Seleccionar archivos",
+    "adaptiveTitle": "Inteligencia adaptativa",
+    "adaptiveSubtitle": "El motor detecta la intención del documento y reconstruye el dashboard en tiempo real.",
+    "analyzeAnother": "Analizar otro documento",
+    "processing": {
+      "uploading": "Subiendo",
+      "reading": "Leyendo",
+      "understanding": "Comprendiendo",
+      "analyzing": "Analizando",
+      "generatingInsights": "Generando insights",
+      "completed": "Completado"
+    },
+    "errors": {
+      "unsupportedFile": "Este tipo de archivo no está soportado. Usa PDF, DOCX, XLSX, XLS, PNG, JPG o JPEG.",
+      "fileTooLarge": "El archivo supera el límite permitido (15 MB documentos, 30 MB imágenes).",
+      "payloadTooLarge": "El archivo procesado supera el límite local (~28 MB en JSON).",
+      "serverBodyRejected": "El servidor rechazó la solicitud (413). Payload enviado: ~{{sizeKb}} KB. Redespliega o reinicia UltraTechBack con DOCUMENT_JSON_LIMIT=32mb.",
+      "preprocessFailed": "No se pudo preparar el archivo para el análisis.",
+      "tooManyPages": "El documento supera el límite de 8 páginas. Sube un archivo más corto para reducir costos.",
+      "conversionFailed": "No se pudo convertir el documento para analizarlo.",
+      "backendTimeout": "El análisis tardó demasiado. Intenta con un documento más pequeño.",
+      "aiError": "El servicio de IA no pudo analizar este documento.",
+      "networkError": "No se pudo conectar con el servicio de análisis. Revisa tu conexión.",
+      "unknown": "Ocurrió un error al analizar el documento."
+    },
+    "showcase": {
+      "label": "Caso de estudio",
+      "title": "AI Document Intelligence",
+      "subtitle": "De archivos estáticos a insight accionable",
+      "description": "Un flujo de análisis documental que valida cargas, preprocesa contenido para reducir costo de IA y renderiza resumen más dashboards adaptativos desde respuestas reales del backend."
+    }
   },
   "servicesPage": {
     "badge": "Nuestros servicios",

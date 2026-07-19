@@ -1,0 +1,228 @@
+<section class="doc-intel">
+  <header class="doc-intel__hero">
+    <span class="doc-intel__badge">{{ 'documentIntelligence.badge' | translate }}</span>
+    <h2 class="doc-intel__title">
+      {{ 'documentIntelligence.titlePrefix' | translate }}
+      <span>{{ 'documentIntelligence.titleHighlight' | translate }}</span>
+    </h2>
+    <p class="doc-intel__subtitle">{{ 'documentIntelligence.subtitle' | translate }}</p>
+
+    <div class="doc-intel__hero-actions">
+      <button type="button" class="doc-intel__btn doc-intel__btn--primary" (click)="onBrowseClick()">
+        {{ 'documentIntelligence.getStarted' | translate }}
+      </button>
+      <button type="button" class="doc-intel__btn doc-intel__btn--ghost" (click)="onBrowseClick()">
+        {{ 'documentIntelligence.viewDemo' | translate }}
+      </button>
+    </div>
+  </header>
+
+  <div
+    class="doc-intel__upload-card"
+    (dragover)="onDragOver($event)"
+    (drop)="onDrop($event)"
+  >
+    <input
+      #fileInput
+      type="file"
+      class="doc-intel__file-input"
+      [attr.accept]="'.pdf,.docx,.xlsx,.xls,.png,.jpg,.jpeg'"
+      (change)="onFileSelected($event)"
+    />
+
+    <div class="doc-intel__dropzone">
+      <img [src]="assets.uploadIcon" alt="" aria-hidden="true" class="doc-intel__dropzone-icon" />
+      <p class="doc-intel__dropzone-title">{{ 'documentIntelligence.uploadTitle' | translate }}</p>
+      <p class="doc-intel__dropzone-note">{{ 'documentIntelligence.uploadNote' | translate }}</p>
+
+      <div class="doc-intel__formats">
+        @for (tag of formatTags; track tag) {
+          <span>{{ tag }}</span>
+        }
+      </div>
+
+      <button type="button" class="doc-intel__browse" (click)="onBrowseClick()">
+        {{ 'documentIntelligence.browseFiles' | translate }}
+      </button>
+    </div>
+
+    @if (state.showProgress()) {
+      <div class="doc-intel__upload-progress">
+        <div class="doc-intel__upload-progress-bar">
+          <span [style.width.%]="state.uploadProgress()"></span>
+        </div>
+        <p>{{ state.uploadProgress() }}%</p>
+      </div>
+    }
+
+    @if (state.error(); as uploadError) {
+      <p class="doc-intel__error">{{ uploadError.messageKey | translate: uploadError.messageParams }}</p>
+    }
+  </div>
+
+  @if (state.showProgress() || state.showResults()) {
+    <section class="doc-intel__pipeline" aria-live="polite">
+      <div class="doc-intel__steps">
+        @for (step of processingStages; track step.id; let index = $index) {
+          <div
+            class="doc-intel__step"
+            [class.doc-intel__step--complete]="isStageComplete(step.id)"
+            [class.doc-intel__step--active]="isStageActive(step.id)"
+          >
+            <span class="doc-intel__step-icon">
+              <img [src]="step.icon" alt="" aria-hidden="true" loading="lazy" />
+            </span>
+            <span class="doc-intel__step-label">{{ step.labelKey | translate }}</span>
+          </div>
+          @if (index < processingStages.length - 1) {
+            <span
+              class="doc-intel__step-line"
+              [class.doc-intel__step-line--complete]="isStageComplete(processingStages[index + 1].id)"
+            ></span>
+          }
+        }
+      </div>
+
+      <div class="doc-intel__pipeline-copy">
+        <h3>{{ 'documentIntelligence.adaptiveTitle' | translate }}</h3>
+        <p>{{ 'documentIntelligence.adaptiveSubtitle' | translate }}</p>
+      </div>
+    </section>
+  }
+
+  @if (state.showResults()) {
+    <div class="doc-intel__results">
+      @if (state.summaryView(); as summary) {
+        <article class="doc-intel__summary-card">
+          <header class="doc-intel__card-header">
+            <h3>{{ summary.title }}</h3>
+            @if (summary.badge) {
+              <span class="doc-intel__pill doc-intel__pill--green">{{ summary.badge }}</span>
+            }
+          </header>
+
+          @if (summary.meta.length) {
+            <div class="doc-intel__meta-grid">
+              @for (item of summary.meta; track item.label) {
+                <div>
+                  <span>{{ item.label }}</span>
+                  <strong>{{ item.value }}</strong>
+                </div>
+              }
+            </div>
+          }
+
+          @for (section of summary.sections; track section.title) {
+            <section class="doc-intel__section">
+              <h4>{{ section.title }}</h4>
+              @if (section.items?.length) {
+                <ul>
+                  @for (item of section.items; track item) {
+                    <li>{{ item }}</li>
+                  }
+                </ul>
+              }
+              @if (section.badges?.length) {
+                <div class="doc-intel__badges">
+                  @for (badge of section.badges; track badge.label) {
+                    <span class="doc-intel__risk" [attr.data-level]="badge.level">{{ badge.label }}</span>
+                  }
+                </div>
+              }
+              @if (section.footer) {
+                <p class="doc-intel__section-footer">{{ section.footer }}</p>
+              }
+            </section>
+          }
+        </article>
+      }
+
+      @if (state.dashboardView(); as dashboard) {
+        @if (dashboard.visible) {
+          <article class="doc-intel__dashboard-card">
+            <header class="doc-intel__card-header">
+              <h3>{{ dashboard.title }}</h3>
+              @if (dashboard.badge) {
+                <span class="doc-intel__pill doc-intel__pill--blue">{{ dashboard.badge }}</span>
+              }
+            </header>
+
+            @if (dashboard.kpis.length) {
+              <div class="doc-intel__kpis">
+                @for (kpi of dashboard.kpis; track kpi.label) {
+                  <div>
+                    <span>{{ kpi.label }}</span>
+                    <strong>{{ kpi.value }}</strong>
+                    @if (kpi.trend) {
+                      <small [attr.data-direction]="kpi.trendDirection">{{ kpi.trend }}</small>
+                    }
+                  </div>
+                }
+              </div>
+            }
+
+            @if (dashboard.chartOptions && (dashboard.type === 'bar' || dashboard.type === 'line')) {
+              <apx-chart
+                [series]="dashboard.chartOptions.series"
+                [chart]="dashboard.chartOptions.chart"
+                [xaxis]="dashboard.chartOptions.xaxis!"
+                [yaxis]="dashboard.chartOptions.yaxis!"
+                [stroke]="dashboard.chartOptions.stroke!"
+                [dataLabels]="dashboard.chartOptions.dataLabels!"
+                [plotOptions]="dashboard.chartOptions.plotOptions!"
+                [colors]="dashboard.chartOptions.colors!"
+                [tooltip]="dashboard.chartOptions.tooltip!"
+              ></apx-chart>
+            }
+
+            @if (dashboard.chartOptions && dashboard.type === 'pie') {
+              <apx-chart
+                [series]="dashboard.chartOptions.series"
+                [chart]="dashboard.chartOptions.chart"
+                [labels]="dashboard.chartOptions.labels!"
+                [colors]="dashboard.chartOptions.colors!"
+                [dataLabels]="dashboard.chartOptions.dataLabels!"
+                [tooltip]="dashboard.chartOptions.tooltip!"
+              ></apx-chart>
+            }
+
+            @if (dashboard.type === 'table' && dashboard.tableRows.length) {
+              <div class="doc-intel__table-wrap">
+                <table>
+                  @if (dashboard.tableHeaders.length) {
+                    <thead>
+                      <tr>
+                        @for (header of dashboard.tableHeaders; track header) {
+                          <th>{{ header }}</th>
+                        }
+                      </tr>
+                    </thead>
+                  }
+                  <tbody>
+                    @for (row of dashboard.tableRows; track $index) {
+                      <tr>
+                        @for (cell of row; track $index) {
+                          <td>{{ cell }}</td>
+                        }
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            }
+
+            @if (dashboard.insight) {
+              <div class="doc-intel__insight">
+                <p>{{ dashboard.insight }}</p>
+              </div>
+            }
+          </article>
+        }
+      }
+
+      <button type="button" class="doc-intel__reset" (click)="resetDemo()">
+        {{ 'documentIntelligence.analyzeAnother' | translate }}
+      </button>
+    </div>
+  }
+</section>

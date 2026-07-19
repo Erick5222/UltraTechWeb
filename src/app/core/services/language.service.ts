@@ -25,9 +25,21 @@ export class LanguageService {
     return this.applyLanguage(lang, true);
   }
 
-  translate(key: string): string {
+  translate(key: string, params?: Record<string, string | number>): string {
     const value = this.getNestedValue(this.translations(), key);
-    return typeof value === 'string' ? value : key;
+    if (typeof value !== 'string') {
+      return key;
+    }
+
+    if (!params) {
+      return value;
+    }
+
+    return Object.entries(params).reduce(
+      (result, [paramKey, paramValue]) =>
+        result.replaceAll(`{{${paramKey}}}`, String(paramValue)),
+      value,
+    );
   }
 
   isActiveLanguage(lang: Language): boolean {

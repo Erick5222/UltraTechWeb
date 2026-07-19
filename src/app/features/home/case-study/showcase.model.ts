@@ -11,7 +11,7 @@ export const CASE_STUDY_METRICS: string[] = [
   'caseStudy.metrics.integration',
 ];
 
-export type ShowcaseProjectType = 'fleet-intelligence' | 'placeholder';
+export type ShowcaseProjectType = 'fleet-intelligence' | 'document-intelligence' | 'placeholder';
 
 export interface ShowcasePlaceholderContent {
   titleKey: string;
@@ -27,6 +27,11 @@ export interface ShowcaseProject {
 
 /** Extend this array to add future portfolio showcases. */
 export const SHOWCASE_PROJECTS: ShowcaseProject[] = [
+  {
+    id: 'document-intelligence',
+    type: 'document-intelligence',
+    navLabelKey: 'caseStudy.showcase.nav.documentIntelligence',
+  },
   {
     id: 'fleet-intelligence',
     type: 'fleet-intelligence',

@@ -24,9 +24,9 @@ describe('CaseStudy', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should start with the fleet intelligence showcase', () => {
+  it('should start with the document intelligence showcase', () => {
     expect(component.activeIndex()).toBe(0);
-    expect(component.projects[0]?.type).toBe('fleet-intelligence');
+    expect(component.projects[0]?.type).toBe('document-intelligence');
   });
 
   it('should update the active indicator when selecting another project', () => {

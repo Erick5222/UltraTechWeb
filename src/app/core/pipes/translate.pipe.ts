@@ -8,8 +8,8 @@ import { LanguageService } from '../services/language.service';
 export class TranslatePipe implements PipeTransform {
   private readonly languageService = inject(LanguageService);
 
-  transform(key: string): string {
+  transform(key: string, params?: Record<string, string | number>): string {
     this.languageService.language();
-    return this.languageService.translate(key);
+    return this.languageService.translate(key, params);
   }
 }

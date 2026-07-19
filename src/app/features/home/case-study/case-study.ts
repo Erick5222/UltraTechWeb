@@ -1,6 +1,7 @@
 import { Component, computed, signal } from '@angular/core';
 import { ShowcaseNavComponent } from './showcase-nav/showcase-nav.component';
 import { ShowcaseControlsComponent } from './showcase-controls/showcase-controls.component';
+import { DocumentIntelligenceShowcasePanelComponent } from '../../ai-document-intelligence';
 import { FleetShowcasePanelComponent } from './fleet-showcase-panel/fleet-showcase-panel.component';
 import { ShowcasePlaceholderComponent } from './showcase-placeholder/showcase-placeholder.component';
 import { SHOWCASE_PROJECTS } from './showcase.model';
@@ -13,6 +14,7 @@ const TRANSITION_MS = 320;
     ShowcaseNavComponent,
     ShowcaseControlsComponent,
     FleetShowcasePanelComponent,
+    DocumentIntelligenceShowcasePanelComponent,
     ShowcasePlaceholderComponent,
   ],
   templateUrl: './case-study.html',

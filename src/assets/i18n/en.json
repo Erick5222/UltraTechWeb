@@ -87,6 +87,7 @@
       "nav": {
         "ariaLabel": "Featured solution showcases",
         "fleetIntelligence": "Fleet Intelligence Platform",
+        "documentIntelligence": "AI Document Intelligence",
         "enterpriseSolution": "Enterprise solution showcase",
         "additionalCaseStudy": "Additional case study"
       },
@@ -138,13 +139,54 @@
     
     "social": {
       "linkedin": "LinkedIn",
-      "twitter": "WhatsApp",
+      "whatsapp": "WhatsApp",
       "github": "GitHub"
     },
     "links": {
       
     },
     "copyright": "© 2026 Ultra Tech Consulting. Engineered for precision."
+  },
+  "documentIntelligence": {
+    "badge": "✦ NEW INTELLIGENCE SUITE",
+    "titlePrefix": "Transform Documents Into",
+    "titleHighlight": "Business Intelligence",
+    "subtitle": "Upload contracts, reports, spreadsheets or business documents and let AI automatically understand their content with human-level precision.",
+    "getStarted": "Get Started →",
+    "viewDemo": "View Demo ▷",
+    "uploadTitle": "Drag and drop your files",
+    "uploadNote": "Secure, encrypted processing for enterprise compliance.",
+    "browseFiles": "Browse files",
+    "adaptiveTitle": "Adaptive Intelligence",
+    "adaptiveSubtitle": "The engine detects document intent and reconstructs the dashboard in real-time.",
+    "analyzeAnother": "Analyze another document",
+    "processing": {
+      "uploading": "Uploading",
+      "reading": "Reading",
+      "understanding": "Understanding",
+      "analyzing": "Analyzing",
+      "generatingInsights": "Generating Insights",
+      "completed": "Completed"
+    },
+    "errors": {
+      "unsupportedFile": "This file type is not supported. Use PDF, DOCX, XLSX, XLS, PNG, JPG or JPEG.",
+      "fileTooLarge": "The file exceeds the allowed size limit (15 MB documents, 30 MB images).",
+      "payloadTooLarge": "The processed file exceeds the local limit (~28 MB JSON).",
+      "serverBodyRejected": "The server rejected the request (413). Payload sent: ~{{sizeKb}} KB. Redeploy or restart UltraTechBack with DOCUMENT_JSON_LIMIT=32mb.",
+      "preprocessFailed": "The file could not be prepared for analysis.",
+      "tooManyPages": "The document exceeds the 8-page limit. Upload a shorter file to reduce processing cost.",
+      "conversionFailed": "The document could not be converted for analysis.",
+      "backendTimeout": "The analysis took too long. Please try again with a smaller document.",
+      "aiError": "The AI service could not analyze this document.",
+      "networkError": "Could not reach the analysis service. Check your connection.",
+      "unknown": "Something went wrong while analyzing the document."
+    },
+    "showcase": {
+      "label": "Case Study",
+      "title": "AI Document Intelligence",
+      "subtitle": "From static files to actionable business insight",
+      "description": "A document analysis workflow that validates uploads, preprocesses content to reduce AI cost, and renders summary plus adaptive dashboards from real backend responses."
+    }
   },
   "servicesPage": {
     "badge": "Our Services",

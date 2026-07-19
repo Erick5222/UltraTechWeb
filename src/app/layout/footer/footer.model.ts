@@ -1,11 +1,18 @@
 export interface FooterLink {
   labelKey: string;
   href: string;
+  external?: boolean;
 }
+
+export const WHATSAPP_CONTACT_URL = 'https://wa.me/573156526659';
 
 export const FOOTER_SOCIAL_LINKS: FooterLink[] = [
   { labelKey: 'footer.social.linkedin', href: '#' },
-  { labelKey: 'footer.social.twitter', href: '#' },
+  {
+    labelKey: 'footer.social.whatsapp',
+    href: WHATSAPP_CONTACT_URL,
+    external: true,
+  },
   { labelKey: 'footer.social.github', href: '#' },
 ];
 

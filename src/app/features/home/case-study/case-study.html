@@ -26,6 +26,9 @@
                   @case ('fleet-intelligence') {
                     <app-fleet-showcase-panel />
                   }
+                  @case ('document-intelligence') {
+                    <app-document-intelligence-showcase-panel />
+                  }
                   @case ('placeholder') {
                     @if (project.placeholder; as placeholder) {
                       <app-showcase-placeholder [content]="placeholder" />
