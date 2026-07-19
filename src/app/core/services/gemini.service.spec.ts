@@ -37,7 +37,7 @@ describe('GeminiService', () => {
 
     request.flush({
       success: true,
-      data: { reply: 'Hi there', model: 'gemini-2.0-flash' },
+      data: { reply: 'Hi there', model: 'gemini-flash-latest' },
       message: 'Chat response generated successfully',
       timestamp: '2026-07-17T12:00:00.000Z',
     });

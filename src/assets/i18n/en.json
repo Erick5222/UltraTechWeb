@@ -708,12 +708,20 @@
       "prompt": "Start with a quick suggestion or ask anything about your business, documents or technical needs.",
       "inputPlaceholder": "Ask about proposals, documents, APIs, architecture...",
       "execute": "Ask AI",
+      "newConversation": "New conversation",
+      "inputHint": "Enter to send · Ctrl+Enter or Shift+Enter for new line",
       "refreshAria": "Start a new conversation",
       "moreAria": "More options",
       "uploadAria": "Upload file",
       "userLabel": "You",
       "assistantLabel": "Ultra AI",
       "thinking": "Preparing your answer...",
+      "loading": {
+        "connecting": "Connecting to the assistant...",
+        "analyzing": "Analyzing your question...",
+        "generating": "Generating a response...",
+        "almostReady": "Almost ready, just a moment..."
+      },
       "chips": {
         "analyzeContract": "Analyze Contract",
         "analyzeContractPrompt": "Analyze this contract and highlight risks, obligations, payment terms and recommended next steps.",

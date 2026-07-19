@@ -11,20 +11,18 @@
     <div class="platform-assistant__actions">
       <button
         type="button"
-        [attr.aria-label]="'aiPlatformPage.assistant.refreshAria' | translate"
+        class="platform-assistant__new-chat"
         (click)="resetChat()"
-        [disabled]="isLoading()"
+        [disabled]="isLoading() || !canResetChat()"
       >
         <img [src]="assets.refreshIcon" alt="" aria-hidden="true" loading="lazy" />
-      </button>
-      <button type="button" [attr.aria-label]="'aiPlatformPage.assistant.moreAria' | translate">
-        <img [src]="assets.moreIcon" alt="" aria-hidden="true" loading="lazy" />
+        {{ 'aiPlatformPage.assistant.newConversation' | translate }}
       </button>
     </div>
   </header>
 
   <div class="platform-assistant__body" #messagesContainer>
-    @if (messages().length === 0) {
+    @if (messages().length === 0 && !isLoading()) {
       <img
         class="platform-assistant__center-icon"
         [src]="assets.assistantCenterIcon"
@@ -53,7 +51,21 @@
         }
 
         @if (isLoading()) {
-          <p class="platform-assistant__typing">{{ 'aiPlatformPage.assistant.thinking' | translate }}</p>
+          <article
+            class="platform-assistant__message platform-assistant__message--assistant platform-assistant__message--pending"
+          >
+            <span class="platform-assistant__message-label">
+              {{ 'aiPlatformPage.assistant.assistantLabel' | translate }}
+            </span>
+            <p class="platform-assistant__typing">
+              <span class="platform-assistant__typing-indicator" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+              {{ loadingMessageKey() | translate }}
+            </p>
+          </article>
         }
       </div>
     }
@@ -86,14 +98,19 @@
       <img [src]="assets.uploadIcon" alt="" aria-hidden="true" loading="lazy" />
     </button>
 
-    <input
-      type="text"
-      class="platform-assistant__input"
-      [formControl]="messageControl"
-      [placeholder]="'aiPlatformPage.assistant.inputPlaceholder' | translate"
-      (keydown.enter)="sendMessage()"
-      [disabled]="isLoading()"
-    />
+    <div class="platform-assistant__input-wrap">
+      <textarea
+        rows="1"
+        class="platform-assistant__input"
+        [formControl]="messageControl"
+        [placeholder]="'aiPlatformPage.assistant.inputPlaceholder' | translate"
+        (keydown)="handleInputKeydown($event)"
+        [disabled]="isLoading()"
+      ></textarea>
+      <span class="platform-assistant__input-hint">
+        {{ 'aiPlatformPage.assistant.inputHint' | translate }}
+      </span>
+    </div>
 
     <button
       type="button"

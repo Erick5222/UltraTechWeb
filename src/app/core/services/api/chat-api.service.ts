@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { environment } from '../../../../environments/environment';
-import { ApiSuccessResponse } from '../../models/api-response.model';
+import { ApiErrorResponse, ApiSuccessResponse } from '../../models/api-response.model';
 import { ChatMessage } from '../../models/chat-message.model';
 
 interface ChatApiData {
@@ -32,12 +32,10 @@ export class ChatApiService {
   }
 
   private mapError(error: unknown): Error {
-    if (error instanceof Error) {
-      return error;
-    }
-
     if (error instanceof HttpErrorResponse) {
-      const apiError = typeof error.error?.error === 'string' ? error.error.error : 'request_failed';
+      this.logServiceError(error);
+      const apiError =
+        typeof error.error?.error === 'string' ? error.error.error : 'request_failed';
 
       if (apiError === 'missing_api_key') {
         return new Error('missing_api_key');
@@ -54,6 +52,49 @@ export class ChatApiService {
       return new Error(apiError);
     }
 
+    if (error instanceof Error) {
+      console.error('[Chat API] Request failed', {
+        message: error.message,
+      });
+      return error;
+    }
+
+    console.error('[Chat API] Unknown request failure', error);
     return new Error('request_failed');
+  }
+
+  private logServiceError(error: HttpErrorResponse): void {
+    const body = this.parseErrorBody(error);
+
+    console.error('[Chat API] Gemini gateway error', {
+      httpStatus: error.status,
+      statusText: error.statusText,
+      url: error.url,
+      apiMessage: body?.message,
+      apiError: body?.error,
+      timestamp: body?.timestamp,
+      responseBody: error.error,
+    });
+  }
+
+  private parseErrorBody(error: HttpErrorResponse): ApiErrorResponse | null {
+    if (error.error && typeof error.error === 'object' && 'error' in error.error) {
+      return error.error as ApiErrorResponse;
+    }
+
+    if (typeof error.error === 'string') {
+      try {
+        return JSON.parse(error.error) as ApiErrorResponse;
+      } catch {
+        return {
+          success: false,
+          message: 'Request failed',
+          error: error.error,
+          timestamp: '',
+        };
+      }
+    }
+
+    return null;
   }
 }

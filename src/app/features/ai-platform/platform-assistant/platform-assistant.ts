@@ -1,6 +1,7 @@
 import {
   Component,
   ElementRef,
+  OnDestroy,
   ViewChild,
   inject,
   signal,
@@ -20,10 +21,20 @@ import { PLATFORM_ASSETS, PLATFORM_SUGGESTION_CHIPS } from '../ai-platform.model
   templateUrl: './platform-assistant.html',
   styleUrl: './platform-assistant.scss',
 })
-export class PlatformAssistant {
+export class PlatformAssistant implements OnDestroy {
   private readonly geminiService = inject(GeminiService);
   private readonly dashboardData = inject(DashboardDataService);
   private readonly languageService = inject(LanguageService);
+
+  private static readonly LOADING_MESSAGE_KEYS = [
+    'aiPlatformPage.assistant.loading.connecting',
+    'aiPlatformPage.assistant.loading.analyzing',
+    'aiPlatformPage.assistant.loading.generating',
+    'aiPlatformPage.assistant.loading.almostReady',
+  ] as const;
+
+  private loadingMessageIntervalId: ReturnType<typeof setInterval> | null = null;
+  private loadingMessageIndex = 0;
 
   readonly assets = PLATFORM_ASSETS;
   readonly suggestionChips = PLATFORM_SUGGESTION_CHIPS;
@@ -35,8 +46,13 @@ export class PlatformAssistant {
   readonly messages = signal<ChatMessage[]>([]);
   readonly isLoading = signal(false);
   readonly errorKey = signal<string | null>(null);
+  readonly loadingMessageKey = signal<string>(PlatformAssistant.LOADING_MESSAGE_KEYS[0]);
 
   @ViewChild('messagesContainer') private messagesContainer?: ElementRef<HTMLElement>;
+
+  ngOnDestroy(): void {
+    this.stopLoadingMessages();
+  }
 
   applySuggestion(promptKey: string): void {
     this.messageControl.setValue(this.languageService.translate(promptKey));
@@ -60,6 +76,7 @@ export class PlatformAssistant {
     this.messageControl.reset();
     this.errorKey.set(null);
     this.isLoading.set(true);
+    this.startLoadingMessages();
     this.scrollToBottom();
 
     const startedAt = performance.now();
@@ -75,6 +92,7 @@ export class PlatformAssistant {
           },
         ]);
         this.isLoading.set(false);
+        this.stopLoadingMessages();
         this.scrollToBottom();
 
         void this.dashboardData.recordChatInteraction({
@@ -87,6 +105,7 @@ export class PlatformAssistant {
       },
       error: (error: Error) => {
         this.isLoading.set(false);
+        this.stopLoadingMessages();
         this.errorKey.set(this.mapErrorKey(error.message));
         this.scrollToBottom();
 
@@ -102,10 +121,50 @@ export class PlatformAssistant {
   }
 
   resetChat(): void {
+    this.stopLoadingMessages();
     this.messages.set([]);
     this.errorKey.set(null);
     this.messageControl.reset();
     this.isLoading.set(false);
+  }
+
+  handleInputKeydown(event: KeyboardEvent): void {
+    if (event.key !== 'Enter') {
+      return;
+    }
+
+    if (event.ctrlKey || event.shiftKey) {
+      return;
+    }
+
+    event.preventDefault();
+    this.sendMessage();
+  }
+
+  canResetChat(): boolean {
+    return this.messages().length > 0 || this.errorKey() !== null;
+  }
+
+  private startLoadingMessages(): void {
+    this.stopLoadingMessages();
+    this.loadingMessageIndex = 0;
+    this.loadingMessageKey.set(PlatformAssistant.LOADING_MESSAGE_KEYS[0]);
+
+    this.loadingMessageIntervalId = setInterval(() => {
+      this.loadingMessageIndex =
+        (this.loadingMessageIndex + 1) % PlatformAssistant.LOADING_MESSAGE_KEYS.length;
+      this.loadingMessageKey.set(
+        PlatformAssistant.LOADING_MESSAGE_KEYS[this.loadingMessageIndex],
+      );
+      this.scrollToBottom();
+    }, 2800);
+  }
+
+  private stopLoadingMessages(): void {
+    if (this.loadingMessageIntervalId) {
+      clearInterval(this.loadingMessageIntervalId);
+      this.loadingMessageIntervalId = null;
+    }
   }
 
   private mapErrorKey(message: string): string {

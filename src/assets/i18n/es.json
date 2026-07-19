@@ -709,12 +709,20 @@
       "prompt": "Empieza con una sugerencia rápida o pregunta lo que necesites sobre tu negocio, documentos o necesidades técnicas.",
       "inputPlaceholder": "Pregunta sobre propuestas, documentos, APIs, arquitectura...",
       "execute": "Consultar IA",
+      "newConversation": "Nueva conversación",
+      "inputHint": "Enter para enviar · Ctrl+Enter o Shift+Enter para nueva línea",
       "refreshAria": "Iniciar nueva conversación",
       "moreAria": "Más opciones",
       "uploadAria": "Subir archivo",
       "userLabel": "Tú",
       "assistantLabel": "Ultra IA",
       "thinking": "Preparando tu respuesta...",
+      "loading": {
+        "connecting": "Conectando con el asistente...",
+        "analyzing": "Analizando tu consulta...",
+        "generating": "Generando respuesta...",
+        "almostReady": "Casi listo, un momento más..."
+      },
       "chips": {
         "analyzeContract": "Analizar contrato",
         "analyzeContractPrompt": "Analiza este contrato y resalta riesgos, obligaciones, términos de pago y próximos pasos recomendados.",
