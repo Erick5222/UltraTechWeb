@@ -6,7 +6,7 @@
   </header>
 
   <div class="platform-analytics__kpi-grid">
-    @for (kpi of kpis; track kpi.id) {
+    @for (kpi of kpis(); track kpi.id) {
       <article class="platform-analytics__kpi-card">
         <div class="platform-analytics__kpi-top">
           <img [src]="kpi.icon" [alt]="kpi.labelKey | translate" class="platform-analytics__kpi-icon" loading="lazy" />
@@ -44,7 +44,10 @@
     </div>
 
     <div class="platform-analytics__chart-wrap">
-      <svg viewBox="0 0 920 260" class="platform-analytics__chart" aria-hidden="true">
+      @if (!hasData()) {
+        <p class="platform-analytics__empty">{{ 'aiPlatformPage.analytics.emptyState' | translate }}</p>
+      } @else {
+        <svg viewBox="0 0 920 260" class="platform-analytics__chart" aria-hidden="true">
         <defs>
           <linearGradient id="analyticsAreaGradient" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#5e8bff" stop-opacity="0.35" />
@@ -66,12 +69,13 @@
           stroke-width="2.5"
           filter="url(#analyticsLineGlow)"
         />
-      </svg>
-      <div class="platform-analytics__chart-labels">
-        @for (label of chartGeometry().labels; track label) {
-          <span>{{ label }}</span>
-        }
-      </div>
+        </svg>
+        <div class="platform-analytics__chart-labels">
+          @for (label of chartGeometry().labels; track label) {
+            <span>{{ label }}</span>
+          }
+        </div>
+      }
     </div>
   </article>
 
@@ -81,7 +85,7 @@
         {{ 'aiPlatformPage.analytics.mostUsedWorkflows' | translate }}
       </h2>
       <div class="platform-analytics__bars">
-        @for (item of workflowUsage; track item.id) {
+        @for (item of workflowUsage(); track item.id) {
           <div class="platform-analytics__bar-row">
             <div class="platform-analytics__bar-meta">
               <span>{{ item.labelKey | translate }}</span>
@@ -121,12 +125,12 @@
           }
         </svg>
         <div class="platform-analytics__donut-center">
-          <strong>85%</strong>
+          <strong>{{ utilityRate() }}%</strong>
           <span>{{ 'aiPlatformPage.analytics.utilityRate' | translate }}</span>
         </div>
       </div>
       <ul class="platform-analytics__legend">
-        @for (segment of usageSegments; track segment.id) {
+        @for (segment of usageSegments(); track segment.id) {
           <li>
             <span class="platform-analytics__legend-dot" [style.background]="segment.color"></span>
             {{ segment.labelKey | translate }} ({{ segment.percent }}%)
@@ -142,12 +146,12 @@
         {{ 'aiPlatformPage.analytics.hoursSaved' | translate }}
       </h2>
       <div class="platform-analytics__column-chart">
-        @for (value of hoursWeek; track $index) {
+        @for (value of hoursWeek(); track $index) {
           <div class="platform-analytics__column">
             <div class="platform-analytics__column-bar-wrap">
               <span
                 class="platform-analytics__column-bar"
-                [class.platform-analytics__column-bar--current]="$index === hoursWeek.length - 1"
+                [class.platform-analytics__column-bar--current]="$index === hoursWeek().length - 1"
                 [style.height]="hoursBarHeight(value)"
               ></span>
             </div>
@@ -162,7 +166,7 @@
         {{ 'aiPlatformPage.analytics.busiestHours' | translate }}
       </h2>
       <div class="platform-analytics__heatmap">
-        @for (value of hourlyUsage; track $index) {
+        @for (value of hourlyUsage(); track $index) {
           <span
             class="platform-analytics__heatmap-cell"
             [style.background]="'rgba(94, 139, 255, ' + heatmapOpacity(value) + ')'"
@@ -174,16 +178,20 @@
           <span>{{ label }}</span>
         }
       </div>
-      <p class="platform-analytics__heatmap-note">{{ 'aiPlatformPage.analytics.peakUsageNote' | translate }}</p>
+      <p class="platform-analytics__heatmap-note">
+        {{ peakUsageNote() | translate: peakUsageParams() }}
+      </p>
     </article>
   </div>
 
   <div class="platform-analytics__footer-kpis">
-    @for (item of footerKpis; track item.id) {
+    @for (item of footerKpis(); track item.id) {
       <div class="platform-analytics__footer-kpi">
         <span class="platform-analytics__footer-label">{{ item.labelKey | translate }}</span>
         <strong class="platform-analytics__footer-value">{{ item.value }}</strong>
-        <span class="platform-analytics__footer-sub">{{ item.subtextKey | translate }}</span>
+        <span class="platform-analytics__footer-sub">
+          {{ item.subtextKey | translate: item.subtextParams }}
+        </span>
       </div>
     }
   </div>
@@ -194,10 +202,10 @@
       {{ 'aiPlatformPage.analytics.generatedInsights' | translate }}
     </h2>
     <div class="platform-analytics__insights-grid">
-      @for (insight of insights; track insight.id) {
+      @for (insight of insights(); track insight.id) {
         <article class="platform-analytics__insight-card">
           <img [src]="insight.icon" alt="" class="platform-analytics__insight-icon" loading="lazy" />
-          <p>{{ insight.textKey | translate }}</p>
+          <p>{{ insight.textKey | translate: insight.params }}</p>
         </article>
       }
     </div>

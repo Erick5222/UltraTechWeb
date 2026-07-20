@@ -36,6 +36,7 @@ export interface DashboardWorkbook {
   metrics: DashboardMetric[];
   activityLog: ActivityRecord[];
   chatHistory: ChatHistoryRecord[];
+  documentAnalyses: DocumentAnalysisRecord[];
 }
 
 export interface ChatInteractionInput {
@@ -45,6 +46,27 @@ export interface ChatInteractionInput {
   executionTime: number;
   tokens?: number;
   status?: 'completed' | 'failed';
+}
+
+export interface DocumentAnalysisInput {
+  fileName: string;
+  extension: string;
+  sourceFormat: string;
+  fileSizeBytes: number;
+  pageCount: number;
+  executionTimeMs: number;
+  status: 'completed' | 'failed';
+  errorCode?: string;
+  documentType?: string;
+  summaryTitle?: string;
+  riskLevel?: string;
+  dashboardType?: string;
+  source?: 'platform' | 'showcase';
+}
+
+export interface DocumentAnalysisRecord extends DocumentAnalysisInput {
+  id: string;
+  timestamp: string;
 }
 
 export const DASHBOARD_DATA_STORAGE_KEY = 'ultra-tech-web-ai-platform-data';

@@ -1,0 +1,23 @@
+<div class="wa-shell" [class.wa-shell--open]="isOpen()">
+  <div class="wa-shell__viewport">
+    <div class="wa-shell__site" [class.wa-shell__site--blurred]="isOpen()">
+      <app-website-demo-site />
+    </div>
+
+    <div class="wa-shell__launcher" [class.wa-shell__launcher--hidden]="isOpen()">
+      <button
+        type="button"
+        class="wa-shell__fab"
+        (click)="openAssistant()"
+        [attr.aria-label]="'websiteAssistant.shell.openAria' | translate"
+      >
+        <img [src]="assets.fabIcon" alt="" aria-hidden="true" loading="lazy" />
+        <span>{{ 'websiteAssistant.shell.fabLabel' | translate }}</span>
+      </button>
+    </div>
+
+    <div class="wa-shell__panel" [class.wa-shell__panel--visible]="isOpen()">
+      <app-website-assistant-chat />
+    </div>
+  </div>
+</div>

@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 
 import { applyChatInteraction } from './dashboard-interaction.utils';
+import { applyDocumentAnalysis } from './dashboard-document-analysis.utils';
 import { DASHBOARD_DATA_SEED } from './dashboard-data.seed';
 import {
   ChatInteractionInput,
+  DocumentAnalysisInput,
   DASHBOARD_DATA_STORAGE_KEY,
   DashboardWorkbook,
 } from './dashboard-data.model';
@@ -49,6 +51,13 @@ export class DashboardLocalStorageRepository implements DashboardDataRepository 
     return updated;
   }
 
+  async recordDocumentAnalysis(input: DocumentAnalysisInput): Promise<DashboardWorkbook> {
+    const workbook = await this.loadWorkbook();
+    const updated = applyDocumentAnalysis(workbook, input);
+    await this.saveWorkbook(updated);
+    return updated;
+  }
+
   private normalizeWorkbook(workbook: DashboardWorkbook): DashboardWorkbook {
     return normalizeDashboardWorkbook({
       metrics: Array.isArray(workbook.metrics) ? workbook.metrics : DASHBOARD_DATA_SEED.metrics,
@@ -56,6 +65,7 @@ export class DashboardLocalStorageRepository implements DashboardDataRepository 
         ? workbook.activityLog
         : DASHBOARD_DATA_SEED.activityLog,
       chatHistory: Array.isArray(workbook.chatHistory) ? workbook.chatHistory : [],
+      documentAnalyses: Array.isArray(workbook.documentAnalyses) ? workbook.documentAnalyses : [],
     });
   }
 

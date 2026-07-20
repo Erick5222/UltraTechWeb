@@ -20,6 +20,12 @@
   padding: 24px 24px 64px;
 }
 
+@media (max-width: 768px) {
+  .ai-platform__content {
+    padding: 16px 14px 48px;
+  }
+}
+
 .ai-platform__inner {
   width: 100%;
   max-width: 1200px;

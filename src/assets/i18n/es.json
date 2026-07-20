@@ -88,6 +88,7 @@
         "ariaLabel": "Escaparates de soluciones destacadas",
         "fleetIntelligence": "Fleet Intelligence Platform",
         "documentIntelligence": "AI Document Intelligence",
+        "websiteAssistant": "AI Website Assistant",
         "enterpriseSolution": "Escaparate de solución empresarial",
         "additionalCaseStudy": "Caso de estudio adicional"
       },
@@ -159,6 +160,8 @@
     "uploadTitle": "Arrastra y suelta tus archivos",
     "uploadNote": "Procesamiento seguro y cifrado para cumplimiento empresarial.",
     "browseFiles": "Seleccionar archivos",
+    "analyzeDocument": "Analizar documento",
+    "analyzeAgain": "Intentar de nuevo",
     "adaptiveTitle": "Inteligencia adaptativa",
     "adaptiveSubtitle": "El motor detecta la intención del documento y reconstruye el dashboard en tiempo real.",
     "analyzeAnother": "Analizar otro documento",
@@ -188,6 +191,129 @@
       "title": "AI Document Intelligence",
       "subtitle": "De archivos estáticos a insight accionable",
       "description": "Un flujo de análisis documental que valida cargas, preprocesa contenido para reducir costo de IA y renderiza resumen más dashboards adaptativos desde respuestas reales del backend."
+    }
+  },
+  "websiteAssistant": {
+    "showcase": {
+      "label": "Caso de estudio",
+      "title": "AI Website Assistant",
+      "subtitle": "Tu empleado virtual integrado en cualquier sitio web corporativo",
+      "description": "Un asistente inteligente que vive dentro de un sitio empresarial, responde consultas en tiempo real, captura leads y guía a los visitantes hacia las soluciones de Ultra Tech."
+    },
+    "shell": {
+      "fabLabel": "Abrir asistente IA",
+      "openAria": "Abrir asistente web con IA"
+    },
+    "demoSite": {
+      "nav": {
+        "services": "Servicios",
+        "solutions": "Soluciones",
+        "about": "Nosotros",
+        "contact": "Contacto"
+      },
+      "hero": {
+        "kicker": "Sitio corporativo demo",
+        "title": "AI Website Assistant",
+        "description": "Descubre cómo un asistente inteligente puede integrarse en cualquier sitio empresarial para mejorar la atención al cliente, automatizar respuestas y orientar visitantes hacia las soluciones correctas."
+      },
+      "benefits": {
+        "title": "Beneficios",
+        "availability": {
+          "title": "Atención 24/7",
+          "description": "Siempre disponible para visitantes en cualquier zona horaria."
+        },
+        "instant": {
+          "title": "Respuestas instantáneas",
+          "description": "Respuestas en segundos sin esperar a un agente humano."
+        },
+        "leads": {
+          "title": "Captura de leads",
+          "description": "Califica interés y dirige prospectos con alta intención."
+        },
+        "integration": {
+          "title": "Integración sencilla",
+          "description": "Se integra en sitios existentes con mínima fricción."
+        },
+        "recommendations": {
+          "title": "Recomendaciones inteligentes",
+          "description": "Sugiere servicios relevantes según la intención del visitante."
+        },
+        "scalable": {
+          "title": "Escalable",
+          "description": "Atiende más tráfico sin aumentar headcount."
+        }
+      },
+      "flow": {
+        "title": "¿Cómo funciona?",
+        "visitor": "Visitante",
+        "assistant": "Asistente IA",
+        "knowledge": "Base de conocimiento",
+        "response": "Respuesta personalizada",
+        "satisfied": "Cliente satisfecho"
+      },
+      "impact": {
+        "title": "Impacto de negocio",
+        "availability": {
+          "value": "24/7",
+          "label": "Disponibilidad"
+        },
+        "responseTime": {
+          "value": "< 2s",
+          "label": "Tiempo promedio de respuesta"
+        },
+        "clients": {
+          "value": "10K+",
+          "label": "Clientes atendidos"
+        },
+        "automated": {
+          "value": "85%",
+          "label": "Consultas automatizadas"
+        }
+      },
+      "tech": {
+        "title": "Tecnologías utilizadas",
+        "angular": "Angular",
+        "node": "Node.js",
+        "gemini": "Gemini",
+        "rest": "REST API",
+        "sqlite": "SQLite",
+        "sheets": "Google Sheets"
+      }
+    },
+    "chat": {
+      "title": "Asistente IA",
+      "status": "En línea y analizando",
+      "welcome": "¡Hola! Puedo ayudarte a conocer los servicios, soluciones y cómo Ultra Tech puede apoyar tu negocio.",
+      "visitorLabel": "Visitante",
+      "inputPlaceholder": "Escribe un mensaje...",
+      "sendAria": "Enviar mensaje",
+      "closeAria": "Cerrar asistente",
+      "loading": {
+        "connecting": "Conectando con el asistente...",
+        "analyzing": "Analizando tu consulta...",
+        "generating": "Generando respuesta..."
+      },
+      "quickActions": {
+        "schedule": "Agendar reunión",
+        "pricing": "Ver precios",
+        "schedulePrompt": "Quiero agendar una reunión con Ultra Tech para hablar de un proyecto.",
+        "pricingPrompt": "¿Pueden compartir una referencia de precios para un proyecto de IA con Ultra Tech?"
+      },
+      "suggestions": {
+        "services": "¿Qué servicios ofrecen?",
+        "solutions": "¿Qué soluciones de IA tienen?",
+        "meeting": "Agendar reunión",
+        "servicesPrompt": "¿Qué servicios ofrece Ultra Tech?",
+        "solutionsPrompt": "¿Qué soluciones de IA ofrece Ultra Tech para empresas?",
+        "meetingPrompt": "Quiero agendar una reunión con Ultra Tech."
+      },
+      "errors": {
+        "config": "El asistente aún no está configurado. Intenta más tarde.",
+        "empty": "El asistente devolvió una respuesta vacía.",
+        "network": "No se pudo conectar con el servicio del asistente.",
+        "unknown": "Ocurrió un error al enviar tu mensaje.",
+        "offTopic": "Solo puedo ayudarte con preguntas relacionadas con los servicios y soluciones de Ultra Tech."
+      }
     }
   },
   "servicesPage": {
@@ -703,6 +829,9 @@
       "hoursSaved": "Horas ahorradas por semana",
       "busiestHours": "Horas de mayor uso",
       "peakUsageNote": "Pico de uso identificado entre 9:00 - 11:00 AM",
+      "peakUsageDynamic": "Pico de uso identificado alrededor de {{hour}}.",
+      "peakUsageEmpty": "Aún no hay actividad registrada.",
+      "emptyState": "Usa el asistente de IA o analiza documentos para poblar la analítica.",
       "generatedInsights": "Insights generados",
       "kpis": {
         "conversations": "Conversaciones IA",
@@ -730,19 +859,26 @@
       },
       "footer": {
         "responseTime": "TIEMPO PROM. DE RESPUESTA",
-        "responseTimeSub": "PERCENTIL GLOBAL: 98%",
+        "responseTimeSub": "Basado en {{count}} interacciones de chat",
         "successRate": "TASA DE ÉXITO",
-        "successRateSub": "CUMPLE SLA",
-        "satisfaction": "SATISFACCIÓN DEL USUARIO",
-        "satisfactionSub": "★★★★★",
+        "successRateSub": "Actividades completadas en la plataforma",
+        "completionRate": "TASA DE COMPLETITUD",
+        "completionRateSub": "Completadas vs fallidas",
         "processingTime": "TIEMPO PROM. DE PROCESAMIENTO",
-        "processingTimeSub": "-5s RESPECTO AL MES PASADO"
+        "processingTimeSub": "De {{count}} documentos completados"
       },
       "insights": {
         "documentUsage": "El uso de análisis de documentos aumentó 24% esta semana, sugiriendo un enfoque fuerte en auditorías administrativas.",
         "proposalPopular": "La generación de propuestas se convirtió en el flujo más popular del equipo de desarrollo de negocio.",
         "peakUsage": "El pico de uso de IA ocurre entre 9:00 y 11:00, alineado con el briefing estratégico matutino.",
-        "automationSaved": "La automatización redujo trabajo repetitivo en aproximadamente 18 horas por usuario activo este trimestre."
+        "automationSaved": "La automatización redujo trabajo repetitivo en aproximadamente 18 horas por usuario activo este trimestre.",
+        "dynamic": {
+          "documentsWeek": "Se procesaron {{count}} documentos en los últimos 7 días.",
+          "topWorkflow": "{{workflow}} es el flujo más activo con {{count}} ejecuciones registradas.",
+          "peakHour": "La mayor actividad de la plataforma ocurre alrededor de {{hour}}.",
+          "automationSaved": "Tiempo estimado ahorrado en los últimos 30 días: {{hours}} horas.",
+          "empty": "Usa el asistente y los flujos documentales para generar insights en vivo."
+        }
       }
     },
     "assistant": {
@@ -755,7 +891,22 @@
       "inputHint": "Enter para enviar · Ctrl+Enter o Shift+Enter para nueva línea",
       "refreshAria": "Iniciar nueva conversación",
       "moreAria": "Más opciones",
-      "uploadAria": "Subir archivo",
+      "uploadAria": "Agregar adjunto",
+      "attachment": {
+        "uploadDocument": "Cargar documento",
+        "uploadImage": "Cargar imagen",
+        "errors": {
+          "documentOnly": "Selecciona un PDF, DOCX, XLSX o XLS.",
+          "imageOnly": "Selecciona una imagen PNG, JPG o JPEG.",
+          "documentTooLarge": "El documento supera el límite del chat (8 MB).",
+          "imageTooLarge": "La imagen supera el límite del chat (5 MB).",
+          "tooManyPages": "El documento supera el límite del chat (4 páginas).",
+          "unsupportedFile": "Este tipo de archivo no está soportado en el chat.",
+          "preprocessFailed": "No se pudo preparar el archivo para el análisis.",
+          "payloadTooLarge": "El archivo procesado es demasiado grande para enviarlo a la IA.",
+          "emptyContent": "No se encontró contenido legible en este archivo."
+        }
+      },
       "userLabel": "Tú",
       "assistantLabel": "Ultra IA",
       "thinking": "Preparando tu respuesta...",
@@ -763,7 +914,8 @@
         "connecting": "Conectando con el asistente...",
         "analyzing": "Analizando tu consulta...",
         "generating": "Generando respuesta...",
-        "almostReady": "Casi listo, un momento más..."
+        "almostReady": "Casi listo, un momento más...",
+        "summarizingAttachment": "Resumiendo tu archivo..."
       },
       "chips": {
         "analyzeContract": "Analizar contrato",

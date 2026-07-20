@@ -6,6 +6,7 @@ import {
   DOCUMENT_MAX_BYTES,
   DOCUMENT_MAX_IMAGE_BYTES,
   DOCUMENT_MAX_PAGES,
+  DocumentFilePreview,
   DocumentSourceFormat,
   DocumentUploadError,
 } from '../models/document-analysis.model';
@@ -39,6 +40,28 @@ export class DocumentUploadService {
     }
 
     return null;
+  }
+
+  buildFilePreview(file: File): DocumentFilePreview | null {
+    const sourceFormat = this.resolveSourceFormat(file.name, file.type);
+    if (!sourceFormat) {
+      return null;
+    }
+
+    const extensionWithDot = this.getExtension(file.name);
+    const extension = extensionWithDot.replace('.', '').toUpperCase() || sourceFormat.toUpperCase();
+    const name = extensionWithDot
+      ? file.name.slice(0, file.name.length - extensionWithDot.length)
+      : file.name;
+    const isImage = this.isImageFormat(sourceFormat);
+
+    return {
+      name,
+      extension,
+      sourceFormat,
+      thumbnailUrl: isImage ? URL.createObjectURL(file) : null,
+      kind: isImage ? 'image' : 'document',
+    };
   }
 
   validatePageCount(pageCount: number): DocumentUploadError | null {

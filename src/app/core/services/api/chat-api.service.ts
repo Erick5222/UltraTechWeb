@@ -4,12 +4,26 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { environment } from '../../../../environments/environment';
+import { DocumentAnalyzeRequest } from '../../../features/ai-document-intelligence/models/document-analysis.model';
 import { ApiErrorResponse, ApiSuccessResponse } from '../../models/api-response.model';
 import { ChatMessage } from '../../models/chat-message.model';
 
 interface ChatApiData {
   reply: string;
   model: string;
+}
+
+interface ChatAttachmentApiData extends ChatApiData {
+  fileName?: string;
+  sourceFormat?: string;
+  pageCount?: number;
+}
+
+export interface ChatAttachmentSummaryResult {
+  reply: string;
+  fileName: string;
+  sourceFormat: string;
+  pageCount: number;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -26,6 +40,30 @@ export class ChatApiService {
             throw new Error('empty_response');
           }
           return reply;
+        }),
+        catchError((error: unknown) => throwError(() => this.mapError(error))),
+      );
+  }
+
+  summarizeAttachment(payload: DocumentAnalyzeRequest): Observable<ChatAttachmentSummaryResult> {
+    return this.http
+      .post<ApiSuccessResponse<ChatAttachmentApiData>>(
+        `${environment.apiBaseUrl}/chat/attachment`,
+        payload,
+      )
+      .pipe(
+        map((response) => {
+          const reply = response.data?.reply?.trim();
+          if (!reply) {
+            throw new Error('empty_response');
+          }
+
+          return {
+            reply,
+            fileName: response.data?.fileName || payload.fileName,
+            sourceFormat: response.data?.sourceFormat || payload.sourceFormat,
+            pageCount: response.data?.pageCount || payload.pageCount,
+          };
         }),
         catchError((error: unknown) => throwError(() => this.mapError(error))),
       );

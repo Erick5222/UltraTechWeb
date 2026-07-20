@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 
 import { DashboardApiService } from '../api/dashboard-api.service';
-import { ChatInteractionInput, DashboardWorkbook } from './dashboard-data.model';
+import { ChatInteractionInput, DocumentAnalysisInput, DashboardWorkbook } from './dashboard-data.model';
 import { DashboardDataRepository } from './dashboard-data.repository';
 
 @Injectable({ providedIn: 'root' })
@@ -18,5 +18,9 @@ export class DashboardApiRepository implements DashboardDataRepository {
 
   async recordChatInteraction(input: ChatInteractionInput): Promise<DashboardWorkbook> {
     return this.dashboardApi.recordChatInteraction(input);
+  }
+
+  async recordDocumentAnalysis(input: DocumentAnalysisInput): Promise<DashboardWorkbook> {
+    return this.dashboardApi.recordDocumentAnalysis(input);
   }
 }

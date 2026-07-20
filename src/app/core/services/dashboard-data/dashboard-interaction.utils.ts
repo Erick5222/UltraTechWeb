@@ -143,6 +143,7 @@ export function applyChatInteraction(
       },
       ...workbook.chatHistory,
     ].slice(0, 200),
+    documentAnalyses: workbook.documentAnalyses ?? [],
   };
 }
 

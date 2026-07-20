@@ -1,0 +1,43 @@
+<div class="wa-demo">
+  <header class="wa-demo__header">
+    <span class="wa-demo__logo">ULTRA TECH</span>
+    <nav class="wa-demo__nav" aria-label="Demo navigation">
+      @for (link of config.demoNav; track link.id) {
+        <span class="wa-demo__nav-link">{{ link.labelKey | translate }}</span>
+      }
+    </nav>
+  </header>
+
+  <section class="wa-demo__hero">
+    <p class="wa-demo__hero-kicker">{{ 'websiteAssistant.demoSite.hero.kicker' | translate }}</p>
+    <h1 class="wa-demo__hero-title">{{ 'websiteAssistant.demoSite.hero.title' | translate }}</h1>
+    <p class="wa-demo__hero-description">{{ 'websiteAssistant.demoSite.hero.description' | translate }}</p>
+  </section>
+
+  <section class="wa-demo__section">
+    <h2 class="wa-demo__section-title">{{ 'websiteAssistant.demoSite.benefits.title' | translate }}</h2>
+    <div class="wa-demo__benefits">
+      @for (benefit of config.benefits; track benefit.id) {
+        <article class="wa-demo__benefit-card">
+          <img [src]="benefit.icon" alt="" aria-hidden="true" loading="lazy" />
+          <h3>{{ benefit.titleKey | translate }}</h3>
+          <p>{{ benefit.descriptionKey | translate }}</p>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="wa-demo__section">
+    <h2 class="wa-demo__section-title">{{ 'websiteAssistant.demoSite.flow.title' | translate }}</h2>
+    <div class="wa-demo__flow">
+      @for (step of config.flowSteps; track step.id; let last = $last) {
+        <div class="wa-demo__flow-step">
+          <span class="wa-demo__flow-label">{{ step.labelKey | translate }}</span>
+          @if (!last) {
+            <span class="wa-demo__flow-arrow" aria-hidden="true">↓</span>
+          }
+        </div>
+      }
+    </div>
+  </section>
+</div>

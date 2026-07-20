@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 
-import { ChatInteractionInput, DashboardWorkbook } from './dashboard-data.model';
+import { ChatInteractionInput, DocumentAnalysisInput, DashboardWorkbook } from './dashboard-data.model';
 import { DashboardDataRepository } from './dashboard-data.repository';
 import { DashboardApiRepository } from './dashboard-api.repository';
 import { DashboardLocalStorageRepository } from './dashboard-local-storage.repository';
@@ -55,6 +55,20 @@ export class DashboardResilientRepository implements DashboardDataRepository {
       this.warnFallback(error);
       this.useLocalFallback = true;
       return this.localRepository.recordChatInteraction(input);
+    }
+  }
+
+  async recordDocumentAnalysis(input: DocumentAnalysisInput): Promise<DashboardWorkbook> {
+    if (this.useLocalFallback) {
+      return this.localRepository.recordDocumentAnalysis(input);
+    }
+
+    try {
+      return await this.apiRepository.recordDocumentAnalysis(input);
+    } catch (error) {
+      this.warnFallback(error);
+      this.useLocalFallback = true;
+      return this.localRepository.recordDocumentAnalysis(input);
     }
   }
 

@@ -6,12 +6,13 @@ import { environment } from '../../../../environments/environment';
 import { ApiSuccessResponse } from '../../models/api-response.model';
 import {
   ChatInteractionInput,
+  DocumentAnalysisInput,
   DashboardWorkbook,
 } from '../dashboard-data/dashboard-data.model';
 import { DASHBOARD_DATA_SEED } from '../dashboard-data/dashboard-data.seed';
 import { normalizeDashboardWorkbook } from '../dashboard-data/dashboard-workbook.mapper';
 
-type DashboardAction = 'load' | 'save' | 'recordChat';
+type DashboardAction = 'load' | 'save' | 'recordChat' | 'recordDocumentAnalysis';
 
 interface DashboardApiData {
   workbook?: DashboardWorkbook | null;
@@ -33,6 +34,11 @@ export class DashboardApiService {
 
   async recordChatInteraction(input: ChatInteractionInput): Promise<DashboardWorkbook> {
     const response = await this.postAction('recordChat', { interaction: input });
+    return this.resolveWorkbook(response.data?.workbook);
+  }
+
+  async recordDocumentAnalysis(input: DocumentAnalysisInput): Promise<DashboardWorkbook> {
+    const response = await this.postAction('recordDocumentAnalysis', { analysis: input });
     return this.resolveWorkbook(response.data?.workbook);
   }
 

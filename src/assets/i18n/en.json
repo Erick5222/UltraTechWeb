@@ -88,6 +88,7 @@
         "ariaLabel": "Featured solution showcases",
         "fleetIntelligence": "Fleet Intelligence Platform",
         "documentIntelligence": "AI Document Intelligence",
+        "websiteAssistant": "AI Website Assistant",
         "enterpriseSolution": "Enterprise solution showcase",
         "additionalCaseStudy": "Additional case study"
       },
@@ -157,6 +158,8 @@
     "uploadTitle": "Drag and drop your files",
     "uploadNote": "Secure, encrypted processing for enterprise compliance.",
     "browseFiles": "Browse files",
+    "analyzeDocument": "Analyze document",
+    "analyzeAgain": "Try again",
     "adaptiveTitle": "Adaptive Intelligence",
     "adaptiveSubtitle": "The engine detects document intent and reconstructs the dashboard in real-time.",
     "analyzeAnother": "Analyze another document",
@@ -186,6 +189,129 @@
       "title": "AI Document Intelligence",
       "subtitle": "From static files to actionable business insight",
       "description": "A document analysis workflow that validates uploads, preprocesses content to reduce AI cost, and renders summary plus adaptive dashboards from real backend responses."
+    }
+  },
+  "websiteAssistant": {
+    "showcase": {
+      "label": "Case Study",
+      "title": "AI Website Assistant",
+      "subtitle": "Your virtual employee embedded in any corporate website",
+      "description": "An intelligent assistant that lives inside a business website, answers visitor questions in real time, captures leads, and guides prospects toward Ultra Tech solutions."
+    },
+    "shell": {
+      "fabLabel": "Open AI Assistant",
+      "openAria": "Open AI website assistant"
+    },
+    "demoSite": {
+      "nav": {
+        "services": "Services",
+        "solutions": "Solutions",
+        "about": "About",
+        "contact": "Contact"
+      },
+      "hero": {
+        "kicker": "Corporate Demo Site",
+        "title": "AI Website Assistant",
+        "description": "See how an intelligent assistant can integrate into any company website to improve customer support, automate responses, and guide visitors toward the right solutions."
+      },
+      "benefits": {
+        "title": "Benefits",
+        "availability": {
+          "title": "24/7 Support",
+          "description": "Always available for visitors in any time zone."
+        },
+        "instant": {
+          "title": "Instant Responses",
+          "description": "Answers in seconds without waiting for a human agent."
+        },
+        "leads": {
+          "title": "Lead Capture",
+          "description": "Qualifies interest and routes high-intent prospects."
+        },
+        "integration": {
+          "title": "Easy Integration",
+          "description": "Embeds into existing websites with minimal friction."
+        },
+        "recommendations": {
+          "title": "Smart Recommendations",
+          "description": "Suggests relevant services based on visitor intent."
+        },
+        "scalable": {
+          "title": "Scalable",
+          "description": "Handles growing traffic without adding headcount."
+        }
+      },
+      "flow": {
+        "title": "How It Works",
+        "visitor": "Visitor",
+        "assistant": "AI Assistant",
+        "knowledge": "Knowledge Base",
+        "response": "Personalized Response",
+        "satisfied": "Satisfied Customer"
+      },
+      "impact": {
+        "title": "Business Impact",
+        "availability": {
+          "value": "24/7",
+          "label": "Availability"
+        },
+        "responseTime": {
+          "value": "< 2s",
+          "label": "Average Response Time"
+        },
+        "clients": {
+          "value": "10K+",
+          "label": "Clients Served"
+        },
+        "automated": {
+          "value": "85%",
+          "label": "Automated Queries"
+        }
+      },
+      "tech": {
+        "title": "Technologies Used",
+        "angular": "Angular",
+        "node": "Node.js",
+        "gemini": "Gemini",
+        "rest": "REST API",
+        "sqlite": "SQLite",
+        "sheets": "Google Sheets"
+      }
+    },
+    "chat": {
+      "title": "AI Assistant",
+      "status": "Online & Analyzing",
+      "welcome": "Hi! I can help you understand Ultra Tech services, solutions, and how we can support your business.",
+      "visitorLabel": "Visitor",
+      "inputPlaceholder": "Type a message...",
+      "sendAria": "Send message",
+      "closeAria": "Close assistant",
+      "loading": {
+        "connecting": "Connecting to assistant...",
+        "analyzing": "Analyzing your request...",
+        "generating": "Generating response..."
+      },
+      "quickActions": {
+        "schedule": "Schedule Meeting",
+        "pricing": "View Pricing",
+        "schedulePrompt": "I would like to schedule a meeting with Ultra Tech to discuss a project.",
+        "pricingPrompt": "Can you share pricing guidance for an AI project with Ultra Tech?"
+      },
+      "suggestions": {
+        "services": "What services do you offer?",
+        "solutions": "What AI solutions do you have?",
+        "meeting": "Schedule a meeting",
+        "servicesPrompt": "What services does Ultra Tech offer?",
+        "solutionsPrompt": "What AI solutions does Ultra Tech provide for businesses?",
+        "meetingPrompt": "I want to schedule a meeting with Ultra Tech."
+      },
+      "errors": {
+        "config": "The assistant is not configured yet. Please try again later.",
+        "empty": "The assistant returned an empty response.",
+        "network": "Could not reach the assistant service.",
+        "unknown": "Something went wrong while sending your message.",
+        "offTopic": "I can only help with questions related to Ultra Tech services and solutions."
+      }
     }
   },
   "servicesPage": {
@@ -702,6 +828,9 @@
       "hoursSaved": "Hours Saved per Week",
       "busiestHours": "Busiest Usage Hours",
       "peakUsageNote": "Peak usage identified between 9:00 - 11:00 AM",
+      "peakUsageDynamic": "Peak usage identified around {{hour}}.",
+      "peakUsageEmpty": "No usage activity recorded yet.",
+      "emptyState": "Start using the AI assistant or analyze documents to populate analytics.",
       "generatedInsights": "Generated Insights",
       "kpis": {
         "conversations": "AI Conversations",
@@ -729,19 +858,26 @@
       },
       "footer": {
         "responseTime": "AVG. RESPONSE TIME",
-        "responseTimeSub": "GLOBAL PERCENTILE: 98%",
+        "responseTimeSub": "Based on {{count}} chat interactions",
         "successRate": "SUCCESS RATE",
-        "successRateSub": "SLA COMPLIANT",
-        "satisfaction": "USER SATISFACTION",
-        "satisfactionSub": "★★★★★",
+        "successRateSub": "Completed platform activities",
+        "completionRate": "COMPLETION RATE",
+        "completionRateSub": "Completed vs failed activities",
         "processingTime": "AVG. PROCESSING TIME",
-        "processingTimeSub": "-5s FROM LAST MONTH"
+        "processingTimeSub": "From {{count}} completed documents"
       },
       "insights": {
         "documentUsage": "Document analysis usage increased 24% this week, suggesting a heavy focus on administrative audits.",
         "proposalPopular": "Proposal generation became the most popular workflow for the business development team.",
         "peakUsage": "Peak AI usage occurs between 9:00 and 11:00, aligning with the morning strategic briefing period.",
-        "automationSaved": "Automation reduced repetitive work by an estimated 18 hours per active user this quarter."
+        "automationSaved": "Automation reduced repetitive work by an estimated 18 hours per active user this quarter.",
+        "dynamic": {
+          "documentsWeek": "{{count}} documents were processed in the last 7 days.",
+          "topWorkflow": "{{workflow}} is the most active workflow with {{count}} recorded runs.",
+          "peakHour": "Peak platform activity occurs around {{hour}}.",
+          "automationSaved": "Estimated time saved in the last 30 days: {{hours}} hours.",
+          "empty": "Use the assistant and document workflows to generate live analytics insights."
+        }
       }
     },
     "assistant": {
@@ -754,7 +890,22 @@
       "inputHint": "Enter to send · Ctrl+Enter or Shift+Enter for new line",
       "refreshAria": "Start a new conversation",
       "moreAria": "More options",
-      "uploadAria": "Upload file",
+      "uploadAria": "Add attachment",
+      "attachment": {
+        "uploadDocument": "Upload document",
+        "uploadImage": "Upload image",
+        "errors": {
+          "documentOnly": "Select a PDF, DOCX, XLSX or XLS file.",
+          "imageOnly": "Select a PNG, JPG or JPEG image.",
+          "documentTooLarge": "Document exceeds the chat limit (8 MB).",
+          "imageTooLarge": "Image exceeds the chat limit (5 MB).",
+          "tooManyPages": "Document exceeds the chat limit (4 pages).",
+          "unsupportedFile": "This file type is not supported for chat upload.",
+          "preprocessFailed": "The file could not be prepared for analysis.",
+          "payloadTooLarge": "The processed file is too large to send to the AI.",
+          "emptyContent": "No readable content was found in this file."
+        }
+      },
       "userLabel": "You",
       "assistantLabel": "Ultra AI",
       "thinking": "Preparing your answer...",
@@ -762,7 +913,8 @@
         "connecting": "Connecting to the assistant...",
         "analyzing": "Analyzing your question...",
         "generating": "Generating a response...",
-        "almostReady": "Almost ready, just a moment..."
+        "almostReady": "Almost ready, just a moment...",
+        "summarizingAttachment": "Summarizing your file..."
       },
       "chips": {
         "analyzeContract": "Analyze Contract",

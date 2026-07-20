@@ -16,9 +16,6 @@
 }
 
 .platform-assistant__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding: 18px 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
@@ -28,6 +25,7 @@
   align-items: flex-start;
   gap: 12px;
   min-width: 0;
+  width: 100%;
 
   img {
     width: 20px;
@@ -37,11 +35,24 @@
   }
 }
 
+.platform-assistant__heading {
+  flex: 1;
+  min-width: 0;
+}
+
+.platform-assistant__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
 .platform-assistant__title {
   margin: 0;
   font-size: 15px;
   font-weight: 600;
   color: #ffffff;
+  min-width: 0;
 }
 
 .platform-assistant__subtitle {
@@ -52,16 +63,11 @@
   color: #9aa3b2;
 }
 
-.platform-assistant__actions {
-  display: flex;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
 .platform-assistant__new-chat {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  flex-shrink: 0;
   padding: 8px 12px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 10px;
@@ -264,6 +270,15 @@
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+.platform-assistant__file-input {
+  display: none;
+}
+
+.platform-assistant__attach {
+  position: relative;
+  flex-shrink: 0;
+}
+
 .platform-assistant__upload {
   display: flex;
   align-items: center;
@@ -272,14 +287,61 @@
   width: 36px;
   height: 36px;
   padding: 0;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.04);
+  color: #dbeafe;
   cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
 
-  img {
-    width: 16px;
-    height: 16px;
+  &--active,
+  &:hover:not(:disabled) {
+    border-color: rgba(94, 139, 255, 0.4);
+    background: rgba(94, 139, 255, 0.12);
+    color: #ffffff;
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+}
+
+.platform-assistant__upload-icon {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.platform-assistant__attach-menu {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 8px);
+  z-index: 5;
+  display: grid;
+  gap: 4px;
+  min-width: 180px;
+  padding: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: #1a1a1a;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+
+  button {
+    padding: 10px 12px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: #e5e7eb;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(94, 139, 255, 0.12);
+      color: #ffffff;
+    }
   }
 }
 
@@ -355,34 +417,74 @@
   }
 }
 
-@media (max-width: 768px) {
-  .platform-assistant__header {
-    flex-direction: column;
-    align-items: stretch;
+@media (max-width: 1023px) {
+  .platform-assistant {
+    min-height: clamp(560px, 72vh, 860px);
+    max-height: none;
+  }
+
+  .platform-assistant__body {
+    min-height: clamp(320px, 48vh, 560px);
+    padding: 18px 16px;
+  }
+
+  .platform-assistant__messages {
     gap: 14px;
   }
 
-  .platform-assistant__actions {
-    justify-content: flex-end;
-  }
+  .platform-assistant__message {
+    padding: 14px 16px;
 
+    p {
+      font-size: 14px;
+      line-height: 1.7;
+    }
+  }
+}
+
+@media (max-width: 768px) {
   .platform-assistant__subtitle {
     max-width: none;
+  }
+
+  .platform-assistant__new-chat {
+    padding: 7px 10px;
+    font-size: 11px;
+
+    img {
+      width: 12px;
+      height: 12px;
+    }
   }
 }
 
 @media (max-width: 480px) {
+  .platform-assistant {
+    min-height: clamp(580px, 78vh, 920px);
+    border-radius: 14px;
+  }
+
+  .platform-assistant__body {
+    min-height: clamp(360px, 52vh, 620px);
+    padding: 16px 14px;
+  }
+
+  .platform-assistant__header {
+    padding: 16px 14px;
+  }
+
   .platform-assistant__input-row {
     flex-direction: column;
     align-items: stretch;
+    padding: 14px;
   }
 
   .platform-assistant__input-wrap,
-  .platform-assistant__upload {
+  .platform-assistant__attach {
     align-self: stretch;
   }
 
-  .platform-assistant__upload {
+  .platform-assistant__attach {
     align-self: flex-start;
   }
 

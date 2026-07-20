@@ -23,6 +23,7 @@ export class DocumentIntelligenceShellComponent {
   readonly processingStages = PROCESSING_STAGES;
 
   private readonly fileInput = viewChild<ElementRef<HTMLInputElement>>('fileInput');
+  private readonly uploadAnchor = viewChild<ElementRef<HTMLElement>>('uploadAnchor');
 
   onBrowseClick(): void {
     this.fileInput()?.nativeElement.click();
@@ -49,8 +50,15 @@ export class DocumentIntelligenceShellComponent {
     input.value = '';
   }
 
+  async onAnalyzeClick(): Promise<void> {
+    await this.state.startAnalysis();
+  }
+
   resetDemo(): void {
     this.state.reset();
+    requestAnimationFrame(() => {
+      this.uploadAnchor()?.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   }
 
   isStageComplete(stageId: string): boolean {
@@ -59,7 +67,7 @@ export class DocumentIntelligenceShellComponent {
     if (current === 'completed') {
       return true;
     }
-    if (current === 'idle' || current === 'error') {
+    if (current === 'idle' || current === 'ready' || current === 'error') {
       return false;
     }
 
@@ -69,6 +77,14 @@ export class DocumentIntelligenceShellComponent {
   }
 
   isStageActive(stageId: string): boolean {
+    if (stageId === 'completed' && this.state.stage() === 'completed') {
+      return false;
+    }
+
     return this.state.stage() === stageId;
+  }
+
+  isStageDone(stageId: string): boolean {
+    return stageId === 'completed' && this.state.stage() === 'completed';
   }
 }

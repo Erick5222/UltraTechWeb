@@ -11,6 +11,7 @@ const SHEETS = {
   METRICS: 'DashboardMetrics',
   ACTIVITY: 'ActivityLog',
   CHAT: 'ChatHistory',
+  DOCUMENTS: 'DocumentAnalyses',
 };
 
 function doPost(e) {
@@ -28,6 +29,11 @@ function doPost(e) {
         return jsonResponse({
           success: true,
           workbook: recordChatInteraction(payload.interaction),
+        });
+      case 'recordDocumentAnalysis':
+        return jsonResponse({
+          success: true,
+          workbook: recordDocumentAnalysis(payload.analysis),
         });
       case 'save':
         saveWorkbook(payload.workbook);
@@ -53,6 +59,7 @@ function loadWorkbook() {
     metrics: readMetrics(ss),
     activityLog: readActivity(ss),
     chatHistory: readChat(ss),
+    documentAnalyses: readDocumentAnalyses(ss),
   };
 }
 
@@ -147,6 +154,164 @@ function parseMetricValue(value) {
 
   var parsed = Number(value);
   return isNaN(parsed) ? 0 : parsed;
+}
+
+function isDocumentsProcessedMetric(metric) {
+  if (!metric) {
+    return false;
+  }
+
+  var id = String(metric.id || '')
+    .trim()
+    .toLowerCase();
+  var name = String(metric.metric || '')
+    .trim()
+    .toLowerCase();
+
+  return id === 'documents-processed' || name === 'documents processed';
+}
+
+function countCompletedDocumentAnalyses(analyses) {
+  return (analyses || []).filter(function (item) {
+    return String(item.status || 'completed') !== 'failed';
+  }).length;
+}
+
+function isAutomationTasksMetric(metric) {
+  if (!metric) {
+    return false;
+  }
+
+  var id = String(metric.id || '')
+    .trim()
+    .toLowerCase();
+  var name = String(metric.metric || '')
+    .trim()
+    .toLowerCase();
+
+  return id === 'automation-tasks' || name === 'automation tasks';
+}
+
+function syncDocumentsProcessedMetric(metrics, documentAnalyses, today) {
+  var completedCount = countCompletedDocumentAnalyses(documentAnalyses);
+
+  return (metrics || []).map(function (m) {
+    if (!isDocumentsProcessedMetric(m)) {
+      return m;
+    }
+
+    return {
+      id: m.id || 'documents-processed',
+      metric: m.metric || 'Documents Processed',
+      value: completedCount,
+      description: m.description,
+      detailText: m.detailText,
+      detailVariant: m.detailVariant || 'info',
+      format: m.format || 'number',
+      icon: m.icon,
+      lastUpdated: today,
+    };
+  });
+}
+
+function syncAutomationTasksMetric(metrics, failed, today) {
+  return (metrics || []).map(function (m) {
+    if (!isAutomationTasksMetric(m)) {
+      return m;
+    }
+
+    var current = parseMetricValue(m.value);
+    var next = failed
+      ? Math.max(0, Math.round((current - 0.2) * 10) / 10)
+      : Math.min(99, Math.round((current + 0.1) * 10) / 10);
+
+    return {
+      id: m.id || 'automation-tasks',
+      metric: m.metric || 'Automation Tasks',
+      value: next,
+      description: m.description,
+      detailText: m.detailText,
+      detailVariant: m.detailVariant || 'neutral',
+      format: m.format || 'percent',
+      icon: m.icon,
+      lastUpdated: today,
+    };
+  });
+}
+
+function ensureDocumentsProcessedMetric(metrics) {
+  var list = metrics || [];
+  for (var i = 0; i < list.length; i++) {
+    if (isDocumentsProcessedMetric(list[i])) {
+      return list;
+    }
+  }
+
+  var def = METRIC_CATALOG['Documents Processed'];
+  list.push({
+    id: def.id,
+    metric: 'Documents Processed',
+    value: 0,
+    description: 'PDFs and contracts analyzed',
+    detailText: '',
+    detailVariant: def.detailVariant,
+    format: def.format,
+    icon: def.icon,
+    lastUpdated: '',
+  });
+
+  return list;
+}
+
+function patchLegacyMetricsSheet(sheet, metrics) {
+  if (!sheet || !metrics || metrics.length === 0) {
+    return;
+  }
+
+  var byName = {};
+  var byId = {};
+  metrics.forEach(function (m) {
+    var name = String(m.metric || '')
+      .trim()
+      .toLowerCase();
+    var id = String(m.id || '')
+      .trim()
+      .toLowerCase();
+    if (name) {
+      byName[name] = m;
+    }
+    if (id) {
+      byId[id] = m;
+    }
+  });
+
+  var data = sheet.getDataRange().getValues();
+  for (var i = 1; i < data.length; i++) {
+    var rowName = String(data[i][0] || '')
+      .trim()
+      .toLowerCase();
+    if (!rowName) {
+      continue;
+    }
+
+    var metric = byName[rowName] || byId[rowName.replace(/\s+/g, '-')];
+    if (!metric) {
+      continue;
+    }
+
+    sheet.getRange(i + 1, 2).setValue(parseMetricValue(metric.value));
+    sheet.getRange(i + 1, 3).setValue(sanitizeSheetText(metric.description, data[i][2] || ''));
+    sheet.getRange(i + 1, 4).setValue(sanitizeSheetText(metric.detailText, data[i][3] || ''));
+    sheet.getRange(i + 1, 5).setValue(formatSheetDate(metric.lastUpdated));
+  }
+}
+
+function syncDocumentAnalysisMetrics(metrics, documentAnalyses, today, failed) {
+  return syncAutomationTasksMetric(
+    syncDocumentsProcessedMetric(ensureDocumentsProcessedMetric(metrics), documentAnalyses, today),
+    failed,
+    today,
+  );
 }
 
 function sanitizeSheetText(value, fallback) {
@@ -293,6 +458,88 @@ function readChat(ss) {
     });
 }
 
+function readDocumentAnalyses(ss) {
+  var sheet = ss.getSheetByName(SHEETS.DOCUMENTS);
+  if (!sheet) {
+    return [];
+  }
+
+  var rows = sheet.getDataRange().getValues().slice(1);
+  return rows
+    .filter(function (r) {
+      return r[0];
+    })
+    .map(function (r) {
+      return {
+        id: String(r[0]),
+        timestamp: normalizeTimestampToIso(r[1]),
+        fileName: String(r[2]),
+        extension: String(r[3]),
+        sourceFormat: String(r[4]),
+        fileSizeBytes: Number(r[5]) || 0,
+        pageCount: Number(r[6]) || 1,
+        executionTimeMs: Number(r[7]) || 0,
+        status: String(r[8] || 'completed'),
+        errorCode: String(r[9] || ''),
+        documentType: String(r[10] || ''),
+        summaryTitle: String(r[11] || ''),
+        riskLevel: String(r[12] || ''),
+        dashboardType: String(r[13] || ''),
+        source: String(r[14] || 'platform'),
+      };
+    })
+    .reverse();
+}
+
+function recordDocumentAnalysis(analysis) {
+  var workbook = loadWorkbook();
+  var failed = analysis.status === 'failed';
+  var now = new Date().toISOString();
+  var today = now.slice(0, 10);
+  var record = {
+    id: Utilities.getUuid(),
+    timestamp: now,
+    fileName: analysis.fileName || 'document',
+    extension: analysis.extension || '',
+    sourceFormat: analysis.sourceFormat || 'pdf',
+    fileSizeBytes: Number(analysis.fileSizeBytes) || 0,
+    pageCount: Number(analysis.pageCount) || 1,
+    executionTimeMs: Number(analysis.executionTimeMs) || 0,
+    status: failed ? 'failed' : 'completed',
+    errorCode: analysis.errorCode || '',
+    documentType: analysis.documentType || '',
+    summaryTitle: analysis.summaryTitle || '',
+    riskLevel: analysis.riskLevel || '',
+    dashboardType: analysis.dashboardType || '',
+    source: analysis.source || 'platform',
+  };
+
+  workbook.activityLog.unshift({
+    id: Utilities.getUuid(),
+    timestamp: now,
+    activityType: failed ? 'Error' : 'Document',
+    title: failed ? 'Document analysis failed' : 'Document analyzed',
+    status: failed ? 'Failed' : 'Completed',
+    details: failed
+      ? String(analysis.errorCode || 'Analysis failed').slice(0, 120)
+      : String(record.fileName + ' · ' + record.extension).slice(0, 120),
+  });
+
+  workbook.documentAnalyses = workbook.documentAnalyses || [];
+  workbook.documentAnalyses.unshift(record);
+  workbook.activityLog = workbook.activityLog.slice(0, 50);
+  workbook.documentAnalyses = workbook.documentAnalyses.slice(0, 200);
+  workbook.metrics = syncDocumentAnalysisMetrics(
+    workbook.metrics,
+    workbook.documentAnalyses,
+    today,
+    failed,
+  );
+
+  saveWorkbook(workbook);
+  return workbook;
+}
+
 function recordChatInteraction(interaction) {
   const workbook = loadWorkbook();
   const failed = interaction.status === 'failed';
@@ -335,8 +582,18 @@ function recordChatInteraction(interaction) {
     if (m.id === 'ai-conversations' && incConversations) {
       return { id: m.id, metric: m.metric, value: m.value + 1, description: m.description, detailText: m.detailText, detailVariant: m.detailVariant, format: m.format, icon: m.icon, lastUpdated: today };
     }
-    if (!failed && m.id === 'documents-processed' && incDocuments) {
-      return { id: m.id, metric: m.metric, value: m.value + 1, description: m.description, detailText: m.detailText, detailVariant: m.detailVariant, format: m.format, icon: m.icon, lastUpdated: today };
+    if (!failed && isDocumentsProcessedMetric(m) && incDocuments) {
+      return {
+        id: m.id || 'documents-processed',
+        metric: m.metric || 'Documents Processed',
+        value: parseMetricValue(m.value) + 1,
+        description: m.description,
+        detailText: m.detailText,
+        detailVariant: m.detailVariant,
+        format: m.format,
+        icon: m.icon,
+        lastUpdated: today,
+      };
     }
     if (!failed && m.id === 'automation-tasks' && bumpAutomation) {
       return { id: m.id, metric: m.metric, value: Math.min(99, Math.round((m.value + 0.1) * 10) / 10), description: m.description, detailText: m.detailText, detailVariant: m.detailVariant, format: m.format, icon: m.icon, lastUpdated: today };
@@ -363,6 +620,7 @@ function recordChatInteraction(interaction) {
     executionTime: interaction.executionTime,
   });
 
+  workbook.documentAnalyses = workbook.documentAnalyses || [];
   workbook.activityLog = workbook.activityLog.slice(0, 50);
   workbook.chatHistory = workbook.chatHistory.slice(0, 200);
 
@@ -375,10 +633,14 @@ function saveWorkbook(workbook) {
   writeMetrics(ss, workbook.metrics);
   writeActivity(ss, workbook.activityLog);
   writeChat(ss, workbook.chatHistory);
+  writeDocumentAnalyses(ss, workbook.documentAnalyses || []);
 }
 
 function writeMetrics(ss, metrics) {
   var sheet = ss.getSheetByName(SHEETS.METRICS);
+  if (!sheet) {
+    return;
+  }
 
   if (!isLegacyMetricsSheet(sheet)) {
     writeMetricsExtended(sheet, metrics);
@@ -386,31 +648,7 @@ function writeMetrics(ss, metrics) {
   }
 
   ensureLegacyMetricHeaders(sheet);
-
-  if (sheet.getLastColumn() > 5) {
-    sheet.getRange('F:Z').clearContent();
-  }
-
-  var lastRow = sheet.getLastRow();
-  if (lastRow > 1) {
-    sheet.getRange(2, 1, lastRow - 1, 5).clear();
-  }
-
-  if (!metrics || metrics.length === 0) {
-    return;
-  }
-
-  var rows = metrics.map(function (m) {
-    return [
-      m.metric,
-      parseMetricValue(m.value),
-      sanitizeSheetText(m.description, ''),
-      sanitizeSheetText(m.detailText, ''),
-      formatSheetDate(m.lastUpdated),
-    ];
-  });
-
-  sheet.getRange(2, 1, rows.length, 5).setValues(rows);
+  patchLegacyMetricsSheet(sheet, metrics);
 }
 
 function writeMetricsExtended(sheet, metrics) {
@@ -468,6 +706,60 @@ function writeChat(ss, chats) {
         c.model,
         Number(c.tokens) || 0,
         Number(c.executionTime) || 0,
+      ],
+    ]);
+  });
+}
+
+function writeDocumentAnalyses(ss, analyses) {
+  var sheet = ss.getSheetByName(SHEETS.DOCUMENTS);
+  if (!sheet) {
+    sheet = ss.insertSheet(SHEETS.DOCUMENTS);
+    sheet
+      .getRange(1, 1, 1, 15)
+      .setValues([
+        [
+          'Id',
+          'Timestamp',
+          'FileName',
+          'Extension',
+          'SourceFormat',
+          'FileSizeBytes',
+          'PageCount',
+          'ExecutionTimeMs',
+          'Status',
+          'ErrorCode',
+          'DocumentType',
+          'SummaryTitle',
+          'RiskLevel',
+          'DashboardType',
+          'Source',
+        ],
+      ]);
+  }
+
+  var lastRow = Math.max(sheet.getLastRow(), 2);
+  sheet.getRange(2, 1, lastRow - 1, 15).clearContent();
+  var trimmed = analyses.slice(0, 200);
+  var reversed = trimmed.slice().reverse();
+  reversed.forEach(function (item, i) {
+    sheet.getRange(i + 2, 1, 1, 15).setValues([
+      [
+        item.id,
+        formatActivityTimestamp(item.timestamp),
+        item.fileName,
+        item.extension,
+        item.sourceFormat,
+        Number(item.fileSizeBytes) || 0,
+        Number(item.pageCount) || 1,
+        Number(item.executionTimeMs) || 0,
+        item.status,
+        item.errorCode || '',
+        item.documentType || '',
+        item.summaryTitle || '',
+        item.riskLevel || '',
+        item.dashboardType || '',
+        item.source || 'platform',
       ],
     ]);
   });

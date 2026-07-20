@@ -2,22 +2,23 @@
   <header class="platform-assistant__header">
     <div class="platform-assistant__title-wrap">
       <img [src]="assets.assistantHeaderIcon" alt="" aria-hidden="true" loading="lazy" />
-      <div>
-        <h2 class="platform-assistant__title">{{ 'aiPlatformPage.assistant.title' | translate }}</h2>
-        <p class="platform-assistant__subtitle">{{ 'aiPlatformPage.assistant.subtitle' | translate }}</p>
+      <div class="platform-assistant__heading">
+        <div class="platform-assistant__title-row">
+          <h2 class="platform-assistant__title">{{ 'aiPlatformPage.assistant.title' | translate }}</h2>
+          <button
+            type="button"
+            class="platform-assistant__new-chat"
+            (click)="resetChat()"
+            [disabled]="isLoading() || !canResetChat()"
+          >
+            <img [src]="assets.refreshIcon" alt="" aria-hidden="true" loading="lazy" />
+            {{ 'aiPlatformPage.assistant.newConversation' | translate }}
+          </button>
+        </div>
+        @if (!hasConversation()) {
+          <p class="platform-assistant__subtitle">{{ 'aiPlatformPage.assistant.subtitle' | translate }}</p>
+        }
       </div>
-    </div>
-
-    <div class="platform-assistant__actions">
-      <button
-        type="button"
-        class="platform-assistant__new-chat"
-        (click)="resetChat()"
-        [disabled]="isLoading() || !canResetChat()"
-      >
-        <img [src]="assets.refreshIcon" alt="" aria-hidden="true" loading="lazy" />
-        {{ 'aiPlatformPage.assistant.newConversation' | translate }}
-      </button>
     </div>
   </header>
 
@@ -75,28 +76,61 @@
     }
   </div>
 
-  <div class="platform-assistant__suggestions">
-    @for (chip of suggestionChips; track chip.id) {
-      <button
-        type="button"
-        class="platform-assistant__chip"
-        (click)="applySuggestion(chip.promptKey)"
-        [disabled]="isLoading()"
-      >
-        {{ chip.labelKey | translate }}
-      </button>
-    }
-  </div>
+  @if (!hasConversation()) {
+    <div class="platform-assistant__suggestions">
+      @for (chip of suggestionChips; track chip.id) {
+        <button
+          type="button"
+          class="platform-assistant__chip"
+          (click)="applySuggestion(chip.promptKey)"
+          [disabled]="isLoading()"
+        >
+          {{ chip.labelKey | translate }}
+        </button>
+      }
+    </div>
+  }
 
   <footer class="platform-assistant__input-row">
-    <button
-      type="button"
-      class="platform-assistant__upload"
-      [attr.aria-label]="'aiPlatformPage.assistant.uploadAria' | translate"
-      disabled
-    >
-      <img [src]="assets.uploadIcon" alt="" aria-hidden="true" loading="lazy" />
-    </button>
+    <input
+      #documentFileInput
+      type="file"
+      class="platform-assistant__file-input"
+      [attr.accept]="documentAccept"
+      (change)="onDocumentSelected($event)"
+    />
+    <input
+      #imageFileInput
+      type="file"
+      class="platform-assistant__file-input"
+      [attr.accept]="imageAccept"
+      (change)="onImageSelected($event)"
+    />
+
+    <div #attachmentMenu class="platform-assistant__attach">
+      <button
+        type="button"
+        class="platform-assistant__upload"
+        [class.platform-assistant__upload--active]="attachmentMenuOpen()"
+        [attr.aria-label]="'aiPlatformPage.assistant.uploadAria' | translate"
+        [attr.aria-expanded]="attachmentMenuOpen()"
+        (click)="toggleAttachmentMenu()"
+        [disabled]="isLoading()"
+      >
+        <span class="platform-assistant__upload-icon" aria-hidden="true">+</span>
+      </button>
+
+      @if (attachmentMenuOpen()) {
+        <div class="platform-assistant__attach-menu" role="menu">
+          <button type="button" role="menuitem" (click)="openDocumentPicker()">
+            {{ 'aiPlatformPage.assistant.attachment.uploadDocument' | translate }}
+          </button>
+          <button type="button" role="menuitem" (click)="openImagePicker()">
+            {{ 'aiPlatformPage.assistant.attachment.uploadImage' | translate }}
+          </button>
+        </div>
+      }
+    </div>
 
     <div class="platform-assistant__input-wrap">
       <textarea

@@ -1,0 +1,112 @@
+<section class="wa-chat" aria-label="AI Website Assistant">
+  <header class="wa-chat__header">
+    <div class="wa-chat__identity">
+      <div class="wa-chat__avatar">
+        <img [src]="assets.avatarIcon" alt="" aria-hidden="true" loading="lazy" />
+        <span class="wa-chat__status-dot" aria-hidden="true"></span>
+      </div>
+      <div class="wa-chat__heading">
+        <h3 class="wa-chat__title">{{ 'websiteAssistant.chat.title' | translate }}</h3>
+        <p class="wa-chat__status">{{ 'websiteAssistant.chat.status' | translate }}</p>
+      </div>
+    </div>
+    <button
+      type="button"
+      class="wa-chat__close"
+      (click)="close()"
+      [attr.aria-label]="'websiteAssistant.chat.closeAria' | translate"
+    >
+      ×
+    </button>
+  </header>
+
+  <div class="wa-chat__body" #messagesContainer>
+    @if (!hasConversation()) {
+      <p class="wa-chat__welcome">{{ 'websiteAssistant.chat.welcome' | translate }}</p>
+      <div class="wa-chat__suggestions">
+        @for (chip of suggestionChips; track chip.id) {
+          <button
+            type="button"
+            class="wa-chat__suggestion"
+            (click)="applySuggestion(chip.promptKey)"
+            [disabled]="isLoading()"
+          >
+            {{ chip.labelKey | translate }}
+          </button>
+        }
+      </div>
+    } @else {
+      <div class="wa-chat__messages">
+        @for (message of messages(); track message.id) {
+          <article
+            class="wa-chat__message"
+            [class.wa-chat__message--user]="message.role === 'user'"
+            [class.wa-chat__message--assistant]="message.role === 'assistant'"
+          >
+            @if (message.role === 'user') {
+              <p class="wa-chat__bubble">{{ message.content }}</p>
+              <span class="wa-chat__meta">
+                {{ 'websiteAssistant.chat.visitorLabel' | translate }}
+                {{ formatTimestamp(message.timestamp) }}
+              </span>
+            } @else {
+              <p class="wa-chat__bubble" [innerHTML]="formatAssistantContent(message.content)"></p>
+            }
+          </article>
+        }
+
+        @if (isLoading()) {
+          <article class="wa-chat__message wa-chat__message--assistant wa-chat__message--pending">
+            <p class="wa-chat__typing">
+              <span class="wa-chat__typing-indicator" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+              {{ loadingMessageKey() | translate }}
+            </p>
+          </article>
+        }
+      </div>
+    }
+
+    @if (errorKey()) {
+      <p class="wa-chat__error">{{ errorKey()! | translate }}</p>
+    }
+  </div>
+
+  @if (hasConversation()) {
+    <div class="wa-chat__quick-actions">
+      @for (action of quickActions; track action.id) {
+        <button
+          type="button"
+          class="wa-chat__quick-action"
+          (click)="applyQuickAction(action.promptKey)"
+          [disabled]="isLoading()"
+        >
+          {{ action.labelKey | translate }}
+        </button>
+      }
+    </div>
+  }
+
+  <footer class="wa-chat__input-row">
+    <input
+      type="text"
+      class="wa-chat__input"
+      [formControl]="messageControl"
+      [placeholder]="'websiteAssistant.chat.inputPlaceholder' | translate"
+      (keydown)="handleInputKeydown($event)"
+      [disabled]="isLoading()"
+    />
+    <button
+      type="button"
+      class="wa-chat__send"
+      (click)="sendMessage()"
+      [disabled]="isLoading() || messageControl.invalid"
+      [attr.aria-label]="'websiteAssistant.chat.sendAria' | translate"
+    >
+      <img [src]="assets.sendIcon" alt="" aria-hidden="true" loading="lazy" />
+    </button>
+  </footer>
+</section>

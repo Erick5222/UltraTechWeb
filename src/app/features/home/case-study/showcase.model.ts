@@ -11,7 +11,11 @@ export const CASE_STUDY_METRICS: string[] = [
   'caseStudy.metrics.integration',
 ];
 
-export type ShowcaseProjectType = 'fleet-intelligence' | 'document-intelligence' | 'placeholder';
+export type ShowcaseProjectType =
+  | 'fleet-intelligence'
+  | 'document-intelligence'
+  | 'website-assistant'
+  | 'placeholder';
 
 export interface ShowcasePlaceholderContent {
   titleKey: string;
@@ -33,26 +37,13 @@ export const SHOWCASE_PROJECTS: ShowcaseProject[] = [
     navLabelKey: 'caseStudy.showcase.nav.documentIntelligence',
   },
   {
+    id: 'website-assistant',
+    type: 'website-assistant',
+    navLabelKey: 'caseStudy.showcase.nav.websiteAssistant',
+  },
+  {
     id: 'fleet-intelligence',
     type: 'fleet-intelligence',
     navLabelKey: 'caseStudy.showcase.nav.fleetIntelligence',
-  },
-  {
-    id: 'enterprise-solution',
-    type: 'placeholder',
-    navLabelKey: 'caseStudy.showcase.nav.enterpriseSolution',
-    placeholder: {
-      titleKey: 'caseStudy.showcase.placeholders.enterprise.title',
-      subtitleKey: 'caseStudy.showcase.placeholders.enterprise.subtitle',
-    },
-  },
-  {
-    id: 'additional-case-study',
-    type: 'placeholder',
-    navLabelKey: 'caseStudy.showcase.nav.additionalCaseStudy',
-    placeholder: {
-      titleKey: 'caseStudy.showcase.placeholders.additional.title',
-      subtitleKey: 'caseStudy.showcase.placeholders.additional.subtitle',
-    },
   },
 ];

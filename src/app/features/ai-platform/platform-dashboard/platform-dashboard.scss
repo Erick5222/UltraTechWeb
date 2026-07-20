@@ -15,6 +15,17 @@
   align-items: start;
 }
 
+@media (max-width: 1023px) {
+  .platform-dashboard__main {
+    gap: 16px;
+  }
+
+  .platform-dashboard__main app-platform-assistant {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
 .platform-dashboard__sidebar {
   display: grid;
   gap: 20px;

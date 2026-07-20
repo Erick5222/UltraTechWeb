@@ -36,7 +36,7 @@ export const PROCESSING_STAGES = [
   {
     id: 'completed',
     labelKey: 'documentIntelligence.processing.completed',
-    icon: DOC_INTEL_ASSETS.stepVisualization,
+    icon: null,
   },
 ] as const;
 

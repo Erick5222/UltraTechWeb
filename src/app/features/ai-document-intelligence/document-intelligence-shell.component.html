@@ -11,13 +11,11 @@
       <button type="button" class="doc-intel__btn doc-intel__btn--primary" (click)="onBrowseClick()">
         {{ 'documentIntelligence.getStarted' | translate }}
       </button>
-      <button type="button" class="doc-intel__btn doc-intel__btn--ghost" (click)="onBrowseClick()">
-        {{ 'documentIntelligence.viewDemo' | translate }}
-      </button>
     </div>
   </header>
 
   <div
+    #uploadAnchor
     class="doc-intel__upload-card"
     (dragover)="onDragOver($event)"
     (drop)="onDrop($event)"
@@ -46,6 +44,40 @@
       </button>
     </div>
 
+    @if (state.filePreview(); as preview) {
+      <div class="doc-intel__file-preview" aria-live="polite">
+        <div
+          class="doc-intel__file-preview-thumb"
+          [class.doc-intel__file-preview-thumb--image]="preview.kind === 'image'"
+          [attr.data-format]="preview.extension"
+        >
+          @if (preview.thumbnailUrl) {
+            <img [src]="preview.thumbnailUrl" [alt]="preview.name" loading="lazy" />
+          } @else {
+            <span class="doc-intel__file-preview-badge">{{ preview.extension }}</span>
+          }
+        </div>
+
+        <div class="doc-intel__file-preview-meta">
+          <p class="doc-intel__file-preview-name" [title]="preview.name + '.' + preview.extension.toLowerCase()">
+            {{ preview.name }}
+          </p>
+          <p class="doc-intel__file-preview-ext">.{{ preview.extension.toLowerCase() }}</p>
+        </div>
+      </div>
+    }
+
+    @if (state.showAnalyzeButton()) {
+      <button
+        type="button"
+        class="doc-intel__analyze"
+        (click)="onAnalyzeClick()"
+        [disabled]="state.isAnalyzing()"
+      >
+        {{ (state.stage() === 'error' ? 'documentIntelligence.analyzeAgain' : 'documentIntelligence.analyzeDocument') | translate }}
+      </button>
+    }
+
     @if (state.showProgress()) {
       <div class="doc-intel__upload-progress">
         <div class="doc-intel__upload-progress-bar">
@@ -68,9 +100,18 @@
             class="doc-intel__step"
             [class.doc-intel__step--complete]="isStageComplete(step.id)"
             [class.doc-intel__step--active]="isStageActive(step.id)"
+            [class.doc-intel__step--done]="isStageDone(step.id)"
           >
             <span class="doc-intel__step-icon">
-              <img [src]="step.icon" alt="" aria-hidden="true" loading="lazy" />
+              @if (step.id === 'completed') {
+                <span
+                  class="doc-intel__step-check"
+                  [class.doc-intel__step-check--pending]="!isStageDone(step.id)"
+                  aria-hidden="true"
+                ></span>
+              } @else if (step.icon) {
+                <img [src]="step.icon" alt="" aria-hidden="true" loading="lazy" />
+              }
             </span>
             <span class="doc-intel__step-label">{{ step.labelKey | translate }}</span>
           </div>

@@ -1,6 +1,7 @@
 import {
   Component,
   ElementRef,
+  HostListener,
   OnDestroy,
   ViewChild,
   inject,
@@ -14,6 +15,12 @@ import { LanguageService } from '../../../core/services/language.service';
 import { ChatMessage } from '../../../core/models/chat-message.model';
 import { DEFAULT_AI_MODEL } from '../../../core/services/dashboard-data/dashboard-data.constants';
 import { PLATFORM_ASSETS, PLATFORM_SUGGESTION_CHIPS } from '../ai-platform.model';
+import {
+  CHAT_DOCUMENT_ACCEPT,
+  CHAT_IMAGE_ACCEPT,
+  ChatAttachmentMode,
+} from '../models/platform-chat-attachment.model';
+import { PlatformChatAttachmentService } from '../services/platform-chat-attachment.service';
 
 @Component({
   selector: 'app-platform-assistant',
@@ -25,6 +32,7 @@ export class PlatformAssistant implements OnDestroy {
   private readonly geminiService = inject(GeminiService);
   private readonly dashboardData = inject(DashboardDataService);
   private readonly languageService = inject(LanguageService);
+  private readonly attachmentService = inject(PlatformChatAttachmentService);
 
   private static readonly LOADING_MESSAGE_KEYS = [
     'aiPlatformPage.assistant.loading.connecting',
@@ -38,6 +46,8 @@ export class PlatformAssistant implements OnDestroy {
 
   readonly assets = PLATFORM_ASSETS;
   readonly suggestionChips = PLATFORM_SUGGESTION_CHIPS;
+  readonly documentAccept = CHAT_DOCUMENT_ACCEPT;
+  readonly imageAccept = CHAT_IMAGE_ACCEPT;
   readonly messageControl = new FormControl('', {
     nonNullable: true,
     validators: [Validators.required, Validators.maxLength(4000)],
@@ -47,16 +57,62 @@ export class PlatformAssistant implements OnDestroy {
   readonly isLoading = signal(false);
   readonly errorKey = signal<string | null>(null);
   readonly loadingMessageKey = signal<string>(PlatformAssistant.LOADING_MESSAGE_KEYS[0]);
+  readonly attachmentMenuOpen = signal(false);
 
   @ViewChild('messagesContainer') private messagesContainer?: ElementRef<HTMLElement>;
+  @ViewChild('documentFileInput') private documentFileInput?: ElementRef<HTMLInputElement>;
+  @ViewChild('imageFileInput') private imageFileInput?: ElementRef<HTMLInputElement>;
+  @ViewChild('attachmentMenu') private attachmentMenu?: ElementRef<HTMLElement>;
 
   ngOnDestroy(): void {
     this.stopLoadingMessages();
   }
 
+  hasConversation(): boolean {
+    return this.messages().length > 0 || this.isLoading();
+  }
+
   applySuggestion(promptKey: string): void {
     this.messageControl.setValue(this.languageService.translate(promptKey));
     this.messageControl.markAsDirty();
+  }
+
+  toggleAttachmentMenu(): void {
+    if (this.isLoading()) {
+      return;
+    }
+
+    this.attachmentMenuOpen.update((open) => !open);
+  }
+
+  openDocumentPicker(): void {
+    this.closeAttachmentMenu();
+    this.documentFileInput?.nativeElement.click();
+  }
+
+  openImagePicker(): void {
+    this.closeAttachmentMenu();
+    this.imageFileInput?.nativeElement.click();
+  }
+
+  async onDocumentSelected(event: Event): Promise<void> {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    input.value = '';
+
+    if (file) {
+      await this.handleAttachment(file, 'document');
+    }
+  }
+
+  async onImageSelected(event: Event): Promise<void> {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    input.value = '';
+
+    if (file) {
+      await this.handleAttachment(file, 'image');
+    }
   }
 
   sendMessage(): void {
@@ -126,6 +182,7 @@ export class PlatformAssistant implements OnDestroy {
     this.errorKey.set(null);
     this.messageControl.reset();
     this.isLoading.set(false);
+    this.closeAttachmentMenu();
   }
 
   handleInputKeydown(event: KeyboardEvent): void {
@@ -143,6 +200,109 @@ export class PlatformAssistant implements OnDestroy {
 
   canResetChat(): boolean {
     return this.messages().length > 0 || this.errorKey() !== null;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    if (!this.attachmentMenuOpen()) {
+      return;
+    }
+
+    const menuElement = this.attachmentMenu?.nativeElement;
+    const target = event.target as Node | null;
+
+    if (menuElement && target && !menuElement.contains(target)) {
+      this.closeAttachmentMenu();
+    }
+  }
+
+  private async handleAttachment(file: File, mode: ChatAttachmentMode): Promise<void> {
+    const validationError = this.attachmentService.validate(file, mode);
+    if (validationError) {
+      this.errorKey.set(validationError.messageKey);
+      return;
+    }
+
+    const userMessage: ChatMessage = {
+      id: crypto.randomUUID(),
+      role: 'user',
+      content: this.attachmentService.buildUserMessageLabel(file),
+    };
+
+    this.messages.update((current) => [...current, userMessage]);
+    this.errorKey.set(null);
+    this.isLoading.set(true);
+    this.stopLoadingMessages();
+    this.loadingMessageKey.set('aiPlatformPage.assistant.loading.summarizingAttachment');
+    this.scrollToBottom();
+
+    const startedAt = performance.now();
+    const extension = file.name.split('.').pop()?.toUpperCase() ?? '';
+    const baseName = extension
+      ? file.name.slice(0, file.name.length - extension.length - 1)
+      : file.name;
+
+    try {
+      const result = await this.attachmentService.summarize(file);
+
+      this.messages.update((current) => [
+        ...current,
+        {
+          id: crypto.randomUUID(),
+          role: 'assistant',
+          content: result.reply,
+        },
+      ]);
+
+      await this.dashboardData.recordDocumentAnalysis({
+        fileName: baseName,
+        extension,
+        sourceFormat: result.sourceFormat,
+        fileSizeBytes: file.size,
+        pageCount: result.pageCount,
+        executionTimeMs: Math.round(performance.now() - startedAt),
+        status: 'completed',
+        source: 'platform',
+      });
+
+      await this.dashboardData.recordChatInteraction({
+        prompt: `Attachment summary: ${file.name}`,
+        response: result.reply,
+        model: DEFAULT_AI_MODEL,
+        executionTime: Math.round(performance.now() - startedAt),
+        status: 'completed',
+      });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'unknown';
+      this.errorKey.set(this.mapAttachmentErrorKey(message));
+
+      await this.dashboardData.recordDocumentAnalysis({
+        fileName: baseName,
+        extension,
+        sourceFormat: file.name.split('.').pop()?.toLowerCase() ?? 'pdf',
+        fileSizeBytes: file.size,
+        pageCount: 1,
+        executionTimeMs: Math.round(performance.now() - startedAt),
+        status: 'failed',
+        errorCode: message,
+        source: 'platform',
+      });
+
+      await this.dashboardData.recordChatInteraction({
+        prompt: `Attachment summary: ${file.name}`,
+        response: message,
+        model: DEFAULT_AI_MODEL,
+        executionTime: Math.round(performance.now() - startedAt),
+        status: 'failed',
+      });
+    } finally {
+      this.isLoading.set(false);
+      this.scrollToBottom();
+    }
+  }
+
+  private closeAttachmentMenu(): void {
+    this.attachmentMenuOpen.set(false);
   }
 
   private startLoadingMessages(): void {
@@ -177,6 +337,25 @@ export class PlatformAssistant implements OnDestroy {
         return 'aiPlatformPage.assistant.errors.emptyResponse';
       default:
         return 'aiPlatformPage.assistant.errors.requestFailed';
+    }
+  }
+
+  private mapAttachmentErrorKey(message: string): string {
+    switch (message) {
+      case 'too_many_pages':
+        return 'aiPlatformPage.assistant.attachment.errors.tooManyPages';
+      case 'unsupported_file':
+        return 'aiPlatformPage.assistant.attachment.errors.unsupportedFile';
+      case 'conversion_failed':
+      case 'preprocess_failed':
+        return 'aiPlatformPage.assistant.attachment.errors.preprocessFailed';
+      case 'payload_too_large':
+      case 'server_body_rejected':
+        return 'aiPlatformPage.assistant.attachment.errors.payloadTooLarge';
+      case 'empty_content':
+        return 'aiPlatformPage.assistant.attachment.errors.emptyContent';
+      default:
+        return this.mapErrorKey(message);
     }
   }
 

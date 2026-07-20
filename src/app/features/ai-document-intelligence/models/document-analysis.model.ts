@@ -59,8 +59,17 @@ export interface DocumentUploadError {
   messageParams?: Record<string, string | number>;
 }
 
+export interface DocumentFilePreview {
+  name: string;
+  extension: string;
+  sourceFormat: DocumentSourceFormat;
+  thumbnailUrl: string | null;
+  kind: 'image' | 'document';
+}
+
 export type DocumentProcessingStage =
   | 'idle'
+  | 'ready'
   | 'uploading'
   | 'reading'
   | 'understanding'

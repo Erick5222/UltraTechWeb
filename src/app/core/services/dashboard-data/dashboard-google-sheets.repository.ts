@@ -5,6 +5,7 @@ import { firstValueFrom } from 'rxjs';
 import { DASHBOARD_DATA_SEED } from './dashboard-data.seed';
 import {
   ChatInteractionInput,
+  DocumentAnalysisInput,
   DashboardWorkbook,
 } from './dashboard-data.model';
 import { DashboardDataRepository } from './dashboard-data.repository';
@@ -34,8 +35,12 @@ export class DashboardGoogleSheetsRepository implements DashboardDataRepository 
     return this.postAction('recordChat', { interaction: input });
   }
 
+  async recordDocumentAnalysis(input: DocumentAnalysisInput): Promise<DashboardWorkbook> {
+    return this.postAction('recordDocumentAnalysis', { analysis: input });
+  }
+
   private async postAction(
-    action: 'load' | 'save' | 'recordChat',
+    action: 'load' | 'save' | 'recordChat' | 'recordDocumentAnalysis',
     payload: Record<string, unknown> = {},
   ): Promise<DashboardWorkbook> {
     const webhookUrl = this.webhookConfig.url;

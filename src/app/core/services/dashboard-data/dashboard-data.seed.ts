@@ -73,4 +73,5 @@ export const DASHBOARD_DATA_SEED: DashboardWorkbook = {
     },
   ],
   chatHistory: [],
+  documentAnalyses: [],
 };

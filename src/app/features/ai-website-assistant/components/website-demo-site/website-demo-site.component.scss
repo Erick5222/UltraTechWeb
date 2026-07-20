@@ -1,0 +1,160 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.wa-demo {
+  display: grid;
+  gap: 20px;
+  height: 100%;
+  padding: 18px 20px 24px;
+  overflow-y: auto;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(94, 139, 255, 0.08), transparent 42%),
+    radial-gradient(circle at 80% 0%, rgba(139, 92, 246, 0.08), transparent 36%),
+    #0b0d12;
+  color: #e5e7eb;
+}
+
+.wa-demo__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.wa-demo__logo {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #ffffff;
+}
+
+.wa-demo__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.wa-demo__nav-link {
+  font-size: 10px;
+  color: #9aa3b2;
+}
+
+.wa-demo__hero {
+  display: grid;
+  gap: 8px;
+  padding: 8px 0 4px;
+}
+
+.wa-demo__hero-kicker {
+  margin: 0;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7ec8ff;
+}
+
+.wa-demo__hero-title {
+  margin: 0;
+  font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #ffffff;
+}
+
+.wa-demo__hero-description {
+  margin: 0;
+  max-width: 640px;
+  font-size: 12px;
+  line-height: 1.65;
+  color: #b8c0cc;
+}
+
+.wa-demo__section {
+  display: grid;
+  gap: 12px;
+}
+
+.wa-demo__section-title {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.wa-demo__benefits {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.wa-demo__benefit-card {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  img {
+    width: 16px;
+    height: 16px;
+    opacity: 0.85;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 11px;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  p {
+    margin: 0;
+    font-size: 10px;
+    line-height: 1.5;
+    color: #9aa3b2;
+  }
+}
+
+.wa-demo__flow {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.wa-demo__flow-step {
+  display: grid;
+  gap: 4px;
+  justify-items: center;
+}
+
+.wa-demo__flow-label {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(94, 139, 255, 0.08);
+  border: 1px solid rgba(94, 139, 255, 0.16);
+  font-size: 10px;
+  font-weight: 600;
+  text-align: center;
+  color: #dbeafe;
+}
+
+.wa-demo__flow-arrow {
+  font-size: 12px;
+  color: #64748b;
+}
+
+@media (max-width: 640px) {
+  .wa-demo__benefits {
+    grid-template-columns: 1fr;
+  }
+}

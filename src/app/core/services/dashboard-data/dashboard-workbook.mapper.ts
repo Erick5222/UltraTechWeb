@@ -3,6 +3,7 @@ import {
   DashboardMetric,
   DashboardMetricDetailVariant,
   DashboardMetricFormat,
+  DocumentAnalysisRecord,
   DashboardWorkbook,
 } from './dashboard-data.model';
 import {
@@ -52,8 +53,9 @@ export function normalizeDashboardWorkbook(workbook: DashboardWorkbook): Dashboa
     metrics: workbook.metrics
       .map((metric) => normalizeMetric(metric))
       .filter((metric): metric is DashboardMetric => metric !== null),
-    activityLog: workbook.activityLog.map(normalizeActivity),
+    activityLog: (workbook.activityLog ?? []).map(normalizeActivity),
     chatHistory: workbook.chatHistory ?? [],
+    documentAnalyses: (workbook.documentAnalyses ?? []).map(normalizeDocumentAnalysis),
   };
 }
 
@@ -97,6 +99,26 @@ function normalizeActivity(raw: ActivityRecord): ActivityRecord {
     title: String(raw.title || 'AI activity'),
     status: String(raw.status || 'Completed'),
     details: String(raw.details || ''),
+  };
+}
+
+function normalizeDocumentAnalysis(raw: DocumentAnalysisRecord): DocumentAnalysisRecord {
+  return {
+    id: String(raw.id),
+    timestamp: normalizeActivityTimestamp(raw.timestamp),
+    fileName: String(raw.fileName || 'document'),
+    extension: String(raw.extension || ''),
+    sourceFormat: String(raw.sourceFormat || 'pdf'),
+    fileSizeBytes: Number(raw.fileSizeBytes) || 0,
+    pageCount: Number(raw.pageCount) || 1,
+    executionTimeMs: Number(raw.executionTimeMs) || 0,
+    status: raw.status === 'failed' ? 'failed' : 'completed',
+    errorCode: raw.errorCode ? String(raw.errorCode) : undefined,
+    documentType: raw.documentType ? String(raw.documentType) : undefined,
+    summaryTitle: raw.summaryTitle ? String(raw.summaryTitle) : undefined,
+    riskLevel: raw.riskLevel ? String(raw.riskLevel) : undefined,
+    dashboardType: raw.dashboardType ? String(raw.dashboardType) : undefined,
+    source: raw.source === 'showcase' ? 'showcase' : 'platform',
   };
 }
 
