@@ -1,4 +1,13 @@
-import { Component, computed, signal } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  ViewChild,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
 import { ShowcaseNavComponent } from './showcase-nav/showcase-nav.component';
 import { ShowcaseControlsComponent } from './showcase-controls/showcase-controls.component';
 import { DocumentIntelligenceShowcasePanelComponent } from '../../ai-document-intelligence';
@@ -6,6 +15,7 @@ import { WebsiteAssistantShowcasePanelComponent } from '../../ai-website-assista
 import { FleetShowcasePanelComponent } from './fleet-showcase-panel/fleet-showcase-panel.component';
 import { ShowcasePlaceholderComponent } from './showcase-placeholder/showcase-placeholder.component';
 import { SHOWCASE_PROJECTS } from './showcase.model';
+import { CaseStudyCarouselService } from './services/case-study-carousel.service';
 
 const TRANSITION_MS = 320;
 
@@ -19,10 +29,13 @@ const TRANSITION_MS = 320;
     WebsiteAssistantShowcasePanelComponent,
     ShowcasePlaceholderComponent,
   ],
+  providers: [CaseStudyCarouselService],
   templateUrl: './case-study.html',
   styleUrl: './case-study.scss',
 })
-export class CaseStudy {
+export class CaseStudy implements AfterViewInit, OnDestroy {
+  private readonly carouselService = inject(CaseStudyCarouselService);
+
   readonly projects = SHOWCASE_PROJECTS;
   readonly activeIndex = signal(0);
   readonly displayIndex = signal(0);
@@ -35,12 +48,32 @@ export class CaseStudy {
     new Set([SHOWCASE_PROJECTS[0]?.id].filter(Boolean) as string[]),
   );
 
+  @ViewChild('caseStudyRoot') private caseStudyRoot?: ElementRef<HTMLElement>;
+
   mountedProjects(): Set<string> {
     return this.mountedProjectIds();
   }
 
   isProjectMounted(projectId: string): boolean {
     return this.mountedProjectIds().has(projectId);
+  }
+
+  ngAfterViewInit(): void {
+    const container = this.caseStudyRoot?.nativeElement;
+    if (!container) {
+      return;
+    }
+
+    this.carouselService.attach(container);
+    this.carouselService.registerHandlers({
+      advance: () => this.onAutoAdvance(),
+      canAdvance: () => !this.isTransitioning(),
+    });
+    this.carouselService.start();
+  }
+
+  ngOnDestroy(): void {
+    this.carouselService.destroy();
   }
 
   onPrevious(): void {
@@ -69,5 +102,10 @@ export class CaseStudy {
       this.displayIndex.set(index);
       this.isTransitioning.set(false);
     }, TRANSITION_MS);
+  }
+
+  private onAutoAdvance(): void {
+    const nextIndex = (this.activeIndex() + 1) % this.projects.length;
+    this.onProjectSelect(nextIndex);
   }
 }

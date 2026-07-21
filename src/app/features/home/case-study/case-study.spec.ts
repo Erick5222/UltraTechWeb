@@ -4,10 +4,12 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 import { CaseStudy } from './case-study';
 import { LanguageService } from '../../../core/services/language.service';
+import { CaseStudyCarouselService } from './services/case-study-carousel.service';
 
 describe('CaseStudy', () => {
   let component: CaseStudy;
   let fixture: ComponentFixture<CaseStudy>;
+  let carouselService: CaseStudyCarouselService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -17,7 +19,13 @@ describe('CaseStudy', () => {
 
     fixture = TestBed.createComponent(CaseStudy);
     component = fixture.componentInstance;
+    carouselService = fixture.debugElement.injector.get(CaseStudyCarouselService);
     await fixture.whenStable();
+    fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    carouselService.destroy();
   });
 
   it('should create', () => {
